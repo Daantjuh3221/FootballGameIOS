@@ -1,0 +1,534 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D125C40E1E81131E00A63590 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C40D1E81131E00A63590 /* AppDelegate.swift */; };
+		D125C4101E81131E00A63590 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D125C40F1E81131E00A63590 /* GameScene.sks */; };
+		D125C4121E81131E00A63590 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D125C4111E81131E00A63590 /* Actions.sks */; };
+		D125C4141E81131E00A63590 /* Game.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D125C4131E81131E00A63590 /* Game.xcassets */; };
+		D125C4161E81131E00A63590 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4151E81131E00A63590 /* GameScene.swift */; };
+		D125C4181E81131E00A63590 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4171E81131E00A63590 /* GameViewController.swift */; };
+		D125C41B1E81131E00A63590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D125C4191E81131E00A63590 /* Main.storyboard */; };
+		D125C41D1E81131E00A63590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D125C41C1E81131E00A63590 /* Assets.xcassets */; };
+		D125C4281E81131F00A63590 /* TableFootballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4271E81131F00A63590 /* TableFootballTests.swift */; };
+		D125C4331E81131F00A63590 /* TableFootballUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4321E81131F00A63590 /* TableFootballUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D125C4241E81131F00A63590 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D125C4021E81131E00A63590 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D125C4091E81131E00A63590;
+			remoteInfo = TableFootball;
+		};
+		D125C42F1E81131F00A63590 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D125C4021E81131E00A63590 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D125C4091E81131E00A63590;
+			remoteInfo = TableFootball;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D125C40A1E81131E00A63590 /* TableFootball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableFootball.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D125C40D1E81131E00A63590 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D125C40F1E81131E00A63590 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		D125C4111E81131E00A63590 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		D125C4131E81131E00A63590 /* Game.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Game.xcassets; sourceTree = "<group>"; };
+		D125C4151E81131E00A63590 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		D125C4171E81131E00A63590 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		D125C41A1E81131E00A63590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D125C41C1E81131E00A63590 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D125C41E1E81131E00A63590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D125C4231E81131F00A63590 /* TableFootballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableFootballTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D125C4271E81131F00A63590 /* TableFootballTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFootballTests.swift; sourceTree = "<group>"; };
+		D125C4291E81131F00A63590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D125C42E1E81131F00A63590 /* TableFootballUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableFootballUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D125C4321E81131F00A63590 /* TableFootballUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFootballUITests.swift; sourceTree = "<group>"; };
+		D125C4341E81131F00A63590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D125C4071E81131E00A63590 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D125C4201E81131F00A63590 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D125C42B1E81131F00A63590 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D125C4011E81131E00A63590 = {
+			isa = PBXGroup;
+			children = (
+				D125C40C1E81131E00A63590 /* TableFootball */,
+				D125C4261E81131F00A63590 /* TableFootballTests */,
+				D125C4311E81131F00A63590 /* TableFootballUITests */,
+				D125C40B1E81131E00A63590 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D125C40B1E81131E00A63590 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D125C40A1E81131E00A63590 /* TableFootball.app */,
+				D125C4231E81131F00A63590 /* TableFootballTests.xctest */,
+				D125C42E1E81131F00A63590 /* TableFootballUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D125C40C1E81131E00A63590 /* TableFootball */ = {
+			isa = PBXGroup;
+			children = (
+				D125C40D1E81131E00A63590 /* AppDelegate.swift */,
+				D125C40F1E81131E00A63590 /* GameScene.sks */,
+				D125C4111E81131E00A63590 /* Actions.sks */,
+				D125C4131E81131E00A63590 /* Game.xcassets */,
+				D125C4151E81131E00A63590 /* GameScene.swift */,
+				D125C4171E81131E00A63590 /* GameViewController.swift */,
+				D125C4191E81131E00A63590 /* Main.storyboard */,
+				D125C41C1E81131E00A63590 /* Assets.xcassets */,
+				D125C41E1E81131E00A63590 /* Info.plist */,
+			);
+			path = TableFootball;
+			sourceTree = "<group>";
+		};
+		D125C4261E81131F00A63590 /* TableFootballTests */ = {
+			isa = PBXGroup;
+			children = (
+				D125C4271E81131F00A63590 /* TableFootballTests.swift */,
+				D125C4291E81131F00A63590 /* Info.plist */,
+			);
+			path = TableFootballTests;
+			sourceTree = "<group>";
+		};
+		D125C4311E81131F00A63590 /* TableFootballUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D125C4321E81131F00A63590 /* TableFootballUITests.swift */,
+				D125C4341E81131F00A63590 /* Info.plist */,
+			);
+			path = TableFootballUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D125C4091E81131E00A63590 /* TableFootball */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D125C4371E81131F00A63590 /* Build configuration list for PBXNativeTarget "TableFootball" */;
+			buildPhases = (
+				D125C4061E81131E00A63590 /* Sources */,
+				D125C4071E81131E00A63590 /* Frameworks */,
+				D125C4081E81131E00A63590 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TableFootball;
+			productName = TableFootball;
+			productReference = D125C40A1E81131E00A63590 /* TableFootball.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D125C4221E81131F00A63590 /* TableFootballTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D125C43A1E81131F00A63590 /* Build configuration list for PBXNativeTarget "TableFootballTests" */;
+			buildPhases = (
+				D125C41F1E81131F00A63590 /* Sources */,
+				D125C4201E81131F00A63590 /* Frameworks */,
+				D125C4211E81131F00A63590 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D125C4251E81131F00A63590 /* PBXTargetDependency */,
+			);
+			name = TableFootballTests;
+			productName = TableFootballTests;
+			productReference = D125C4231E81131F00A63590 /* TableFootballTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D125C42D1E81131F00A63590 /* TableFootballUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D125C43D1E81131F00A63590 /* Build configuration list for PBXNativeTarget "TableFootballUITests" */;
+			buildPhases = (
+				D125C42A1E81131F00A63590 /* Sources */,
+				D125C42B1E81131F00A63590 /* Frameworks */,
+				D125C42C1E81131F00A63590 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D125C4301E81131F00A63590 /* PBXTargetDependency */,
+			);
+			name = TableFootballUITests;
+			productName = TableFootballUITests;
+			productReference = D125C42E1E81131F00A63590 /* TableFootballUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D125C4021E81131E00A63590 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = HuubvandeHoef;
+				TargetAttributes = {
+					D125C4091E81131E00A63590 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					D125C4221E81131F00A63590 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D125C4091E81131E00A63590;
+					};
+					D125C42D1E81131F00A63590 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D125C4091E81131E00A63590;
+					};
+				};
+			};
+			buildConfigurationList = D125C4051E81131E00A63590 /* Build configuration list for PBXProject "TableFootball" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D125C4011E81131E00A63590;
+			productRefGroup = D125C40B1E81131E00A63590 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D125C4091E81131E00A63590 /* TableFootball */,
+				D125C4221E81131F00A63590 /* TableFootballTests */,
+				D125C42D1E81131F00A63590 /* TableFootballUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D125C4081E81131E00A63590 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D125C4101E81131E00A63590 /* GameScene.sks in Resources */,
+				D125C4121E81131E00A63590 /* Actions.sks in Resources */,
+				D125C4141E81131E00A63590 /* Game.xcassets in Resources */,
+				D125C41B1E81131E00A63590 /* Main.storyboard in Resources */,
+				D125C41D1E81131E00A63590 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D125C4211E81131F00A63590 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D125C42C1E81131F00A63590 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D125C4061E81131E00A63590 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D125C4161E81131E00A63590 /* GameScene.swift in Sources */,
+				D125C4181E81131E00A63590 /* GameViewController.swift in Sources */,
+				D125C40E1E81131E00A63590 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D125C41F1E81131F00A63590 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D125C4281E81131F00A63590 /* TableFootballTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D125C42A1E81131F00A63590 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D125C4331E81131F00A63590 /* TableFootballUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D125C4251E81131F00A63590 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D125C4091E81131E00A63590 /* TableFootball */;
+			targetProxy = D125C4241E81131F00A63590 /* PBXContainerItemProxy */;
+		};
+		D125C4301E81131F00A63590 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D125C4091E81131E00A63590 /* TableFootball */;
+			targetProxy = D125C42F1E81131F00A63590 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D125C4191E81131E00A63590 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D125C41A1E81131E00A63590 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D125C4351E81131F00A63590 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		D125C4361E81131F00A63590 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D125C4381E81131F00A63590 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = TableFootball/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Huub.TableFootball;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		D125C4391E81131F00A63590 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = TableFootball/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Huub.TableFootball;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		D125C43B1E81131F00A63590 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TableFootballTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Huub.TableFootballTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableFootball.app/TableFootball";
+			};
+			name = Debug;
+		};
+		D125C43C1E81131F00A63590 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TableFootballTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Huub.TableFootballTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TableFootball.app/TableFootball";
+			};
+			name = Release;
+		};
+		D125C43E1E81131F00A63590 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = TableFootballUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Huub.TableFootballUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TableFootball;
+			};
+			name = Debug;
+		};
+		D125C43F1E81131F00A63590 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = TableFootballUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Huub.TableFootballUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TableFootball;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D125C4051E81131E00A63590 /* Build configuration list for PBXProject "TableFootball" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D125C4351E81131F00A63590 /* Debug */,
+				D125C4361E81131F00A63590 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D125C4371E81131F00A63590 /* Build configuration list for PBXNativeTarget "TableFootball" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D125C4381E81131F00A63590 /* Debug */,
+				D125C4391E81131F00A63590 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D125C43A1E81131F00A63590 /* Build configuration list for PBXNativeTarget "TableFootballTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D125C43B1E81131F00A63590 /* Debug */,
+				D125C43C1E81131F00A63590 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D125C43D1E81131F00A63590 /* Build configuration list for PBXNativeTarget "TableFootballUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D125C43E1E81131F00A63590 /* Debug */,
+				D125C43F1E81131F00A63590 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D125C4021E81131E00A63590 /* Project object */;
+}
