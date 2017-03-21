@@ -13,6 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
+    var canvas:SKSpriteNode = SKSpriteNode()
     
     //Create the vartiables
     var theBall:Ball = Ball()
@@ -80,7 +81,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Check if there is made a goal
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "goal"){
             theBall.didScored()
-            theBall.position = CGPoint(x:0,y:0)
         }
     }
     

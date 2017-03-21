@@ -35,7 +35,7 @@ class Ball: SKSpriteNode {
     
     func didScored(){
         isScored = true
-        print("Goal")
+       // print("Goal")
     }
     
     func collidesWithWallVertical(){

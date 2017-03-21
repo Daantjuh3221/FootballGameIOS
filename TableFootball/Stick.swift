@@ -18,22 +18,31 @@ class Stick: SKSpriteNode{
     var timer = 0
     var mcounter = 20
     var diff:CGFloat = 1
-    var positionY:CGFloat = 0;
-
     
+    var positionY:CGFloat = 0
+    var footPositionX:CGFloat = 0
+    
+    let body:SKPhysicsBody = SKPhysicsBody(circleOfRadius: 0)
     
     func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String ){
         position.y = 0
+        
+        //Get data from socket
         let socket = SocketIOManager.sharedInstance.getSocket();
         socket.on("getPositionY") {data, ack in
             print(data)
             self.positionY = (data[0] as? CGFloat)!
-            print(self.positionY)
         }
-
+        socket.on("getPositionX") {data, ack in
+            print(data)
+            self.footPositionX = (data[0] as? CGFloat)!
+        }
+        
+        //Make amount of feets
         amount = amountOfFeets - 1
         
         //Forloop which makes all the foots
+        //Needs to be better.
         for i in 0...amount{
             if(i == 0){
                 theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "firstfoot", colorSprite: sprite, gameScene: gameScene)
@@ -45,11 +54,14 @@ class Stick: SKSpriteNode{
     }
     
     func update(){
+        //Update each foot of this stick
         for i in 0...amount{
-            theFoots[i].update(baseStick: self)
+            theFoots[i].update(baseStick: self, rotation: footPositionX)
         }
         
+        //Update the stick self
         position.y = (self.positionY)
+        //body.velocity.dy = (self.positionY + position.y)*10
         
     }
 }

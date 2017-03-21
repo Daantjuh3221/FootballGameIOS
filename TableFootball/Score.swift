@@ -22,21 +22,17 @@ class Score:SKSpriteNode{
         
         scoreRedLBL = gamescene.childNode(withName: "redscore") as! SKLabelNode
         scoreBlueLBL = gamescene.childNode(withName: "bluescore")as! SKLabelNode
-        
-        
     }
     
     func redScores(){
+        //Red scores
         scoreRed += 1
         scoreRedLBL.text = "Score:  \(scoreRed)"
-        print(scoreRed)
-        //Update ScoreBoard
     }
     
     func blueScored(){
+        //Blue scores
         scoreBlue += 1
         scoreBlueLBL.text = "Score \(scoreBlue)"
-        print(scoreBlue)
-        //Update Scoreboard
     }
 }

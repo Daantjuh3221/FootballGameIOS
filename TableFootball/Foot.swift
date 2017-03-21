@@ -26,6 +26,8 @@ class Foot: SKSpriteNode{
     var startPos:CGFloat = 0
     var maxSpeed:CGFloat = 10
     
+    var sensitivity:CGFloat = 10
+    
     let theFoot = SKSpriteNode(imageNamed: "")
     
     var positionOnStick:CGFloat = 0
@@ -55,28 +57,29 @@ class Foot: SKSpriteNode{
         positionOnStick = 0 - theFoot.position.y
     }
     
-    func update(baseStick: Stick){
-        //Make block go to its start position
-        if(theFoot.position.x < startPos){
-            theFoot.physicsBody?.velocity.dx -= (theFoot.position.x - startPos)/2
-        }
-        if(theFoot.position.x > startPos){
-            theFoot.physicsBody?.velocity.dx -= (theFoot.position.x - startPos)/2
-        }
-        if(theFoot.position.x == startPos){
-            theFoot.physicsBody?.velocity.dx = 0
-        }
+    func update(baseStick: Stick, rotation: CGFloat){
         
-        //Test Launche, To see if it works
-        if(counter > 0){
-            counter -= 1
+        //theFoot.position.x = startPos + rotation
+        theFoot.physicsBody?.velocity.dx =  rotation * sensitivity
+        
+        if(theFoot.position.x > startPos + 90){
+            theFoot.position.x = startPos + 90
+            
+            if((theFoot.physicsBody?.velocity.dx)! > 0){
+                theFoot.physicsBody?.velocity.dx = 0
+            }
         }
-        if(counter == 1){
-            theFoot.physicsBody?.velocity.dx = -300
+        if(theFoot.position.x < startPos - 90){
+            theFoot.position.x = startPos - 90
+            
+            if((theFoot.physicsBody?.velocity.dx)! < 0){
+                theFoot.physicsBody?.velocity.dx = 0
+            }
         }
         
         //Make vertical movement possible
         theFoot.position.y = baseStick.position.y + positionOnStick
+        //theFoot.physicsBody?.velocity.dy =  baseStick.position.y
     }
     
 }
