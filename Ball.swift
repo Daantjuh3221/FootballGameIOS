@@ -28,23 +28,23 @@ class Ball: SKSpriteNode {
     }
     
     func didScored(){
+        position = CGPoint(x:220, y:0)
         physicsBody?.velocity.dy = 0
         physicsBody?.velocity.dx = 0
         
+        //alpha = 0
        // position = CGPoint(x:220, y:0)
-        
-        self.position = CGPoint(x:220, y:0)
         print("Goal")
     }
     
     func collidesWithWallVertical(){
         physicsBody?.velocity.dy *= -1
-        print("Boem")
+        print("Vert")
     }
     
     func collidesWithWallHorizintal(){
         physicsBody?.velocity.dx *= -1
-        print("Boem")
+        print("Hor")
     }
     
     func update(){

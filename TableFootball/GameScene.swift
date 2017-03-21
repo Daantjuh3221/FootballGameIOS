@@ -76,6 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "goal"){
             theBall.didScored()
+            theBall.position = CGPoint(x:0,y:0)
         }
     }
     
