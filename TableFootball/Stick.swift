@@ -31,7 +31,7 @@ class Stick: SKSpriteNode{
             print(self.positionY)
         }
 
-        amount = amountOfFeets
+        amount = amountOfFeets - 1
         
         //Forloop which makes all the foots
         for i in 0...amount{
@@ -49,11 +49,6 @@ class Stick: SKSpriteNode{
             theFoots[i].update(baseStick: self)
         }
         
-//        timer += 1
-//        if(timer > counter){
-//            counter += mcounter
-//            diff *= -1
-//        }
         position.y = (self.positionY)
         
     }

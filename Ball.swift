@@ -11,7 +11,11 @@ import SpriteKit
 
 class Ball: SKSpriteNode {
     
-    func Init(){
+    var isScored:Bool = false
+    var score:Score = Score()
+    
+    
+    func Init(gamescene:GameScene){
         //Initialize the ball here
         let imageTexture = SKTexture(imageNamed: "ballSprite")
         name = "ball"
@@ -24,31 +28,40 @@ class Ball: SKSpriteNode {
         body.categoryBitMask = 1
         body.contactTestBitMask = 2
         
-        position = CGPoint(x:220, y:0)
+        position = CGPoint(x:300, y:0)
+        
+        score.Init(gamescene: gamescene)
     }
     
     func didScored(){
-        position = CGPoint(x:220, y:0)
-        physicsBody?.velocity.dy = 0
-        physicsBody?.velocity.dx = 0
-        
-        //alpha = 0
-       // position = CGPoint(x:220, y:0)
+        isScored = true
         print("Goal")
     }
     
     func collidesWithWallVertical(){
         physicsBody?.velocity.dy *= -1
-        print("Vert")
     }
     
     func collidesWithWallHorizintal(){
         physicsBody?.velocity.dx *= -1
-        print("Hor")
     }
     
     func update(){
-        
+        if(isScored){
+            isScored = false
+            if(position.x < 0){
+                //Left scored (Blue)
+                score.blueScored()
+            }
+            else{
+                //Right Scored (Red)
+                score.redScores()
+            }
+            position = CGPoint(x:220, y:0)
+            physicsBody?.velocity.dy = 0
+            physicsBody?.velocity.dx = 0
+            
+        }
     }
 }
 

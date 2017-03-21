@@ -33,7 +33,6 @@ class Foot: SKSpriteNode{
     func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene){
         
         //Create Cube as a Foot
-        print("Maak foot aan")
         // let theFoot = SKSpriteNode(imageNamed: "red")
         theFoot.texture = SKTexture(imageNamed: colorSprite)
         theFoot.size = CGSize(width: 40, height: 80)
