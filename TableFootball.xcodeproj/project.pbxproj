@@ -17,6 +17,10 @@
 		D125C41D1E81131E00A63590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D125C41C1E81131E00A63590 /* Assets.xcassets */; };
 		D125C4281E81131F00A63590 /* TableFootballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4271E81131F00A63590 /* TableFootballTests.swift */; };
 		D125C4331E81131F00A63590 /* TableFootballUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4321E81131F00A63590 /* TableFootballUITests.swift */; };
+		D125C4411E81141A00A63590 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4401E81141A00A63590 /* Ball.swift */; };
+		D125C4431E81143F00A63590 /* Foot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4421E81143F00A63590 /* Foot.swift */; };
+		D125C4451E81145D00A63590 /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4441E81145D00A63590 /* Stick.swift */; };
+		D125C4471E81226500A63590 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4461E81226500A63590 /* Goal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		D125C42E1E81131F00A63590 /* TableFootballUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableFootballUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D125C4321E81131F00A63590 /* TableFootballUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableFootballUITests.swift; sourceTree = "<group>"; };
 		D125C4341E81131F00A63590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D125C4401E81141A00A63590 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = SOURCE_ROOT; };
+		D125C4421E81143F00A63590 /* Foot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foot.swift; sourceTree = "<group>"; };
+		D125C4441E81145D00A63590 /* Stick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
+		D125C4461E81226500A63590 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,10 @@
 				D125C4191E81131E00A63590 /* Main.storyboard */,
 				D125C41C1E81131E00A63590 /* Assets.xcassets */,
 				D125C41E1E81131E00A63590 /* Info.plist */,
+				D125C4401E81141A00A63590 /* Ball.swift */,
+				D125C4421E81143F00A63590 /* Foot.swift */,
+				D125C4441E81145D00A63590 /* Stick.swift */,
+				D125C4461E81226500A63590 /* Goal.swift */,
 			);
 			path = TableFootball;
 			sourceTree = "<group>";
@@ -270,9 +282,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D125C4451E81145D00A63590 /* Stick.swift in Sources */,
+				D125C4411E81141A00A63590 /* Ball.swift in Sources */,
 				D125C4161E81131E00A63590 /* GameScene.swift in Sources */,
+				D125C4431E81143F00A63590 /* Foot.swift in Sources */,
 				D125C4181E81131E00A63590 /* GameViewController.swift in Sources */,
 				D125C40E1E81131E00A63590 /* AppDelegate.swift in Sources */,
+				D125C4471E81226500A63590 /* Goal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
