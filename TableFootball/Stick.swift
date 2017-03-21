@@ -18,10 +18,19 @@ class Stick: SKSpriteNode{
     var timer = 0
     var mcounter = 20
     var diff:CGFloat = 1
+    var positionY:CGFloat = 0;
+
+    
     
     func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String ){
         position.y = 0
-        
+        let socket = SocketIOManager.sharedInstance.getSocket();
+        socket.on("getPositionY") {data, ack in
+            print(data)
+            self.positionY = (data[0] as? CGFloat)!
+            print(self.positionY)
+        }
+
         amount = amountOfFeets
         
         //Forloop which makes all the foots
@@ -39,12 +48,13 @@ class Stick: SKSpriteNode{
         for i in 0...amount{
             theFoots[i].update(baseStick: self)
         }
-        timer += 1
-        if(timer > counter){
-            counter += mcounter
-            diff *= -1
-        }
-       // position.y += (10 * diff)
+        
+//        timer += 1
+//        if(timer > counter){
+//            counter += mcounter
+//            diff *= -1
+//        }
+        position.y = (self.positionY)
         
     }
 }
