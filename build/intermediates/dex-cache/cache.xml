@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-s3\2.3.9\8b4d1ccbb09daafd17aa3eba99af31ad8aecf505\aws-android-sdk-s3-2.3.9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8b4d1ccbb09daafd17aa3eba99af31ad8aecf505">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-s3-2.3.9_bc91dfa0737452f1c1bba01464f478e16920c6e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\7587e718e7dd070a32f2a08e1fb65af20017088b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_007107e58bf5a90eec78f14c06781e53e1988472.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_b0363c2b25539881f97311eabed3bd422028edd3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-ddb\2.3.9\5d12b8c7c10b169cdddb3d6c09c800a42dfba6b7\aws-android-sdk-ddb-2.3.9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5d12b8c7c10b169cdddb3d6c09c800a42dfba6b7">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-ddb-2.3.9_a5241be9d906d6582951786c17cc565d3264121c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\da9f927ac0f6883c95515bc5fe88c39fcaee2817\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_ce3c21a524f9b3f05b6e967a02520f6284425fa3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\cb7f7c84fa1f42a04dc4f378dab67c14c8019713\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_1ba5eb5a2f5a0f93bcb8c632887b9651346ea290.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\628885e98181afc9d71898d45db8d7a6d598844f\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_aa33e6079bf174772ba8a2b7deaa9d40c54b809a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\8e37752eb8b4f31eb59161e7a5909b85d0c38a93\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_1ba2ea19c16b1aa69d444d4b08c68462de7adb34.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.11.0\840897fcd7223a8143f1d9b6f69714e7be34fd50\okio-1.11.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\okio-1.11.0_eb466475e80c2163bd5e3a3562ee721cb4ce010a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-ddb-mapper\2.3.9\b64f410bf2f4d4db5642f066d9bad54d2ea4608c\aws-android-sdk-ddb-mapper-2.3.9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b64f410bf2f4d4db5642f066d9bad54d2ea4608c">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-ddb-mapper-2.3.9_1d62b96dbc7cdd9197ca2902b5939ff8dadffb5c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-core\2.3.9\2fa9ee0e95329912656c8ccd98991b195a3ea539\aws-android-sdk-core-2.3.9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2fa9ee0e95329912656c8ccd98991b195a3ea539">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-core-2.3.9_495030a083540768e78528bd36badb46d2262cb7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\3cd396d28a82063c1cfe79d9e0c0bfce5740fab9\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_b488b97869eb3c0933061c8b6cf8a837cf6d2663.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\io.socket\socket.io-client\0.8.3\b30500232ff0668a47c9f91f02e6935457a52fb5\socket.io-client-0.8.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b30500232ff0668a47c9f91f02e6935457a52fb5">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\socket.io-client-0.8.3_da35f00439c174f5f29cff169270d9f4685dc9e6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.5.0\4b0bb6bfbecbdd42b97ff400af342bfe7f32bc83\okhttp-3.5.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4b0bb6bfbecbdd42b97ff400af342bfe7f32bc83">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\okhttp-3.5.0_0e8a3bba352d57676393bfd022811c21e0bdc524.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\e8e2ddd50edc5876bd2cf7c02522b87444a7895b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_223fd2428e441bd23f0f235eddd0c3aa2456cd33.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\2d8f60344601b4abbd249f948a4cfb31e35fdf1d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_295669690bb3fc19b79f1928e100da75e5c2451a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\a326c2cb1225ff3027737040980d1abeae6febe1\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_cdecec901310a4eafbdc9ef0e1e10c76229e7011.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\com\google\code\gson\gson\2.2.4\gson-2.2.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\gson-2.2.4_313aff129984a0a45e086871ec03bfcc02e7284e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\io.socket\engine.io-client\0.8.3\854b49396e1e9f9bb0ab025062ddb49c4ed65ca1\engine.io-client-0.8.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="854b49396e1e9f9bb0ab025062ddb49c4ed65ca1">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\engine.io-client-0.8.3_51fbe17424ab4fff0d54c893fbef22a0042d8a26.jar" />
+    </item>
+
+</items>
