@@ -22,7 +22,6 @@ class Stick: SKSpriteNode{
     var positionY:CGFloat = 0
     var footPositionX:CGFloat = 0
     
-    let body:SKPhysicsBody = SKPhysicsBody(circleOfRadius: 0)
     
     func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String ){
         position.y = 0
@@ -53,15 +52,16 @@ class Stick: SKSpriteNode{
         }
     }
     
+    
     func update(){
         //Update each foot of this stick
         for i in 0...amount{
-            theFoots[i].update(baseStick: self, rotation: footPositionX)
+            theFoots[i].update(baseStick: self, direction: CGVector(dx: footPositionX, dy: positionY))
         }
         
         //Update the stick self
-        position.y = (self.positionY)
-        //body.velocity.dy = (self.positionY + position.y)*10
+        //position.y = (self.positionY)
+       // body.velocity = CGVector(0, self.positionY);
         
     }
 }

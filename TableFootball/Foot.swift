@@ -22,11 +22,12 @@ class Foot: SKSpriteNode{
     var rest:Bool = false
     var arrived:Bool = false
     
+    var sensitivity:CGFloat = 10
+    
     //Basic vars for the foot
     var startPos:CGFloat = 0
     var maxSpeed:CGFloat = 10
     
-    var sensitivity:CGFloat = 10
     
     let theFoot = SKSpriteNode(imageNamed: "")
     
@@ -57,10 +58,29 @@ class Foot: SKSpriteNode{
         positionOnStick = 0 - theFoot.position.y
     }
     
-    func update(baseStick: Stick, rotation: CGFloat){
+    func shootLeft(){
+        
+    }
+    
+    func shootRight(){
+        
+    }
+    
+    func update(baseStick: Stick, direction: CGVector){
+        
+        theFoot.position.x = startPos + direction.dx
+        theFoot.position.y = positionOnStick + direction.dy
+        
+        
+        /*
+        var goalPosition:CGVector = CGVector(dx:theFoot.position.x + direction.dx , dy: theFoot.position.y + direction.dy)
+        
+        var forceGiven:CGVector = CGVector(dx: goalPosition.dx - direction.dx , dy: goalPosition.dy - direction.dy)
+        theFoot.physicsBody?.applyForce(forceGiven)
+        */
         
         //theFoot.position.x = startPos + rotation
-        theFoot.physicsBody?.velocity.dx =  rotation * sensitivity
+        theFoot.physicsBody?.velocity.dx =  direction.dx * sensitivity
         
         if(theFoot.position.x > startPos + 90){
             theFoot.position.x = startPos + 90
@@ -77,9 +97,11 @@ class Foot: SKSpriteNode{
             }
         }
         
+        theFoot.physicsBody?.velocity.dy = direction.dy
         //Make vertical movement possible
-        theFoot.position.y = baseStick.position.y + positionOnStick
+        //theFoot.position.y = baseStick.position.y + positionOnStick
         //theFoot.physicsBody?.velocity.dy =  baseStick.position.y
+
     }
     
 }
