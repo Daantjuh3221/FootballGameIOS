@@ -46,7 +46,7 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.affectedByGravity = false
         theFoot.physicsBody?.isDynamic = true
         theFoot.physicsBody?.mass = 50
-        theFoot.name = name
+        theFoot.name = "foot"
         gameScene.addChild(theFoot)
         
         
@@ -58,50 +58,16 @@ class Foot: SKSpriteNode{
         positionOnStick = 0 - theFoot.position.y
     }
     
-    func shootLeft(){
+    func touchesBall() -> CGVector{
+        var velocity:CGVector = CGVector(dx:0, dy:0)
         
+        return velocity
     }
     
-    func shootRight(){
-        
-    }
-    
-    func update(baseStick: Stick, direction: CGVector){
-        
+    func update(direction: CGVector){
+
         theFoot.position.x = startPos + direction.dx
         theFoot.position.y = positionOnStick + direction.dy
-        
-        
-        /*
-        var goalPosition:CGVector = CGVector(dx:theFoot.position.x + direction.dx , dy: theFoot.position.y + direction.dy)
-        
-        var forceGiven:CGVector = CGVector(dx: goalPosition.dx - direction.dx , dy: goalPosition.dy - direction.dy)
-        theFoot.physicsBody?.applyForce(forceGiven)
-        */
-        
-        //theFoot.position.x = startPos + rotation
-        theFoot.physicsBody?.velocity.dx =  direction.dx * sensitivity
-        
-        if(theFoot.position.x > startPos + 90){
-            theFoot.position.x = startPos + 90
-            
-            if((theFoot.physicsBody?.velocity.dx)! > 0){
-                theFoot.physicsBody?.velocity.dx = 0
-            }
-        }
-        if(theFoot.position.x < startPos - 90){
-            theFoot.position.x = startPos - 90
-            
-            if((theFoot.physicsBody?.velocity.dx)! < 0){
-                theFoot.physicsBody?.velocity.dx = 0
-            }
-        }
-        
-        theFoot.physicsBody?.velocity.dy = direction.dy
-        //Make vertical movement possible
-        //theFoot.position.y = baseStick.position.y + positionOnStick
-        //theFoot.physicsBody?.velocity.dy =  baseStick.position.y
-
     }
     
 }

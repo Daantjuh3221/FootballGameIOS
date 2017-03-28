@@ -12,8 +12,10 @@ import SpriteKit
 class Ball: SKSpriteNode {
     
     var isScored:Bool = false
+    var isShot:Bool = false
     var score:Score = Score()
     
+    var touchFoot:SKNode = SKNode()
     
     func Init(gamescene:GameScene){
         //Initialize the ball here
@@ -46,6 +48,11 @@ class Ball: SKSpriteNode {
         physicsBody?.velocity.dx *= -1
     }
     
+    func collidesWithFoot(foot: SKNode){
+        isShot = true
+        touchFoot = foot
+    }
+    
     func update(){
         if(isScored){
             isScored = false
@@ -61,6 +68,13 @@ class Ball: SKSpriteNode {
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
             
+        }
+        
+        if(isShot){
+            isShot = false
+            let direction:CGVector = CGVector(dx: (position.x - (touchFoot.position.x)) * 1, dy: (position.y - (touchFoot.position.y)) * 1)
+            
+            physicsBody?.applyForce(direction)
         }
     }
 }

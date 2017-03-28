@@ -82,6 +82,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "goal"){
             theBall.didScored()
         }
+        
+        //Check if there is made a goal
+        if(firstBody.node?.name == "ball" && secondBody.node?.name == "foot"){
+            theBall.collidesWithFoot(foot: secondBody.node!)
+        }
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -90,4 +96,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         secondStick.update()
         theBall.update()
     }
+    
+    
 }

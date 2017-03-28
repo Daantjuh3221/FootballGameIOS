@@ -29,11 +29,11 @@ class Stick: SKSpriteNode{
         //Get data from socket
         let socket = SocketIOManager.sharedInstance.getSocket();
         socket.on("getPositionY") {data, ack in
-            print(data)
+           // print(data)
             self.positionY = (data[0] as? CGFloat)!
         }
         socket.on("getPositionX") {data, ack in
-            print(data)
+           // print(data)
             self.footPositionX = (data[0] as? CGFloat)!
         }
         
@@ -44,10 +44,10 @@ class Stick: SKSpriteNode{
         //Needs to be better.
         for i in 0...amount{
             if(i == 0){
-                theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "firstfoot", colorSprite: sprite, gameScene: gameScene)
+                theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
             }else{
                 theFoots.append(Foot())
-                theFoots[i].Init(postionX: position.x, positionY: 120, size: CGSize(width: 40, height: 80), name: "SecondFoot", colorSprite: sprite, gameScene: gameScene)
+                theFoots[i].Init(postionX: position.x, positionY: 120, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
             }
         }
     }
@@ -56,7 +56,7 @@ class Stick: SKSpriteNode{
     func update(){
         //Update each foot of this stick
         for i in 0...amount{
-            theFoots[i].update(baseStick: self, direction: CGVector(dx: footPositionX, dy: positionY))
+            theFoots[i].update( direction: CGVector(dx: footPositionX, dy: positionY))
         }
         
         //Update the stick self
