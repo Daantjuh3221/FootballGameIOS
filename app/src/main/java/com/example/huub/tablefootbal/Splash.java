@@ -1,5 +1,6 @@
 package com.example.huub.tablefootbal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 
 /**
  * Created by Lars on 8-3-2017.
@@ -20,17 +22,30 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        Thread myThread = new Thread() {
+
+
+/*        Thread myThread = new Thread() {
             @Override
             public void run() {
                 Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
                 try {
                     sleep(2000);
                     startActivity(i);
-                    //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }
+        };
+        myThread.start();*/
+    }
+
+
+    public void joinGame(View v) {
+        Thread myThread = new Thread() {
+            @Override
+            public void run() {
+                Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+                startActivity(i);
             }
         };
         myThread.start();
