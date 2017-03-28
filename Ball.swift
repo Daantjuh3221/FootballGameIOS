@@ -15,6 +15,8 @@ class Ball: SKSpriteNode {
     var isShot:Bool = false
     var score:Score = Score()
     
+    var ballSpeed:CGFloat = 3
+    
     var touchFoot:SKNode = SKNode()
     
     func Init(gamescene:GameScene){
@@ -59,12 +61,13 @@ class Ball: SKSpriteNode {
             if(position.x < 0){
                 //Left scored (Blue)
                 score.blueScored()
+                position = CGPoint(x:-220, y:0)
             }
             else{
                 //Right Scored (Red)
                 score.redScores()
+                position = CGPoint(x:220, y:0)
             }
-            position = CGPoint(x:220, y:0)
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
             
@@ -72,7 +75,7 @@ class Ball: SKSpriteNode {
         
         if(isShot){
             isShot = false
-            let direction:CGVector = CGVector(dx: (position.x - (touchFoot.position.x)) * 1, dy: (position.y - (touchFoot.position.y)) * 1)
+            let direction:CGVector = CGVector(dx: (position.x - (touchFoot.position.x)) * 3, dy: (position.y - (touchFoot.position.y)) * 3)
             
             physicsBody?.applyForce(direction)
         }

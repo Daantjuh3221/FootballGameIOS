@@ -40,28 +40,52 @@ class Stick: SKSpriteNode{
         //Make amount of feets
         amount = amountOfFeets - 1
         
-        //Forloop which makes all the foots
-        //Needs to be better.
-        for i in 0...amount{
-            if(i == 0){
+        makeFoots(amount: amount, gameScene: gameScene, sprite: sprite)
+    }
+    
+    func makeFoots(amount: Int, gameScene: GameScene, sprite: String ){
+        
+        switch amount{
+        case 0:
+            for i in 0...amount{
                 theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
-            }else{
-                theFoots.append(Foot())
-                theFoots[i].Init(postionX: position.x, positionY: 120, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
             }
+            break;
+        case 1:
+            for i in 0...amount{
+                if(i == 0){
+                theFoots[i].Init(postionX: position.x, positionY: 92, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                } else {
+                    theFoots.append(Foot())
+                    theFoots[i].Init(postionX: position.x, positionY: -92, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                }
+            }
+        case 2:
+            for i in 0...amount{
+                if(i == 0){
+                    theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                } else{
+                    theFoots.append(Foot())
+                    if(i == 1){
+                        theFoots[i].Init(postionX: position.x, positionY: -180, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                    }else{
+                        theFoots[i].Init(postionX: position.x, positionY: 180, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                    }
+                }
+            }
+            break;
+        default:
+            for i in 0...amount{
+                theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+            }
+            break;
         }
     }
     
-    
     func update(){
         //Update each foot of this stick
-        for i in 0...amount{
-            theFoots[i].update( direction: CGVector(dx: footPositionX, dy: positionY))
+        for i in theFoots{
+            i.update( direction: CGVector(dx: footPositionX, dy: positionY))
         }
-        
-        //Update the stick self
-        //position.y = (self.positionY)
-       // body.velocity = CGVector(0, self.positionY);
-        
     }
 }

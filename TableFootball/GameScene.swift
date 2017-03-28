@@ -38,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //Secondstick
         if(self.childNode(withName: "stick02") != nil){
             secondStick = self.childNode(withName: "stick02") as! Stick
-            secondStick.Init(amountOfFeets: 1, positionX: 100, gameScene: self, sprite:"blue")
+            secondStick.Init(amountOfFeets: 3, positionX: 100, gameScene: self, sprite:"blue")
         }
     }
     
@@ -72,10 +72,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         //Apply tthe collision with the walls
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "wall"){
-            theBall.collidesWithWallVertical()
-        }
+          //  theBall.collidesWithWallVertical()
+        } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
-            theBall.collidesWithWallHorizintal()
+          //  theBall.collidesWithWallHorizintal()
         }
         
         //Check if there is made a goal
@@ -83,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.didScored()
         }
         
-        //Check if there is made a goal
+        //Check if a foot touches the ball
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "foot"){
             theBall.collidesWithFoot(foot: secondBody.node!)
         }

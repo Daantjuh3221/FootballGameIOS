@@ -28,6 +28,9 @@ class Foot: SKSpriteNode{
     var startPos:CGFloat = 0
     var maxSpeed:CGFloat = 10
     
+    //SpeedValue
+    var lastSpeed:[CGFloat] = []
+    var speedCounter:Int = 0
     
     let theFoot = SKSpriteNode(imageNamed: "")
     
@@ -56,18 +59,33 @@ class Foot: SKSpriteNode{
         rest = true
         
         positionOnStick = 0 - theFoot.position.y
+        speedCounter = 0
+        for i in 0...10{
+            lastSpeed.append(CGFloat(i))
+        }
     }
     
-    func touchesBall() -> CGVector{
-        var velocity:CGVector = CGVector(dx:0, dy:0)
-        
-        return velocity
+    func getSpeed() -> CGFloat{
+        var speedGiven:CGFloat = 0
+        for i in lastSpeed{
+            speedGiven += i
+        }
+        return speedGiven/CGFloat(lastSpeed.count)
     }
     
     func update(direction: CGVector){
 
         theFoot.position.x = startPos + direction.dx
         theFoot.position.y = positionOnStick + direction.dy
+        
+        
+        if(speedCounter > 10){
+            speedCounter = 0
+        }
+        
+      //  lastSpeed[speedCounter] = theFoot.position.x
+        print(getSpeed())
+        speedCounter += 1
     }
     
 }
