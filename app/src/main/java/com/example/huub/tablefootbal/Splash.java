@@ -19,20 +19,17 @@ import android.widget.TextView;
 
 public class Splash extends AppCompatActivity {
 
-    TextView txtUserName;
-    public String userName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        txtUserName = (TextView) findViewById(R.id.userName);
 
 
-/*        Thread myThread = new Thread() {
+        Thread myThread = new Thread() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+                Intent i = new Intent(getApplicationContext(), joinScreen.class);
                 try {
                     sleep(2000);
                     startActivity(i);
@@ -41,14 +38,7 @@ public class Splash extends AppCompatActivity {
                 }
             }
         };
-        myThread.start();*/
+        myThread.start();
     }
 
-
-    public void joinGame(View v) {
-        userName = txtUserName.getText().toString();
-        Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
-        i.putExtra("userName", userName);
-        startActivity(i);
-    }
 }
