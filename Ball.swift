@@ -18,6 +18,7 @@ class Ball: SKSpriteNode {
     var ballSpeed:CGFloat = 3
     
     var touchFoot:SKNode = SKNode()
+    var footNode:Foot = Foot()
     
     func Init(gamescene:GameScene){
         //Initialize the ball here
@@ -53,6 +54,22 @@ class Ball: SKSpriteNode {
     func collidesWithFoot(foot: SKNode){
         isShot = true
         touchFoot = foot
+        
+    }
+    
+    func checkIfWon(){
+        if(score.hasWon){
+            //Some one won
+            if(score.winner == "red"){
+                //Red has won
+            }else {
+                //blue has Won
+            }
+            alpha = 0
+            
+            physicsBody?.velocity.dy = 0
+            physicsBody?.velocity.dx = 0
+        }
     }
     
     func update(){
@@ -68,6 +85,8 @@ class Ball: SKSpriteNode {
                 score.redScores()
                 position = CGPoint(x:220, y:0)
             }
+            checkIfWon()
+            //Set velocity to 0
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
             

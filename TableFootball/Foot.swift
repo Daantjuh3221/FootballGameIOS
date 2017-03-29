@@ -35,13 +35,14 @@ class Foot: SKSpriteNode{
     let theFoot = SKSpriteNode(imageNamed: "")
     
     var positionOnStick:CGFloat = 0
+    var maxOffsets:CGFloat = 0
     
-    func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene){
+    func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene, maxOffset: CGFloat){
         
         //Create Cube as a Foot
         // let theFoot = SKSpriteNode(imageNamed: "red")
         theFoot.texture = SKTexture(imageNamed: colorSprite)
-        theFoot.size = CGSize(width: 40, height: 80)
+        theFoot.size = CGSize(width: 25, height: 50)
         theFoot.position.x = postionX
         theFoot.position.y = positionY
         theFoot.physicsBody = SKPhysicsBody(rectangleOf: theFoot.frame.size)
@@ -55,10 +56,11 @@ class Foot: SKSpriteNode{
         
         //Set value per position
         startPos = theFoot.position.x
-        maxOffset = startPos + 50
+        
         rest = true
         
-        positionOnStick = 0 - theFoot.position.y
+        positionOnStick = 0 + theFoot.position.y
+        maxOffsets = maxOffset
         speedCounter = 0
         for i in 0...10{
             lastSpeed.append(CGFloat(i))
@@ -75,17 +77,31 @@ class Foot: SKSpriteNode{
     
     func update(direction: CGVector){
 
-        theFoot.position.x = startPos + direction.dx
-        theFoot.position.y = positionOnStick + direction.dy
+        var tempVector:CGVector = direction
+        print("PosY: " + String(describing: tempVector.dy))
+        
+        //Clamp Foots
+        /*
+        if(tempVector.dy >  positionOnStick + maxOffsets){
+            tempVector.dy = positionOnStick + maxOffsets
+        }
+        if(tempVector.dy <  positionOnStick - maxOffsets){
+            tempVector.dy =   positionOnStick - maxOffsets
+        }*/
         
         
+        theFoot.position.x = startPos + tempVector.dx
+        theFoot.position.y = positionOnStick + tempVector.dy
+        
+        
+        /*
         if(speedCounter > 10){
             speedCounter = 0
         }
         
       //  lastSpeed[speedCounter] = theFoot.position.x
         print(getSpeed())
-        speedCounter += 1
+        speedCounter += 1*/
     }
     
 }
