@@ -1,0 +1,25 @@
+{
+  "name": "sio-server",
+  "dependencies": {
+    "bootstrap": "latest",
+    "jquery": "latest",
+    "typeahead.js": "latest",
+    "font-awesome": "latest"
+  },
+  "directory": "components",
+  "license": "MIT",
+  "keywords": [
+    "Socket",
+    "IO",
+    "Simple",
+    "Sample"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "test",
+    "tests"
+  ]
+}
