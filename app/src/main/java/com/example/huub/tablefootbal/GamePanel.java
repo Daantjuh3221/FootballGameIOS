@@ -1,5 +1,6 @@
 package com.example.huub.tablefootbal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,7 +30,7 @@ import static com.example.huub.tablefootbal.MainThread.canvas;
  */
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, SensorEventListener {
     StringBuilder sb = new StringBuilder();
-    private static final String SERVER_ADDRESS  = "http://192.168.10.49:3000";
+/*    private static final String SERVER_ADDRESS  = "http://192.168.10.49:3000";*/
     private Socket mSocket;
 
     private MainThread thread;
@@ -59,32 +60,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private TableFootbalController tableFootbalController;
 
 
-    public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController, String userName){
+    public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
         super(context);
         mDeviceHeight = deviceHeight;
         mDeviceWidth = deviceWidth;
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(),this);
-        try {
-            mSocket = IO.socket(SERVER_ADDRESS);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-                System.out.println("Socket connected");
-            }
-
-        });
-
-        mSocket.connect();
-
-        mSocket.emit("connectUser", userName, "Android");
 
         this.tableFootbalController = tableFootbalController;
+
+        SocketConnection app = (SocketConnection) tableFootbalController.getApplication();
+        mSocket = app.getSocket();
+        mSocket.connect();
 
         getSticks();
 

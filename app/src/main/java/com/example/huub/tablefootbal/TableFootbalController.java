@@ -28,8 +28,6 @@ public class TableFootbalController extends Activity {
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        String userName = (String) getIntent().getSerializableExtra("userName");
-
         Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
         //Force portrait
@@ -45,7 +43,7 @@ public class TableFootbalController extends Activity {
         int deviceWidth = displayMetrics.widthPixels;
         int deviceHeight = displayMetrics.heightPixels;
 
-        gPanel = new GamePanel(this,sensorManager,deviceWidth,deviceHeight, this, userName);
+        gPanel = new GamePanel(this,sensorManager,deviceWidth,deviceHeight, this);
 
         setContentView(gPanel);
 
