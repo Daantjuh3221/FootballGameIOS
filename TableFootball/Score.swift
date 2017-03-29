@@ -15,7 +15,6 @@ class Score:SKSpriteNode{
     var scoreBlueLBL = SKLabelNode()
     var winLabel = SKLabelNode()
     var winLabelShadow = SKLabelNode()
-    
     var scoreLBL = SKLabelNode()
     var scoreLBLShadow = SKLabelNode()
     
@@ -23,14 +22,17 @@ class Score:SKSpriteNode{
     var scoreRed:Int = 0
     var scoreBlue:Int = 0
     
-    var scoreLimit:Int = 5
+    //Score limit, can be set in the constructor
+    var scoreLimit:Int = 1
     
-    var winner:String = ""
+    var winnerRed:Bool = true
     var hasWon:Bool = false
     
-    func Init(gamescene: GameScene){
+    func Init(gamescene: GameScene, _scoreLimit: Int){
         scoreRed = 0
         scoreBlue = 0
+        
+        scoreLimit = _scoreLimit
         
         //Find all labels
         scoreRedLBL = gamescene.childNode(withName: "redscore") as! SKLabelNode
@@ -69,13 +71,13 @@ class Score:SKSpriteNode{
                 //Red has won
                 winLabel.fontColor = UIColor.red
                 setWinScoreText(text: "Red has won")
-                winner = "red"
+                winnerRed = true
                 hasWon = true
             }else if(scoreBlue > scoreRed){
                 //Blue has won
                 winLabel.fontColor = UIColor.blue
                 setWinScoreText(text: "Blue has won!")
-                winner = "blue"
+                winnerRed = false
                 hasWon = true
             }
         }

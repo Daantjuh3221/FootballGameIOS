@@ -15,77 +15,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var graphs = [String : GKGraph]()
     var canvas:SKSpriteNode = SKSpriteNode()
     
+    //GameRules
+    var scoreLimit:Int = 1;
+    
+    
     //Create the vartiables
     var theBall:Ball = Ball()
-    var stick01 = Stick()
-    var stick02 = Stick()
-    var stick03 = Stick()
-    var stick04 = Stick()
-    var stick05 = Stick()
-    var stick06 = Stick()
-    var stick07 = Stick()
-    var stick08 = Stick()
-    //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
-    var stickEnabled:[Bool] = [true, false, false, false, false, false, false ,true]
     
+    //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
+    var sticks:[Stick] = []
+    var stickEnabled:[Bool] = [false, true, false, false, true, false, false ,false, true]
+    var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
+    var stickColor:[String] = ["","red", "red", "blue", "red", "blue", "red", "blue", "blue"]
+    var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
+
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
         //Init the ball
+        //<-----! The Ball acts as the referee !----->
         if(self.childNode(withName: "ball") != nil){
             theBall = self.childNode(withName: "ball") as! Ball
-            theBall.Init(gamescene: self)
+            theBall.Init(gamescene: self, scoreLimit: scoreLimit)
         }
         
-        //1
-        if(stickEnabled[0]){
-        if(self.childNode(withName: "stick01") != nil){
-            stick01 = self.childNode(withName: "stick01") as! Stick
-            stick01.Init(amountOfFeets: 1, positionX: -340, gameScene: self, sprite:"red")
-            }}
-        //2
-        if(stickEnabled[1]){
-        if(self.childNode(withName: "stick02") != nil){
-            stick02 = self.childNode(withName: "stick02") as! Stick
-            stick02.Init(amountOfFeets: 2, positionX: -243, gameScene: self, sprite:"red")
-            }}
-        //3
-        if(stickEnabled[2]){
-        if(self.childNode(withName: "stick03") != nil){
-            stick03 = self.childNode(withName: "stick03") as! Stick
-            stick03.Init(amountOfFeets: 3, positionX: -146, gameScene: self, sprite:"blue")
-            }}
-        //4
-        if(stickEnabled[3]){
-        if(self.childNode(withName: "stick04") != nil){
-            stick04 = self.childNode(withName: "stick04") as! Stick
-            stick04.Init(amountOfFeets: 5, positionX: -49, gameScene: self, sprite:"red")
-            }}
-        //5
-        if(stickEnabled[4]){
-        if(self.childNode(withName: "stick05") != nil){
-            stick05 = self.childNode(withName: "stick05") as! Stick
-            stick05.Init(amountOfFeets: 5, positionX: 49, gameScene: self, sprite:"blue")
-            }}
-        //6
-        if(stickEnabled[5]){
-        if(self.childNode(withName: "stick06") != nil){
-            stick06 = self.childNode(withName: "stick06") as! Stick
-            stick06.Init(amountOfFeets: 3, positionX: 146, gameScene: self, sprite:"red")
-            }}
-        //7
-        if(stickEnabled[6]){
-        if(self.childNode(withName: "stick07") != nil){
-            stick07 = self.childNode(withName: "stick07") as! Stick
-            stick07.Init(amountOfFeets: 2, positionX: 243, gameScene: self, sprite:"blue")
-            }}
-        //8
-        if(stickEnabled[7]){
-        if(self.childNode(withName: "stick08") != nil){
-            stick08 = self.childNode(withName: "stick08") as! Stick
-            stick08.Init(amountOfFeets: 1, positionX: 340, gameScene: self, sprite:"blue")
-            }}
+        for i in 0...8{
+            //Makes all sticks
+                sticks.append(Stick())
+                if(stickEnabled[i]){
+                if(self.childNode(withName: "stick0" + String(i)) != nil){
+                    sticks[i] = self.childNode(withName: "stick0" + String(i)) as! Stick
+                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i])
+                    }}
+        }
     }
     
     override func sceneDidLoad() {
@@ -138,14 +101,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
-        if(stickEnabled[0]){stick01.update()}
-        if(stickEnabled[1]){stick02.update()}
-        if(stickEnabled[2]){stick03.update()}
-        if(stickEnabled[3]){stick04.update()}
-        if(stickEnabled[4]){stick05.update()}
-        if(stickEnabled[5]){stick06.update()}
-        if(stickEnabled[6]){stick07.update()}
-        if(stickEnabled[7]){stick08.update()}
+        for i in sticks{
+            i.update()
+        }
         theBall.update()
         
     }
