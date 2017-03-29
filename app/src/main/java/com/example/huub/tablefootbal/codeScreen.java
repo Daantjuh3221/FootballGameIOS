@@ -40,6 +40,7 @@ public class codeScreen extends AppCompatActivity {
             if (!mExists) {
                 Intent i = new Intent(getApplicationContext(), mainMenu.class);
                 startActivity(i);
+                finish();
             } else{
                 Constants.USERNAME = "";
                 runOnUiThread(new Runnable() {

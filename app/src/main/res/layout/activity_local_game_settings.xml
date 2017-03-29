@@ -6,24 +6,13 @@
     android:background="@drawable/footballfield">
 
     <Button
-        android:id="@+id/playLocalButton"
+        android:id="@+id/playLocalGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="playLocal"
-        android:text="Play Local Game"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
-        android:onClick="playMultiplayer"
-        android:text="Play Multiplayer" />
-
+        android:layout_marginBottom="22dp"
+        android:onClick="playLocalGame"
+        android:text="Play!" />
 
 </RelativeLayout>

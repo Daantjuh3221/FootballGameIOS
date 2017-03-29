@@ -25,6 +25,8 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         Thread myThread = new Thread() {
             @Override
@@ -33,6 +35,7 @@ public class Splash extends AppCompatActivity {
                 try {
                     sleep(2000);
                     startActivity(i);
+                    finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -6,18 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-public class mainMenu extends AppCompatActivity {
+public class localGameSettings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_local_game_settings);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-    public void playLocal (View v) {
-        Intent i = new Intent(getApplicationContext(), localGameSettings.class);
+    public void playLocalGame(View v) {
+        Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
         startActivity(i);
+        finish();
     }
 }
