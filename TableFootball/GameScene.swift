@@ -23,12 +23,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var theBall:Ball = Ball()
     
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
+    //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
     var stickEnabled:[Bool] = [false, true, false, false, true, false, false ,false, true]
     var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
     var stickColor:[String] = ["","red", "red", "blue", "red", "blue", "red", "blue", "blue"]
     var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
-
+    
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -81,10 +82,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         //Apply tthe collision with the walls
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "wall"){
-          //  theBall.collidesWithWallVertical()
+            theBall.collidesWithWallVertical()
         } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
-          //  theBall.collidesWithWallHorizintal()
+            theBall.collidesWithWallHorizintal()
         }
         
         //Check if there is made a goal
