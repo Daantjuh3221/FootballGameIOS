@@ -12,4 +12,15 @@
         android:layout_centerVertical="true"
         android:text="Join Game"
         android:onClick="joinGame"/>
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/joinGameButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName" />
 </RelativeLayout>

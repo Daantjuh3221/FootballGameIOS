@@ -23,6 +23,7 @@ import io.socket.emitter.Emitter;
 
 import static com.example.huub.tablefootbal.MainThread.canvas;
 
+
 /**
  * Created by Huub on 15-2-2017.
  */
@@ -58,7 +59,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private TableFootbalController tableFootbalController;
 
 
-    public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
+    public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController, String userName){
         super(context);
         mDeviceHeight = deviceHeight;
         mDeviceWidth = deviceWidth;
@@ -80,6 +81,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         });
 
         mSocket.connect();
+
+        mSocket.emit("connectUser", userName, "Android");
 
         this.tableFootbalController = tableFootbalController;
 

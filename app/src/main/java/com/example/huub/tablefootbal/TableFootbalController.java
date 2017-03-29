@@ -19,6 +19,7 @@ public class TableFootbalController extends Activity {
 
     private GamePanel gPanel;
 
+
     public SensorManager sensorManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,8 @@ public class TableFootbalController extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        String userName = (String) getIntent().getSerializableExtra("userName");
 
         Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
@@ -42,9 +45,11 @@ public class TableFootbalController extends Activity {
         int deviceWidth = displayMetrics.widthPixels;
         int deviceHeight = displayMetrics.heightPixels;
 
-        gPanel = new GamePanel(this,sensorManager,deviceWidth,deviceHeight, this);
+        gPanel = new GamePanel(this,sensorManager,deviceWidth,deviceHeight, this, userName);
 
         setContentView(gPanel);
 
             }
+
+
 }

@@ -2417,6 +2417,7 @@ containing a value of this type.
         public static final int topPanel=0x7f0b0041;
         public static final int up=0x7f0b0008;
         public static final int useLogo=0x7f0b001a;
+        public static final int userName=0x7f0b0076;
         public static final int withText=0x7f0b0029;
         public static final int wrap=0x7f0b000b;
         public static final int wrap_content=0x7f0b0021;

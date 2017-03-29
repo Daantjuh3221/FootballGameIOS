@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by Lars on 8-3-2017.
@@ -18,10 +19,14 @@ import android.widget.Button;
 
 public class Splash extends AppCompatActivity {
 
+    TextView txtUserName;
+    public String userName;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+        txtUserName = (TextView) findViewById(R.id.userName);
 
 
 /*        Thread myThread = new Thread() {
@@ -41,13 +46,9 @@ public class Splash extends AppCompatActivity {
 
 
     public void joinGame(View v) {
-        Thread myThread = new Thread() {
-            @Override
-            public void run() {
-                Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
-                startActivity(i);
-            }
-        };
-        myThread.start();
+        userName = txtUserName.getText().toString();
+        Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+        i.putExtra("userName", userName);
+        startActivity(i);
     }
 }
