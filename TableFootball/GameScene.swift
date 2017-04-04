@@ -56,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    //<---- Detects collision between objects ---->
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody
         var secondBody: SKPhysicsBody

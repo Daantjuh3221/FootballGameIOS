@@ -44,8 +44,6 @@ class Stick: SKSpriteNode{
         makeFoots(amount: amount, gameScene: gameScene, sprite: sprite)
     }
     
-    
-    //576
     func makeFoots(amount: Int, gameScene: GameScene, sprite: String ){
         switch amount{
         case 0: // 1 foot
