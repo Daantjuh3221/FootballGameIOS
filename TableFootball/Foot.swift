@@ -78,7 +78,7 @@ class Foot: SKSpriteNode{
     func update(direction: CGVector){
 
         var tempVector:CGVector = direction
-        print("PosY: " + String(describing: tempVector.dy))
+        //print("PosY: " + String(describing: tempVector.dy))
         
         //Clamp Foots
         /*

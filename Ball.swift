@@ -89,7 +89,6 @@ class Ball: SKSpriteNode {
             //Set velocity to 0
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
-            
         }
         
         if(isShot){

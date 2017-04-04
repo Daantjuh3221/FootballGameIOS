@@ -42,6 +42,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         for i in 0...8{
+            if (i > 0){
+                stickEnabled[i] = true
+            }
+        }
+        
+        for i in 0...8{
             //Makes all sticks
                 sticks.append(Stick())
                 if(stickEnabled[i]){

@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 class Score:SKSpriteNode{
+    
     //Text labels
     var scoreRedLBL = SKLabelNode()
     var scoreBlueLBL = SKLabelNode()
@@ -43,8 +44,9 @@ class Score:SKSpriteNode{
         scoreLBLShadow = gamescene.childNode(withName: "scorelabelshadow")as! SKLabelNode
         
         setScoreLabel(text:"")
+        setText(text: "", textF: scoreLBL, textS: scoreLBLShadow)
         //Set basic value for labels
-        setWinScoreText(text: "")
+      //  setWinScoreText(text: "")
         winLabelShadow.fontColor = UIColor.black
     }
     
@@ -65,31 +67,33 @@ class Score:SKSpriteNode{
     func checkWinConditions(){
         if(scoreRed >= scoreLimit || scoreBlue >= scoreLimit){
             //Someone has won
-            setScoreLabel(text: String(scoreRed) + " : " + String(scoreBlue))
+            //setText(text: String(scoreRed) + " : " + String(scoreBlue))
+            setText(text: String(scoreRed) + " : " + String(scoreBlue), textF: scoreLBL, textS: scoreLBLShadow)
                 
             if(scoreRed > scoreBlue){
                 //Red has won
                 winLabel.fontColor = UIColor.red
-                setWinScoreText(text: "Red has won")
+                setText(text: "Red has won", textF: winLabel, textS: winLabelShadow)
                 winnerRed = true
                 hasWon = true
             }else if(scoreBlue > scoreRed){
                 //Blue has won
                 winLabel.fontColor = UIColor.blue
-                setWinScoreText(text: "Blue has won!")
+                setText(text: "Blue has won!", textF: winLabel, textS: winLabelShadow)
                 winnerRed = false
                 hasWon = true
             }
         }
     }
     
-    func setWinScoreText(text: String){
-        winLabel.text = text
-        winLabelShadow.text = text
+    //Set text
+    func setText(text: String, textF: SKLabelNode, textS: SKLabelNode){
+        textF.text = text
+        textS.text = text
     }
-    
+   /*
     func setScoreLabel(text: String){
         scoreLBL.text = text
         scoreLBLShadow.text = text
-    }
+    }*/
 }
