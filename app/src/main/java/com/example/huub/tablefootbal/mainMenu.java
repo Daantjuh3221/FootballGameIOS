@@ -20,4 +20,9 @@ public class mainMenu extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), localGameSettings.class);
         startActivity(i);
     }
+
+    public void playMultiplayer (View v) {
+        Intent i = new Intent(getApplicationContext(), multiplayerSettings.class);
+        startActivity(i);
+    }
 }

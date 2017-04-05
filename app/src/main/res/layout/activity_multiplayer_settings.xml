@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/footballfield">
+
+    <Button
+        android:id="@+id/playMultiplayerGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:onClick="playMultiplayerGame"
+        android:text="Play!" />
+
+    <TextView
+        android:id="@+id/textMultiplayerTeam1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="32dp"
+        android:text="Team 1"
+        android:textColor="#ffffff"
+        android:shadowColor="#000000"
+        android:shadowRadius="5"
+        android:shadowDx="5"
+        android:shadowDy="5"/>
+
+    <TextView
+        android:id="@+id/textMultiplayerTeam2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="86dp"
+        android:text="Team 2"
+        android:textColor="#ffffff"
+        android:shadowColor="#000000"
+        android:shadowRadius="5"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:layout_alignBaseline="@+id/textMultiplayerTeam1"
+        android:layout_alignBottom="@+id/textMultiplayerTeam1"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/joinMultiplayerTeam1"
+        android:layout_width="180dp"
+        android:layout_height="200dp"
+        android:layout_alignBottom="@+id/playMultiplayerGame"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textMultiplayerTeam1"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.4"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/joinMultiplayerTeam2"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/playMultiplayerGame"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/joinMultiplayerTeam1"
+        android:layout_marginEnd="60dp"
+        android:alpha="0.4"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/geenMultiplayerTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/playMultiplayerGame"
+        android:layout_alignEnd="@+id/playMultiplayerGame"
+        android:layout_alignTop="@+id/joinMultiplayerTeam1"
+        android:backgroundTint="@android:color/white"
+        android:visibility="visible"
+        android:alpha="0.4"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerMultiplayerTeam1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignBottom="@+id/playMultiplayerGame"
+        android:layout_alignEnd="@+id/joinMultiplayerTeam1"
+        android:layout_alignStart="@+id/textMultiplayerTeam1" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerMultiplayerTeam2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignBottom="@+id/joinMultiplayerTeam2"
+        android:layout_alignEnd="@+id/joinMultiplayerTeam2"
+        android:layout_alignStart="@+id/joinMultiplayerTeam2"
+        android:layout_marginStart="33dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerMultiplayerMidden"
+        android:layout_width="75dp"
+        android:layout_height="120dp"
+        android:layout_alignStart="@+id/geenMultiplayerTeam"
+        android:layout_alignTop="@+id/recyclerMultiplayerTeam1"
+        android:layout_marginStart="11dp" />
+
+</RelativeLayout>
