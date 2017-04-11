@@ -18,8 +18,9 @@ class Ball: SKSpriteNode {
     var ballSpeed:CGFloat = 3
     
     var touchFoot:SKNode = SKNode()
+    var footNode:Foot = Foot()
     
-    func Init(gamescene:GameScene){
+    func Init(gamescene:GameScene, scoreLimit: Int){
         //Initialize the ball here
         let imageTexture = SKTexture(imageNamed: "ballSprite")
         name = "ball"
@@ -31,10 +32,11 @@ class Ball: SKSpriteNode {
         body.mass = 0.2
         body.categoryBitMask = 1
         body.contactTestBitMask = 2
+        body.restitution = 0
         
         position = CGPoint(x:300, y:0)
         
-        score.Init(gamescene: gamescene)
+        score.Init(gamescene: gamescene, _scoreLimit: scoreLimit)
     }
     
     func didScored(){
@@ -53,6 +55,22 @@ class Ball: SKSpriteNode {
     func collidesWithFoot(foot: SKNode){
         isShot = true
         touchFoot = foot
+        
+    }
+    
+    func checkIfWon(){
+        if(score.hasWon){
+            //Some one won
+            if(score.winnerRed){
+                //Red has won
+            }else {
+                //blue has Won
+            }
+            alpha = 0
+            
+            physicsBody?.velocity.dy = 0
+            physicsBody?.velocity.dx = 0
+        }
     }
     
     func update(){
@@ -68,15 +86,16 @@ class Ball: SKSpriteNode {
                 score.redScores()
                 position = CGPoint(x:220, y:0)
             }
+            checkIfWon()
+            //Set velocity to 0
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
-            
         }
         
         if(isShot){
             isShot = false
             let direction:CGVector = CGVector(dx: (position.x - (touchFoot.position.x)) * 3, dy: (position.y - (touchFoot.position.y)) * 3)
-            
+           // touchFoot.increaseSize(3)
             physicsBody?.applyForce(direction)
         }
     }

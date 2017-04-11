@@ -15,30 +15,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var graphs = [String : GKGraph]()
     var canvas:SKSpriteNode = SKSpriteNode()
     
+    //GameRules
+    var scoreLimit:Int = 5;
+    
+    
     //Create the vartiables
     var theBall:Ball = Ball()
-    var firstStick = Stick()
-    var secondStick = Stick()
+    
+    //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
+    //<---- All value for the sticks, counting left to right, Excluding the first ---->
+    var sticks:[Stick] = []
+    var stickEnabled:[Bool] = [false, true, false, true, false, false, true ,false, true]
+    var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
+    var stickColor:[String] = ["","red", "red", "blue", "red", "blue", "red", "blue", "blue"]
+    var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
     
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
         //Init the ball
+        //<-----! The Ball acts as the referee !----->
         if(self.childNode(withName: "ball") != nil){
             theBall = self.childNode(withName: "ball") as! Ball
-            theBall.Init(gamescene: self)
+            theBall.Init(gamescene: self, scoreLimit: scoreLimit)
         }
-     
-        //firstStick
-        if(self.childNode(withName: "stick01") != nil){
-            firstStick = self.childNode(withName: "stick01") as! Stick
-            firstStick.Init(amountOfFeets: 1, positionX: 100, gameScene: self, sprite:"red")
+        
+        /*
+        for i in 0...8{
+            if (i > 0){
+                stickEnabled[i] = true
+            }
         }
-        //Secondstick
-        if(self.childNode(withName: "stick02") != nil){
-            secondStick = self.childNode(withName: "stick02") as! Stick
-            secondStick.Init(amountOfFeets: 3, positionX: 100, gameScene: self, sprite:"blue")
+        */
+        for i in 0...8{
+            //Makes all sticks
+                sticks.append(Stick())
+                if(stickEnabled[i]){
+                if(self.childNode(withName: "stick0" + String(i)) != nil){
+                    sticks[i] = self.childNode(withName: "stick0" + String(i)) as! Stick
+                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i])
+                    }}
         }
     }
     
@@ -46,6 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    //<---- Detects collision between objects ---->
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody
         var secondBody: SKPhysicsBody
@@ -72,10 +90,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         //Apply tthe collision with the walls
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "wall"){
-          //  theBall.collidesWithWallVertical()
+            theBall.collidesWithWallVertical()
         } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
-          //  theBall.collidesWithWallHorizintal()
+            theBall.collidesWithWallHorizintal()
         }
         
         //Check if there is made a goal
@@ -92,9 +110,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
-        firstStick.update()
-        secondStick.update()
+        for i in sticks{
+            i.update()
+        }
         theBall.update()
+        
     }
     
     

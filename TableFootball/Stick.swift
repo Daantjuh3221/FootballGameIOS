@@ -25,6 +25,7 @@ class Stick: SKSpriteNode{
     
     func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String ){
         position.y = 0
+        position.x = positionX
         
         //Get data from socket
         let socket = SocketIOManager.sharedInstance.getSocket();
@@ -44,39 +45,55 @@ class Stick: SKSpriteNode{
     }
     
     func makeFoots(amount: Int, gameScene: GameScene, sprite: String ){
-        
         switch amount{
-        case 0:
+        case 0: // 1 foot
             for i in 0...amount{
-                theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 266)
             }
             break;
-        case 1:
+        case 1: //2 foots
             for i in 0...amount{
                 if(i == 0){
-                theFoots[i].Init(postionX: position.x, positionY: 92, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                    theFoots[i].Init(postionX: position.x, positionY: 92, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 92)
                 } else {
                     theFoots.append(Foot())
-                    theFoots[i].Init(postionX: position.x, positionY: -92, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                    theFoots[i].Init(postionX: position.x, positionY: -92, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 92)
                 }
             }
-        case 2:
+        case 2: //3 foots
             for i in 0...amount{
                 if(i == 0){
-                    theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                    theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108)
                 } else{
                     theFoots.append(Foot())
                     if(i == 1){
-                        theFoots[i].Init(postionX: position.x, positionY: -180, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                        theFoots[i].Init(postionX: position.x, positionY: -180, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108)
                     }else{
-                        theFoots[i].Init(postionX: position.x, positionY: 180, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                        theFoots[i].Init(postionX: position.x, positionY: 180, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108)
                     }
                 }
             }
             break;
-        default:
+        case 4: // 5 foots
             for i in 0...amount{
-                theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene)
+                if(i == 0){
+                    theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                } else{
+                    theFoots.append(Foot())
+                    if(i == 1){
+                        theFoots[i].Init(postionX: position.x, positionY: -220, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                    }else if (i == 2){
+                        theFoots[i].Init(postionX: position.x, positionY: 220, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                    }else if(i == 3){
+                        theFoots[i].Init(postionX: position.x, positionY: 110, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                    }else{
+                        theFoots[i].Init(postionX: position.x, positionY: -110, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                    }
+                }}
+            break;
+        default: // default 1 foot
+            for i in 0...amount{
+                theFoots[i].Init(postionX: position.x, positionY: 0, size: CGSize(width: 40, height: 80), name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 266)
             }
             break;
         }
