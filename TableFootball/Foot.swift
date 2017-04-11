@@ -33,9 +33,11 @@ class Foot: SKSpriteNode{
     var speedCounter:Int = 0
     
     let theFoot = SKSpriteNode(imageNamed: "")
+    let theHead = SKSpriteNode(imageNamed: "")
     
     var positionOnStick:CGFloat = 0
     var maxOffsets:CGFloat = 0
+    
     
     func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene, maxOffset: CGFloat){
         
@@ -48,11 +50,13 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody = SKPhysicsBody(rectangleOf: theFoot.frame.size)
         theFoot.physicsBody?.allowsRotation = false
         theFoot.physicsBody?.affectedByGravity = false
-        theFoot.physicsBody?.isDynamic = true
+        //theFoot.physicsBody?.isDynamic = true
         theFoot.physicsBody?.mass = 50
+        theFoot.physicsBody?.isDynamic = false
         theFoot.name = "foot"
         gameScene.addChild(theFoot)
         
+        drawHead(sprite: colorSprite, gameScene: gameScene)
         
         //Set value per position
         startPos = theFoot.position.x
@@ -65,6 +69,14 @@ class Foot: SKSpriteNode{
         for i in 0...10{
             lastSpeed.append(CGFloat(i))
         }
+    }
+    
+    func drawHead(sprite:String, gameScene: GameScene){
+        theHead.texture = SKTexture(imageNamed: sprite)
+        theHead.position = theFoot.position
+        theHead.size = CGSize(width: 35, height: 65)
+        
+        gameScene.addChild(theHead)
     }
     
     func getSpeed() -> CGFloat{
@@ -88,7 +100,7 @@ class Foot: SKSpriteNode{
         if(tempVector.dy <  positionOnStick - maxOffsets){
             tempVector.dy =   positionOnStick - maxOffsets
         }*/
-        
+        theHead.position.y = theFoot.position.y
         
         theFoot.position.x = startPos + tempVector.dx
         theFoot.position.y = positionOnStick + tempVector.dy

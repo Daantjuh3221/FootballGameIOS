@@ -32,6 +32,7 @@ class Ball: SKSpriteNode {
         body.mass = 0.2
         body.categoryBitMask = 1
         body.contactTestBitMask = 2
+        body.restitution = 0
         
         position = CGPoint(x:300, y:0)
         
@@ -94,7 +95,7 @@ class Ball: SKSpriteNode {
         if(isShot){
             isShot = false
             let direction:CGVector = CGVector(dx: (position.x - (touchFoot.position.x)) * 3, dy: (position.y - (touchFoot.position.y)) * 3)
-            
+           // touchFoot.increaseSize(3)
             physicsBody?.applyForce(direction)
         }
     }

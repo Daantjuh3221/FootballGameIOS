@@ -43,7 +43,7 @@ class Score:SKSpriteNode{
         scoreLBL = gamescene.childNode(withName: "scorelabel")as! SKLabelNode
         scoreLBLShadow = gamescene.childNode(withName: "scorelabelshadow")as! SKLabelNode
         
-        setScoreLabel(text:"")
+        setText(text: "", textF: winLabel, textS: winLabelShadow)
         setText(text: "", textF: scoreLBL, textS: scoreLBLShadow)
         //Set basic value for labels
       //  setWinScoreText(text: "")

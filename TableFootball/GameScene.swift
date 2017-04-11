@@ -16,7 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var canvas:SKSpriteNode = SKSpriteNode()
     
     //GameRules
-    var scoreLimit:Int = 1;
+    var scoreLimit:Int = 5;
     
     
     //Create the vartiables
@@ -25,7 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
-    var stickEnabled:[Bool] = [false, true, false, false, true, false, false ,false, true]
+    var stickEnabled:[Bool] = [false, true, false, true, false, false, true ,false, true]
     var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
     var stickColor:[String] = ["","red", "red", "blue", "red", "blue", "red", "blue", "blue"]
     var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
@@ -41,12 +41,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.Init(gamescene: self, scoreLimit: scoreLimit)
         }
         
+        /*
         for i in 0...8{
             if (i > 0){
                 stickEnabled[i] = true
             }
         }
-        
+        */
         for i in 0...8{
             //Makes all sticks
                 sticks.append(Stick())
