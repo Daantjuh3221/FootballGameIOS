@@ -9,11 +9,10 @@
         android:id="@+id/playLocalGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
         android:onClick="playLocalGame"
-        android:text="Play!" />
+        android:text="Play!"
+        android:layout_below="@+id/joinTeamMidden"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textTeam1"
@@ -23,87 +22,115 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="91dp"
         android:layout_marginTop="32dp"
-        android:text="Team 1"
-        android:textColor="#ffffff"
         android:shadowColor="#000000"
-        android:shadowRadius="5"
         android:shadowDx="5"
-        android:shadowDy="5"/>
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="Team Blue"
+        android:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/textTeam2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="86dp"
-        android:text="Team 2"
-        android:textColor="#ffffff"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
-        android:shadowDx="5"
-        android:shadowDy="5"
         android:layout_alignBaseline="@+id/textTeam1"
         android:layout_alignBottom="@+id/textTeam1"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignEnd="@+id/listViewRed"
+        android:layout_marginEnd="13dp"
+        android:shadowColor="#000000"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:text="Team Red"
+        android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/joinTeam1"
-        android:layout_width="180dp"
+        android:id="@+id/joinTeamBlue"
+        android:layout_width="150dp"
         android:layout_height="200dp"
-        android:layout_alignBottom="@+id/playLocalGame"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textTeam1"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="10dp"
         android:alpha="0.4"
         android:backgroundTint="@android:color/holo_blue_light"
-        android:visibility="visible" />
+        android:onClick="joinTeamBlue"
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/joinTeamMidden"
+        android:layout_alignTop="@+id/joinTeamMidden" />
 
     <Button
-        android:id="@+id/joinTeam2"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/playLocalGame"
+        android:id="@+id/joinTeamRed"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/joinTeam1"
+        android:layout_alignTop="@+id/joinTeamBlue"
         android:layout_marginEnd="60dp"
         android:alpha="0.4"
         android:backgroundTint="@android:color/holo_red_light"
-        android:visibility="visible" />
+        android:onClick="joinTeamRed"
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/joinTeamMidden" />
 
     <Button
-        android:id="@+id/geenTeam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/playLocalGame"
-        android:layout_alignEnd="@+id/playLocalGame"
-        android:layout_alignTop="@+id/joinTeam1"
+        android:id="@+id/joinTeamMidden"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:alpha="0.4"
         android:backgroundTint="@android:color/white"
-        android:visibility="visible"
-        android:alpha="0.4"/>
+        android:onClick="joinTeamMidden"
+        android:visibility="visible" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerTeam1"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignBottom="@+id/playLocalGame"
-        android:layout_alignEnd="@+id/joinTeam1"
-        android:layout_alignStart="@+id/textTeam1" />
+    <ListView
+        android:id="@+id/listViewMidden"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:contextClickable="false"
+        android:fadeScrollbars="false"
+        android:fastScrollAlwaysVisible="false"
+        android:fastScrollEnabled="false"
+        android:longClickable="false"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerTeam2"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignBottom="@+id/joinTeam2"
-        android:layout_alignEnd="@+id/joinTeam2"
-        android:layout_alignStart="@+id/joinTeam2"
-        android:layout_marginStart="33dp" />
+    <ListView
+        android:id="@+id/listViewRed"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:layout_alignBottom="@+id/listViewMidden"
+        android:layout_alignStart="@+id/joinTeamRed"
+        android:layout_alignTop="@+id/listViewMidden"
+        android:layout_marginStart="15dp"
+        android:clickable="false"
+        android:contextClickable="false"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fadeScrollbars="false"
+        android:fastScrollAlwaysVisible="false"
+        android:fastScrollEnabled="false"
+        android:longClickable="false"
+        android:scrollbars="none" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerMidden"
-        android:layout_width="75dp"
-        android:layout_height="120dp"
-        android:layout_alignStart="@+id/geenTeam"
-        android:layout_alignTop="@+id/recyclerTeam1"
-        android:layout_marginStart="11dp" />
+    <ListView
+        android:id="@+id/listViewBlue"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:layout_alignBottom="@+id/listViewMidden"
+        android:layout_alignStart="@+id/joinTeamBlue"
+        android:layout_alignTop="@+id/listViewMidden"
+        android:layout_marginStart="13dp"
+        android:clickable="false"
+        android:contextClickable="false"
+        android:fadeScrollbars="false"
+        android:fastScrollAlwaysVisible="false"
+        android:fastScrollEnabled="false"
+        android:longClickable="false"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 
 </RelativeLayout>

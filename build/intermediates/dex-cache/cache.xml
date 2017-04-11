@@ -3,15 +3,6 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-s3\2.3.9\8b4d1ccbb09daafd17aa3eba99af31ad8aecf505\aws-android-sdk-s3-2.3.9.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="8b4d1ccbb09daafd17aa3eba99af31ad8aecf505">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-s3-2.3.9_bc91dfa0737452f1c1bba01464f478e16920c6e8.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Lars\.android\build-cache\7587e718e7dd070a32f2a08e1fb65af20017088b\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -27,15 +18,6 @@
         revision="25.0.2"
         sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
         <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_b0363c2b25539881f97311eabed3bd422028edd3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-ddb\2.3.9\5d12b8c7c10b169cdddb3d6c09c800a42dfba6b7\aws-android-sdk-ddb-2.3.9.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="5d12b8c7c10b169cdddb3d6c09c800a42dfba6b7">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-ddb-2.3.9_a5241be9d906d6582951786c17cc565d3264121c.jar" />
     </item>
     <item
         is-multidex="false"
@@ -84,24 +66,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-ddb-mapper\2.3.9\b64f410bf2f4d4db5642f066d9bad54d2ea4608c\aws-android-sdk-ddb-mapper-2.3.9.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b64f410bf2f4d4db5642f066d9bad54d2ea4608c">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-ddb-mapper-2.3.9_1d62b96dbc7cdd9197ca2902b5939ff8dadffb5c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-core\2.3.9\2fa9ee0e95329912656c8ccd98991b195a3ea539\aws-android-sdk-core-2.3.9.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2fa9ee0e95329912656c8ccd98991b195a3ea539">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\aws-android-sdk-core-2.3.9_495030a083540768e78528bd36badb46d2262cb7.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Lars\.android\build-cache\3cd396d28a82063c1cfe79d9e0c0bfce5740fab9\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -147,21 +111,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Lars\.android\build-cache\af73ccb18e19c559ac9ce1d01a1c150ad851d2b2\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
+        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_717aad395bb2b90228b19374cbe512013bcfbae2.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Lars\.android\build-cache\a326c2cb1225ff3027737040980d1abeae6febe1\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
         <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_cdecec901310a4eafbdc9ef0e1e10c76229e7011.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\com\google\code\gson\gson\2.2.4\gson-2.2.4.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\gson-2.2.4_313aff129984a0a45e086871ec03bfcc02e7284e.jar" />
     </item>
     <item
         is-multidex="false"

@@ -170,8 +170,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
             d.y = 0;
         }
         previousPos = d;
-        mSocket.emit("sendPositionY", d.x);
-        mSocket.emit("sendPositionX", d.y);
+        mSocket.emit("sendPositionYToAppleTV", d.x);
+        mSocket.emit("sendPositionXToAppleTV", d.y);
         return d;
     }
 

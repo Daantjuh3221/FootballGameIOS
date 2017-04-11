@@ -48,7 +48,11 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".multiplayerSettings"></activity>
+        <activity
+            android:name=".multiplayerSettings"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
