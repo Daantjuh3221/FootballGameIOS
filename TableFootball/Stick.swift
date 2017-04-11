@@ -28,11 +28,11 @@ class Stick: SKSpriteNode{
         
         //Get data from socket
         let socket = SocketIOManager.sharedInstance.getSocket();
-        socket.on("getPositionY") {data, ack in
+        socket.on("getPositionYforAppleTV") {data, ack in
            // print(data)
             self.positionY = (data[0] as? CGFloat)!
         }
-        socket.on("getPositionX") {data, ack in
+        socket.on("getPositionXforAppleTV") {data, ack in
            // print(data)
             self.footPositionX = (data[0] as? CGFloat)!
         }

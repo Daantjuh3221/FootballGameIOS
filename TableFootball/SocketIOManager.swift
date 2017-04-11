@@ -15,6 +15,7 @@ class SocketIOManager: NSObject {
     override public init() {
         super.init()
         socket.on("connect") {data, ack in
+            self.connectAppleTV();
             print("socket connected")
         }
         socket.onAny {print("Got event: \($0.event), with items: \($0.items)")}
@@ -27,8 +28,8 @@ class SocketIOManager: NSObject {
     }
 
     
-    func connectUser(username: String) {
-        socket.emit("connectUser", username)
+    func connectAppleTV() {
+        socket.emit("connectAppleTV")
     }
     
     func establishConnection() {
