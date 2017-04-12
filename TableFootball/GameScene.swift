@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    let socket = SocketIOManager.sharedInstance.getSocket();
+    
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     var canvas:SKSpriteNode = SKSpriteNode()
@@ -38,6 +40,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var teamRed:[String] = []
     
     override func didMove(to view: SKView) {
+        print(Constants.TEAMRED)
+        print(Constants.TEAMBLUE)
+        
+        for i in 0...8{
+            if(i > 0){
+                if(stickColor[i] == "red"){
+                    //Team red
+                    if(Constants.TEAMRED.count > 0){
+                    userNames[i] = Constants.TEAMRED[0]
+                    }
+                }else{
+                    //Team blue
+                    if(Constants.TEAMBLUE.count > 0){
+                    userNames[i] = Constants.TEAMBLUE[0]
+                    }
+                }
+            }
+        }
+        
+        print(userNames)
+        
         physicsWorld.contactDelegate = self
         
         //Init the ball
@@ -47,14 +70,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.Init(gamescene: self, scoreLimit: scoreLimit)
         }
         
-        //Username list must be equal to list send to server!
-        //To-Do code here
-        let socket = SocketIOManager.sharedInstance.getSocket();
-        socket.on("") {data, ack in
-            //teamRed = socketTeamRed
-            //teamBlue = socketTeamBlue
-        }
-        
+//        //Username list must be equal to list send to server!
+//        //To-Do code here
+//        let socket = SocketIOManager.sharedInstance.getSocket();
+//        socket.on("") {data, ack in
+//            //teamRed = socketTeamRed
+//            //teamBlue = socketTeamBlue
+//        }
         
         for i in 0...8{
             //Makes all sticks
@@ -71,23 +93,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }// End did move
     
     override func sceneDidLoad() {
-        var personTeamRed = ""
-        var personTeamBlue = ""
-        var i:Int = 0
-        let socket = SocketIOManager.sharedInstance.getSocket();
-        socket.on("getTeams") {data, ack in
-            personTeamBlue = (data[0] as? String)!
-            personTeamRed = (data[1] as? String)!
-        }
-        for team in stickColor{
-            if(team == "red"){
-                userNames[i] = personTeamRed
-            } else if(team == "blue"){
-                userNames[i] = personTeamBlue
-            }
-            i += 1
-        }
         
+ 
     }
     
     //<---- Detects collision between objects ---->
@@ -120,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.collidesWithWallVertical()
         } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
-            theBall.collidesWithWallHorizintal()
+            theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y)
         }
         
         //Check if there is made a goal
