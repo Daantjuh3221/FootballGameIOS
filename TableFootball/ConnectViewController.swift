@@ -14,7 +14,7 @@ class ConnectViewController: UIViewController {
     var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     var strLabel = UILabel()
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    
+    var i:Int = 0
     
     @IBOutlet weak var lblJoinCode: UILabel!
     
@@ -34,8 +34,8 @@ class ConnectViewController: UIViewController {
         
         let socket = SocketIOManager.sharedInstance.getSocket();
         socket.on("userJoinedAppleTV") {data, ack in
-            self.strLabel.text = "Waiting for player 1 to start game"
-            self.lblJoinCode.isHidden = true
+            self.i += 1
+            self.strLabel.text = "Waiting for players. \(self.i) joined"
         }
         socket.on("getJoinCode") {data, ack in
             let joinCode:String = (data[0] as? String)!
