@@ -27,7 +27,7 @@ class Ball: SKSpriteNode {
         
         let body:SKPhysicsBody = SKPhysicsBody(circleOfRadius: imageTexture.size().width/2)
         body.isDynamic = true
-        body.affectedByGravity = true;
+        body.affectedByGravity = false;
         body.allowsRotation = true;
         body.mass = 0.2
         body.categoryBitMask = 1
@@ -44,14 +44,36 @@ class Ball: SKSpriteNode {
        // print("Goal")
     }
     
-    func collidesWithWallVertical(){
-       // physicsBody?.velocity.dx *= -1
+    func collidesWithWallVertical(wallPosition: CGFloat){
+        
+        physicsBody!.velocity.dx = 0
+        var tempForce = 0
+        
+        if(wallPosition > 0){
+            tempForce = (-1 * 20)
+        }else{
+            tempForce = 20
+        }
+        physicsBody!.applyImpulse(CGVector(dx:tempForce, dy: 0))
     }
     
     func collidesWithWallHorizintal(wallPosition: CGFloat){
        // physicsBody?.velocity.dx *= -1
+        print("wallPosBefore:   \(physicsBody!.velocity.dy)")
+        physicsBody!.velocity.dy = 0
+        var tempForce = 0
         
-        physicsBody?.applyForce(CGVector(dx:0, dy: wallPosition))
+        if(wallPosition > 0){
+        tempForce = (-1 * 20)
+        }else{
+            tempForce = 20
+        }
+      //  print("velocity:   \(physicsBody?.velocity.dy)")
+      //  print("wallPos1 \(currentVelocity)")
+        print("wallPos:   \(tempForce)")
+      //  physicsBody?.applyForce(CGVector(dx:0, dy: tempForce))
+        physicsBody!.applyImpulse(CGVector(dx:0, dy: tempForce))
+        print("wallPosAfter:   \(physicsBody!.velocity.dy)")
     }
     
     func collidesWithFoot(foot: SKNode){
