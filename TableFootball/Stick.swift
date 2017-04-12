@@ -21,21 +21,29 @@ class Stick: SKSpriteNode{
     
     var positionY:CGFloat = 0
     var footPositionX:CGFloat = 0
+    var userName = ""
     
-    
-    func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String ){
+    func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String, userName:String ){
         position.y = 0
         position.x = positionX
+        
+        self.userName = userName
         
         //Get data from socket
         let socket = SocketIOManager.sharedInstance.getSocket();
         socket.on("getPositionYforAppleTV") {data, ack in
            // print(data)
-            self.positionY = (data[0] as? CGFloat)!
+            let inputUser = (data[1] as? String)!
+            if(inputUser == userName){
+                self.positionY = (data[0] as? CGFloat)!
+            }
         }
         socket.on("getPositionXforAppleTV") {data, ack in
            // print(data)
+            let inputUser = (data[1] as? String)!
+            if(inputUser == userName){
             self.footPositionX = (data[0] as? CGFloat)!
+            }
         }
         
         //Make amount of feets
@@ -104,5 +112,6 @@ class Stick: SKSpriteNode{
         for i in theFoots{
             i.update( direction: CGVector(dx: footPositionX, dy: positionY))
         }
+        print(userName)
     }
 }

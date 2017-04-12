@@ -100,12 +100,12 @@ class Foot: SKSpriteNode{
         if(tempVector.dy <  positionOnStick - maxOffsets){
             tempVector.dy =   positionOnStick - maxOffsets
         }*/
-        theHead.position.y = theFoot.position.y
+        
         
         theFoot.position.x = startPos + tempVector.dx
         theFoot.position.y = positionOnStick + tempVector.dy
         
-        
+        theHead.position.y = theFoot.position.y
         /*
         if(speedCounter > 10){
             speedCounter = 0

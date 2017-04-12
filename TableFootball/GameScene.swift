@@ -15,21 +15,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var graphs = [String : GKGraph]()
     var canvas:SKSpriteNode = SKSpriteNode()
     
+    //Create the vartiables
+    var theBall:Ball = Ball()
+    
     //GameRules
     var scoreLimit:Int = 5;
     
     
-    //Create the vartiables
-    var theBall:Ball = Ball()
-    
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
-    var stickEnabled:[Bool] = [false, true, false, true, false, false, true ,false, true]
+    var stickEnabled:[Bool] = [false, true, false, false, false, false, false ,false, true]
     var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
     var stickColor:[String] = ["","red", "red", "blue", "red", "blue", "red", "blue", "blue"]
+    var userNames:[String] = ["", "Huub", "", "", "", "", "", "", "Daan"]
     var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
     
+    //Lists of both teams
+    var teamBlue:[String] = []
+    var teamRed:[String] = []
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -41,23 +45,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.Init(gamescene: self, scoreLimit: scoreLimit)
         }
         
-        /*
-        for i in 0...8{
-            if (i > 0){
-                stickEnabled[i] = true
-            }
+        //Username list must be equal to list send to server!
+        //To-Do code here
+        let socket = SocketIOManager.sharedInstance.getSocket();
+        socket.on("") {data, ack in
+            //teamRed = socketTeamRed
+            //teamBlue = socketTeamBlue
         }
-        */
+        
+        
         for i in 0...8{
             //Makes all sticks
                 sticks.append(Stick())
                 if(stickEnabled[i]){
                 if(self.childNode(withName: "stick0" + String(i)) != nil){
                     sticks[i] = self.childNode(withName: "stick0" + String(i)) as! Stick
-                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i])
-                    }}
+                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i])
+                    }}else{
+                    //Makes unused sticks invisible
+                    self.childNode(withName: "stick0" + String(i))?.alpha = 0
+            }
         }
-    }
+    }// End did move
     
     override func sceneDidLoad() {
         
@@ -106,7 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.collidesWithFoot(foot: secondBody.node!)
         }
         
-    }
+    }//End collision
     
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
@@ -114,8 +123,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             i.update()
         }
         theBall.update()
-        
-    }
-    
-    
+    }//End Update
 }
