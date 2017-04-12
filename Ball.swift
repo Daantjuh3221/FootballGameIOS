@@ -73,6 +73,34 @@ class Ball: SKSpriteNode {
         }
     }
     
+    func normalizeVector(vector:CGVector) -> CGVector{
+        let vectorLength:CGFloat = sqrt((vector.dx * vector.dx) + (vector.dy * vector.dy))
+        
+       // var normalizedVector:CGVector = (1/vectorLength) * vector
+        
+        let normalizedVector:CGVector = CGVector(dx: ((1/vectorLength) * vector.dx), dy:((1/vectorLength) * vector.dy))
+        
+        return normalizedVector
+    }
+    
+    func handleBallToFootCollision(){
+        var positionDiff:CGVector = CGVector(dx:0,dy:0)
+        positionDiff.dx = position.x - touchFoot.position.x
+        positionDiff.dy = position.y - touchFoot.position.y
+        
+        var collisionNormal = positionDiff
+        collisionNormal = normalizeVector(vector: collisionNormal)
+        
+        var resetVector:CGVector = collisionNormal
+        position.x -= resetVector.dx/2
+        position.y -= resetVector.dy/2
+        
+        var velDiff:CGVector = CGVector(dx:0,dy:0)
+        //(self.physicsBody?.velocity)! - touchFoot.physicsBody?.velocity
+        velDiff.dx = (self.physicsBody?.velocity.dx)! - (touchFoot.physicsBody?.velocity.dx)!
+        velDiff.dy = (self.physicsBody?.velocity.dy)! - (touchFoot.physicsBody?.velocity.dy)!
+    }
+    
     func update(){
         if(isScored){
             isScored = false
@@ -94,9 +122,7 @@ class Ball: SKSpriteNode {
         
         if(isShot){
             isShot = false
-            let direction:CGVector = CGVector(dx: (position.x - (touchFoot.position.x)) * 3, dy: (position.y - (touchFoot.position.y)) * 3)
-           // touchFoot.increaseSize(3)
-            physicsBody?.applyForce(direction)
+            handleBallToFootCollision()
         }
     }
 }
