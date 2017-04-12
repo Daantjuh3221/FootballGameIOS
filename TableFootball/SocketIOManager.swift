@@ -21,7 +21,20 @@ class SocketIOManager: NSObject {
             self.connectAppleTV();
             print("socket connected")
         }
-        socket.onAny {print("Got event: \($0.event), with items: \($0.items)")}
+        self.socket.on("getTeams") {data, ack in
+            for players in (data[0] as? NSArray)!{
+                print(players)
+                Constants.TEAMBLUE.append((players as? String)!)
+            }
+            for players in (data[1] as? NSArray)!{
+                print(players)
+                Constants.TEAMRED.append((players as? String)!)
+            }
+            
+            //            personTeamBlue = (data[0] as? String)!
+            //            personTeamRed = (data[1] as? String)!
+        }
+        //socket.onAny {print("Got event: \($0.event), with items: \($0.items)")}
         
         
     }

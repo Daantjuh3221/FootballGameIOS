@@ -45,11 +45,13 @@ class Ball: SKSpriteNode {
     }
     
     func collidesWithWallVertical(){
-        physicsBody?.velocity.dy *= -1
+       // physicsBody?.velocity.dx *= -1
     }
     
-    func collidesWithWallHorizintal(){
-        physicsBody?.velocity.dx *= -1
+    func collidesWithWallHorizintal(wallPosition: CGFloat){
+       // physicsBody?.velocity.dx *= -1
+        
+        physicsBody?.applyForce(CGVector(dx:0, dy: wallPosition))
     }
     
     func collidesWithFoot(foot: SKNode){
@@ -101,18 +103,20 @@ class Ball: SKSpriteNode {
         velDiff.dy = (self.physicsBody?.velocity.dy)! - (touchFoot.physicsBody?.velocity.dy)!
     }
     
+    
+    //<--- Why the fuck.... --->
     func update(){
         if(isScored){
             isScored = false
             if(position.x < 0){
                 //Left scored (Blue)
                 score.blueScored()
-                position = CGPoint(x:-220, y:0)
+                position = CGPoint(x:-300, y:0)
             }
             else{
                 //Right Scored (Red)
                 score.redScores()
-                position = CGPoint(x:220, y:0)
+                position = CGPoint(x:300, y:0)
             }
             checkIfWon()
             //Set velocity to 0
@@ -122,7 +126,8 @@ class Ball: SKSpriteNode {
         
         if(isShot){
             isShot = false
-            handleBallToFootCollision()
+            //handleBallToFootCollision()
+            physicsBody?.applyForce(CGVector(dx: (position.x - touchFoot.position.x) * 5, dy: (position.y - touchFoot.position.y) * 5))
         }
     }
 }

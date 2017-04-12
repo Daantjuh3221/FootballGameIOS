@@ -21,6 +21,7 @@
 		D125C4431E81143F00A63590 /* Foot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4421E81143F00A63590 /* Foot.swift */; };
 		D125C4451E81145D00A63590 /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4441E81145D00A63590 /* Stick.swift */; };
 		D125C4491E8147FC00A63590 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4481E8147FC00A63590 /* Score.swift */; };
+		D19887B31E9E3E9A00E0C1E7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19887B21E9E3E9A00E0C1E7 /* Constants.swift */; };
 		DF00F2201E81327B00C88A2F /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F2081E81327B00C88A2F /* SocketAckEmitter.swift */; };
 		DF00F2211E81327B00C88A2F /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F2091E81327B00C88A2F /* SocketAckManager.swift */; };
 		DF00F2221E81327B00C88A2F /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F20A1E81327B00C88A2F /* SocketAnyEvent.swift */; };
@@ -88,6 +89,7 @@
 		D125C4421E81143F00A63590 /* Foot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foot.swift; sourceTree = "<group>"; };
 		D125C4441E81145D00A63590 /* Stick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D125C4481E8147FC00A63590 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		D19887B21E9E3E9A00E0C1E7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DF00F2081E81327B00C88A2F /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
 		DF00F2091E81327B00C88A2F /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
 		DF00F20A1E81327B00C88A2F /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				D125C4481E8147FC00A63590 /* Score.swift */,
 				DF5CED001E8BAFEC004C714C /* ConnectViewController.swift */,
 				DF5CED021E8BB5AF004C714C /* MenuViewController.swift */,
+				D19887B21E9E3E9A00E0C1E7 /* Constants.swift */,
 			);
 			path = TableFootball;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				DF00F2201E81327B00C88A2F /* SocketAckEmitter.swift in Sources */,
 				DF00F2341E81327B00C88A2F /* SocketStringReader.swift in Sources */,
 				D125C4431E81143F00A63590 /* Foot.swift in Sources */,
+				D19887B31E9E3E9A00E0C1E7 /* Constants.swift in Sources */,
 				DF00F2371E81327B00C88A2F /* WebSocket.swift in Sources */,
 				DF00F22A1E81327B00C88A2F /* SocketEventHandler.swift in Sources */,
 				DF00F2281E81327B00C88A2F /* SocketEngineSpec.swift in Sources */,
