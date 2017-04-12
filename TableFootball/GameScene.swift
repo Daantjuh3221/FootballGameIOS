@@ -30,6 +30,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var stickColor:[String] = ["","red", "red", "blue", "red", "blue", "red", "blue", "blue"]
     var userNames:[String] = ["", "Huub", "", "", "", "", "", "", "Daan"]
     var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
+
+    
     
     //Lists of both teams
     var teamBlue:[String] = []
@@ -69,6 +71,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }// End did move
     
     override func sceneDidLoad() {
+        var personTeamRed = ""
+        var personTeamBlue = ""
+        var i:Int = 0
+        let socket = SocketIOManager.sharedInstance.getSocket();
+        socket.on("getTeams") {data, ack in
+            personTeamBlue = (data[0] as? String)!
+            personTeamRed = (data[1] as? String)!
+        }
+        for team in stickColor{
+            if(team == "red"){
+                userNames[i] = personTeamRed
+            } else if(team == "blue"){
+                userNames[i] = personTeamBlue
+            }
+            i += 1
+        }
         
     }
     
