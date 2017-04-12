@@ -124,9 +124,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         //Apply tthe collision with the walls
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "wall"){
-            theBall.collidesWithWallVertical()
+            theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x)
         } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
+            print("wallBEFOREBEFORE \(firstBody.node?.physicsBody?.velocity.dy)")
+            
             theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y)
         }
         
