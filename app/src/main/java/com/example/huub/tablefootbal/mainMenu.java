@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+//tja
+
 public class mainMenu extends AppCompatActivity {
 
     @Override
