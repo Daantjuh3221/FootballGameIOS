@@ -50,9 +50,9 @@ public class localGameSettings extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        mPlayersBlue = new ArrayList<>();
-        mPlayersRed = new ArrayList<>();
-        mPlayersMidden = new ArrayList<>();
+        mPlayersBlue = new ArrayList<String>();
+        mPlayersRed = new ArrayList<String>();
+        mPlayersMidden = new ArrayList<String>();
 
         mPlayersMidden.add(Constants.USERNAME);
 
@@ -207,7 +207,15 @@ public class localGameSettings extends AppCompatActivity {
 
 
     public void playLocalGame(View v) {
+        for (String player:mPlayersBlue) {
+            mSocket.emit("addPlayer", "teamBlue", player);
+        };
+        for (String player:mPlayersRed) {
+            mSocket.emit("addPlayer", "teamRed", player);
+        };
         Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+        System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
+        mSocket.emit("startGame");
         startActivity(i);
         finish();
     }

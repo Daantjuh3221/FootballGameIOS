@@ -6,6 +6,7 @@ package com.example.huub.tablefootbal;
 
 public class Constants {
     public static String USERNAME = "";
+    public static boolean isPlayerOne = false;
     public static final String SERVER_URL = "http://192.168.10.49:3000";
     public static final String DEVICE = "Android";
 }

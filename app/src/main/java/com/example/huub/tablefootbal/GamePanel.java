@@ -159,11 +159,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
             d.x = -250;
         }
 
-        if (d.y > 90) {
-            d.y = 90;
+        if (d.y > 45) {
+            d.y = 45;
         }
-        if (d.y < -90) {
-            d.y = -90;
+        if (d.y < -45) {
+            d.y = -45;
         }
 
         if (counter > countLimit) {

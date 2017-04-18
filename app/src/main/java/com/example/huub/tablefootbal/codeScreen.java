@@ -26,6 +26,7 @@ public class codeScreen extends AppCompatActivity {
         SocketConnection app = (SocketConnection) getApplication();
         mSocket = app.getSocket();
         mSocket.on("appleTvExists", onAppleTvExists);
+        mSocket.on("isPlayerOne", onIsPlayerOne);
         mSocket.connect();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -33,14 +34,31 @@ public class codeScreen extends AppCompatActivity {
         txtCode = (TextView) findViewById(R.id.codeText);
     }
 
+    private Emitter.Listener onIsPlayerOne = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            Constants.isPlayerOne = (boolean)args[0];
+            System.out.println("IS PLAYER ONE: " + Constants.isPlayerOne);
+        }
+    };
+
     private Emitter.Listener onAppleTvExists = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             mExists = (boolean)args[0];
             if (!mExists) {
-                Intent i = new Intent(getApplicationContext(), mainMenu.class);
-                startActivity(i);
-                finish();
+                if (Constants.isPlayerOne){
+                    System.out.println("WEL PLAYER 1");
+                    Intent i = new Intent(getApplicationContext(), mainMenu.class);
+                    startActivity(i);
+                    finish();
+                } else{
+                    System.out.println("NIET PLAYER 1");
+                    Intent i = new Intent(getApplicationContext(), waiting_screen.class);
+                    startActivity(i);
+                    finish();
+                }
+
             } else{
                 Constants.USERNAME = "";
                 runOnUiThread(new Runnable() {
