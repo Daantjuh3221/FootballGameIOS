@@ -39,7 +39,7 @@ public class TableFootbalController extends Activity {
 
         //Screensize shit
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE) ;
         windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
         int deviceWidth = displayMetrics.widthPixels;
         int deviceHeight = displayMetrics.heightPixels;
