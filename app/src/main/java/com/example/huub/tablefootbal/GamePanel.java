@@ -36,11 +36,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private MainThread thread;
     private Player player;
     private PointF playerPoint;
-    private PointF previousPos;
+    private PointF currentPos = new PointF(0,0);
+    private PointF previousPos = new PointF(0,0);
     private int mDeviceWidth;
     private int mDeviceHeight;
     private float counter = 0;
-    private int countLimit = 20;
+    private int countLimit = 100;
 
     //Database Var
     public PointF playerData;
@@ -155,6 +156,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
             d.x = 0;
         }
         */
+
+        if (counter > countLimit) {
+            player.setPosition(new PointF(d.x,0));
+            counter = 0;
+            //return d;
+        }
+
         if (d.x < -250) {
             d.x = -250;
         }
@@ -170,14 +178,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
             d.y = 0;
         }
         previousPos = d;
-        mSocket.emit("sendPositionYToAppleTV", d.x);
-        mSocket.emit("sendPositionXToAppleTV", d.y);
+        mSocket.emit("sendPositionY", d.x);
+        mSocket.emit("sendPositionX", d.y);
         return d;
     }
 
+    public void setPos(PointF new_pos){
+        this.previousPos = new_pos;
+    }
+
     public boolean inRange() {
-        //previousPos = getPos();
-        if (getPos().y < previousPos.y + 3 && getPos().y > previousPos.y - 3) {
+        if (currentPos.y < previousPos.y + 3 && currentPos.y > previousPos.y - 3) {
             return true;
         } else {
             return false;
@@ -186,12 +197,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     }
 
     public void update(){
-        //previousPos = getPos();
-//        if(inRange()){
-//            counter++;
-//        } else {
-//            counter = 0;
-//        }
+        previousPos = getPos();
+        if(inRange()){
+            counter++;
+        } else {
+            counter = 0;
+        }
 
 
         System.out.println(getPos());
@@ -199,7 +210,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         player.update(playerPoint, yRotation);
         stick.update(playerPoint.x - 100, player.getVelocity());
 
-        frameID+=1;
+
+        setPos(currentPos);
+        frameID += 1;
         //update table
         //tableFootbalController.InsertData();
     }
