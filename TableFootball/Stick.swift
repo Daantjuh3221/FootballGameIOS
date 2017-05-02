@@ -45,6 +45,7 @@ class Stick: SKSpriteNode{
             let inputUser = (data[1] as? String)!
             if(inputUser == userName){
             self.swipeLength = (data[0] as? CGFloat)!
+                print("swipe \(self.swipeLength)")
             }
         }
         
@@ -117,9 +118,9 @@ class Stick: SKSpriteNode{
     
     func update(){
         //Update each foot of this stick
-        print("swipe \(swipeLength)")
+        print("Update \(swipeLength)")
         for i in theFoots{
-            i.update( swipeLength: swipeLength)
+            i.update( swipeLength: swipeLength, positionY: positionY)
         }
         print(userName)
     }

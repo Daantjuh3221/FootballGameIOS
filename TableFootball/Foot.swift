@@ -52,51 +52,53 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.affectedByGravity = false
         //theFoot.physicsBody?.isDynamic = true
         theFoot.physicsBody?.mass = 50
-        theFoot.physicsBody?.isDynamic = false
+        theFoot.physicsBody?.isDynamic = true
         theFoot.name = "foot"
         gameScene.addChild(theFoot)
         
         drawHead(sprite: colorSprite, gameScene: gameScene)
         
-        //Set value per position
-        startPos = theFoot.position.x
+        
         
         rest = true
         
         positionOnStick = 0 + theFoot.position.y
         maxOffsets = maxOffset
         speedCounter = 0
-        for i in 0...10{
-            lastSpeed.append(CGFloat(i))
-        }
+        
+        //Set value per position
+        startPos = theFoot.position.x
     }
     
     func drawHead(sprite:String, gameScene: GameScene){
         theHead.texture = SKTexture(imageNamed: sprite)
         theHead.position = theFoot.position
         theHead.size = CGSize(width: 35, height: 65)
-        
         gameScene.addChild(theHead)
     }
     
     
-    func update(swipeLength: CGFloat){
+    func update(swipeLength: CGFloat, positionY: CGFloat){
 
-        //Set foot back to its centre
+        var appliedForce:CGFloat = swipeLength
+        
+        ///Set foot back to its centre
         if(theFoot.position.x > startPos){
             //Go left
-            theFoot.physicsBody?.velocity.dx = -5
+            theFoot.physicsBody?.applyForce(CGVector(dx:-5000, dy:0 ))
         }else if(theFoot.position.x < startPos){
             //Go right
-            theFoot.physicsBody?.velocity.dx = 5
+            theFoot.physicsBody?.applyForce(CGVector(dx:5000, dy:0 ))
         }
         
         //Apply impulse to the foot
-        theFoot.physicsBody?.applyImpulse(CGVector(dx:swipeLength , dy:0 ))
         
-        //The head. Later needs to be animation!
+        theFoot.physicsBody?.applyForce(CGVector(dx:swipeLength * 2, dy:0 ))
+        theFoot.position.y = positionOnStick + positionY
         theHead.position.y = theFoot.position.y
-
+        
+        
+        
     }
     
 }
