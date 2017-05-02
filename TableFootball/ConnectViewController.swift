@@ -18,6 +18,7 @@ class ConnectViewController: UIViewController {
     var i:Int = 0
     
     @IBOutlet weak var lblJoinCode: UILabel!
+    let userSettings = UserDefaults.standard
     
     override
     func viewDidLoad() {
@@ -46,6 +47,7 @@ class ConnectViewController: UIViewController {
         socket.on("getJoinCode") {data, ack in
             let joinCode:String = (data[0] as? String)!
             self.lblJoinCode.text = joinCode
+            self.userSettings.set(joinCode, forKey: "joinCode")
         }
         
         socket.on("startGameOnAppleTV") {data, ack in
