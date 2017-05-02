@@ -13,6 +13,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -28,7 +29,7 @@ import static com.example.huub.tablefootbal.MainThread.canvas;
 /**
  * Created by Huub on 15-2-2017.
  */
-public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, SensorEventListener {
+public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, SensorEventListener, GestureDetector.OnGestureListener {
     StringBuilder sb = new StringBuilder();
 /*    private static final String SERVER_ADDRESS  = "http://192.168.10.49:3000";*/
     private Socket mSocket;
@@ -58,6 +59,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private Point screenSize;
 
     private TableFootbalController tableFootbalController;
+
+    private float swipeBegin;
+    private float swipeEnd;
+    private float swipeDelta;
 
 
     public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
@@ -134,6 +139,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     public boolean onTouchEvent(MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                swipeBegin = event.getY();
+            case MotionEvent.ACTION_UP:
+                swipeEnd = event.getY();
+                float swipeDelta = swipeEnd - swipeBegin;
+                System.out.println(swipeDelta);
             case MotionEvent.ACTION_MOVE:
                 playerPoint.set((int)event.getX(),(int)event.getY());
         }
@@ -171,7 +181,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         }
         previousPos = d;
         mSocket.emit("sendPositionYToAppleTV", d.x);
-        mSocket.emit("sendPositionXToAppleTV", d.y);
+        mSocket.emit("sendPositionXToAppleTV", swipeDelta);
         return d;
     }
 
@@ -211,5 +221,37 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         player.draw(canvas);
         stick.draw(canvas);
 
+    }
+
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float velocityX, float velocityY) {
+
+
+        return true;
     }
 }
