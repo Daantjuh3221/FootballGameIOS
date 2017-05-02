@@ -1,5 +1,6 @@
 package com.example.huub.tablefootbal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,12 +24,13 @@ import io.socket.emitter.Emitter;
 
 import static com.example.huub.tablefootbal.MainThread.canvas;
 
+
 /**
  * Created by Huub on 15-2-2017.
  */
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, SensorEventListener {
     StringBuilder sb = new StringBuilder();
-    private static final String SERVER_ADDRESS  = "http://192.168.10.49:3000";
+/*    private static final String SERVER_ADDRESS  = "http://192.168.10.49:3000";*/
     private Socket mSocket;
 
     private MainThread thread;
@@ -65,24 +67,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         mDeviceWidth = deviceWidth;
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(),this);
-        try {
-            mSocket = IO.socket(SERVER_ADDRESS);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-                System.out.println("Socket connected");
-            }
-
-        });
-
-        mSocket.connect();
 
         this.tableFootbalController = tableFootbalController;
+
+        SocketConnection app = (SocketConnection) tableFootbalController.getApplication();
+        mSocket = app.getSocket();
+        mSocket.connect();
 
         getSticks();
 
@@ -155,25 +145,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         System.out.println("Niks");
     }
 
-    public PointF getPos() {
+    public PointF getPos(){
+        PointF d = new PointF(0,0);
 
-
-        PointF d = new PointF(0, 0);
         playerData = player.getPosition();
-
-        d.x = (float) ((playerData.x - 600) / 3.8);
-
-        if (counter > countLimit) {
-            player.setPosition(new PointF(d.x,0));
-            counter = 0;
-            //return d;
-        }
-
-
-        if (d.x < -100) {
-            d.x = -100;
-        }
-
+        d.x = (float) (((playerData.x - 600) / 3.8) * 2.5);
         d.y = playerData.y - 800;
         //d.y *= 2;
         /*if (d.x < 0) {
@@ -181,13 +157,29 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         }
         */
 
-        if (d.y > 90) {
-            d.y = 90;
-        }
-        if (d.y < -90) {
-            d.y = -90;
+        if (counter > countLimit) {
+            player.setPosition(new PointF(d.x,0));
+            counter = 0;
+            //return d;
         }
 
+        if (d.x < -250) {
+            d.x = -250;
+        }
+
+        if (d.y > 45) {
+            d.y = 45;
+        }
+        if (d.y < -45) {
+            d.y = -45;
+        }
+
+        if (counter > countLimit) {
+            d.y = 0;
+        }
+        previousPos = d;
+        mSocket.emit("sendPositionY", d.x);
+        mSocket.emit("sendPositionX", d.y);
         return d;
     }
 
@@ -204,24 +196,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 
     }
 
-    public void update() {
-
-        currentPos = getPos();
-
-        if (inRange()) {
+    public void update(){
+        previousPos = getPos();
+        if(inRange()){
             counter++;
         } else {
             counter = 0;
         }
 
-        mSocket.emit("sendPositionY", currentPos.x);
-        mSocket.emit("sendPositionX", currentPos.y);
 
-        System.out.println("\n-----------------------");
-        System.out.println("Prev pos: " + previousPos);
-        System.out.println("Curr pos: " + currentPos);
-        System.out.println("In range: " + inRange());
-        System.out.println("COUNTER: " + "(" + counter + "/" + countLimit + ")");
+        System.out.println(getPos());
+        System.out.println(inRange());
         player.update(playerPoint, yRotation);
         stick.update(playerPoint.x - 100, player.getVelocity());
 

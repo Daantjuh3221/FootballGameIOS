@@ -15,11 +15,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import static com.example.huub.tablefootbal.R.id.imageView;
-
 public class TableFootbalController extends Activity {
 
     private GamePanel gPanel;
+
 
     public SensorManager sensorManager;
     @Override
@@ -49,4 +48,6 @@ public class TableFootbalController extends Activity {
         setContentView(gPanel);
 
             }
+
+
 }
