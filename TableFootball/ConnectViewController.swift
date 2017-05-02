@@ -11,17 +11,18 @@ import UIKit
 
 class ConnectViewController: UIViewController {
     
+    @IBOutlet weak var listConnectedPlayers: UITextView!
     var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     var strLabel = UILabel()
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    
+    var i:Int = 0
     
     @IBOutlet weak var lblJoinCode: UILabel!
     
     override
     func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.listConnectedPlayers.text.append("\n")
 //        activityIndicator.center = self.view.center
 //        activityIndicator.hidesWhenStopped = true
 //        //activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
@@ -34,8 +35,13 @@ class ConnectViewController: UIViewController {
         
         let socket = SocketIOManager.sharedInstance.getSocket();
         socket.on("userJoinedAppleTV") {data, ack in
-            self.strLabel.text = "Waiting for player 1 to start game"
-            self.lblJoinCode.isHidden = true
+            Constants.CONNECTEDPLAYERS.append((data[0] as? String)!)
+            
+            self.listConnectedPlayers.text.append((data[0] as? String)!)
+            self.listConnectedPlayers.text.append(",")
+            
+            self.i += 1
+            self.strLabel.text = "Waiting for players. \(self.i) joined"
         }
         socket.on("getJoinCode") {data, ack in
             let joinCode:String = (data[0] as? String)!

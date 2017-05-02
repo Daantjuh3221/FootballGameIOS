@@ -52,6 +52,14 @@
                                 <color key="textColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Connected players: " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdm-jV-VI0">
+                                <rect key="frame" x="534" y="212" width="853" height="478"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="49"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="3CW-LW-cvP" firstAttribute="top" secondItem="aU0-D6-s9s" secondAttribute="bottom" constant="860" id="9DZ-Tx-nrW"/>
@@ -61,6 +69,7 @@
                     </view>
                     <connections>
                         <outlet property="lblJoinCode" destination="aU0-D6-s9s" id="E3d-Oe-dSN"/>
+                        <outlet property="listConnectedPlayers" destination="Kdm-jV-VI0" id="TzI-HV-eEt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oUK-Fi-n8m" userLabel="First Responder" sceneMemberID="firstResponder"/>

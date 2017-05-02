@@ -11,4 +11,6 @@ import Foundation
 struct Constants {
     static var TEAMRED:[String] = []
     static var TEAMBLUE:[String] = []
+    
+    static var CONNECTEDPLAYERS:[String] = []
 }
