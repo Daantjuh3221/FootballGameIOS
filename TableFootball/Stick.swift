@@ -23,6 +23,8 @@ class Stick: SKSpriteNode{
     var footPositionX:CGFloat = 0
     var userName = ""
     
+    var swipeLength:CGFloat = 0
+    
     func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String, userName:String ){
         position.y = 0
         position.x = positionX
@@ -42,9 +44,15 @@ class Stick: SKSpriteNode{
            // print(data)
             let inputUser = (data[1] as? String)!
             if(inputUser == userName){
-            self.footPositionX = (data[0] as? CGFloat)!
+            self.swipeLength = (data[0] as? CGFloat)!
             }
         }
+        
+        //Swipe left of right
+        //With the length of the swipe
+        //Positive = right
+        //negative = left
+        // Swipelength bla bla bla
         
         //Make amount of feets
         amount = amountOfFeets - 1
@@ -109,8 +117,9 @@ class Stick: SKSpriteNode{
     
     func update(){
         //Update each foot of this stick
+        print("swipe \(swipeLength)")
         for i in theFoots{
-            i.update( direction: CGVector(dx: footPositionX, dy: positionY))
+            i.update( swipeLength: swipeLength)
         }
         print(userName)
     }

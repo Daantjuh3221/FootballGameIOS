@@ -79,45 +79,24 @@ class Foot: SKSpriteNode{
         gameScene.addChild(theHead)
     }
     
-    func getSpeed() -> CGFloat{
-        var speedGiven:CGFloat = 0
-        for i in lastSpeed{
-            speedGiven += i
-        }
-        return speedGiven/CGFloat(lastSpeed.count)
-    }
     
-    func update(direction: CGVector){
+    func update(swipeLength: CGFloat){
 
-        let tempVector:CGVector = direction
-        //print("PosY: " + String(describing: tempVector.dy))
-        
-        //Clamp Foots
-        /*
-        if(tempVector.dy >  positionOnStick + maxOffsets){
-            tempVector.dy = positionOnStick + maxOffsets
+        //Set foot back to its centre
+        if(theFoot.position.x > startPos){
+            //Go left
+            theFoot.physicsBody?.velocity.dx = -5
+        }else if(theFoot.position.x < startPos){
+            //Go right
+            theFoot.physicsBody?.velocity.dx = 5
         }
-        if(tempVector.dy <  positionOnStick - maxOffsets){
-            tempVector.dy =   positionOnStick - maxOffsets
-        }*/
         
+        //Apply impulse to the foot
+        theFoot.physicsBody?.applyImpulse(CGVector(dx:swipeLength , dy:0 ))
         
-        theFoot.position.x = startPos + tempVector.dx
-        theFoot.position.y = positionOnStick + tempVector.dy
-//        
-//        theFoot.physicsBody?.velocity.dx = startPos + tempVector.dx
-//        theFoot.physicsBody?.velocity.dy = positionOnStick + tempVector.dy
-//        
-        
+        //The head. Later needs to be animation!
         theHead.position.y = theFoot.position.y
-        /*
-        if(speedCounter > 10){
-            speedCounter = 0
-        }
-        
-      //  lastSpeed[speedCounter] = theFoot.position.x
-        print(getSpeed())
-        speedCounter += 1*/
+
     }
     
 }

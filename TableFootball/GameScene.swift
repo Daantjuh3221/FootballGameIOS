@@ -27,11 +27,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
-    var stickEnabled:[Bool] = [false, true, false, false, false, false, false ,false, true]
-    var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
-    var stickColor:[String] = ["","red", "red", "blue", "red", "blue", "red", "blue", "blue"]
-    var userNames:[String] = ["", "Huub", "", "", "", "", "", "", "Daan"]
-    var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
+    var stickEnabled:[Bool] = [true, true, true, false, false, true ,false, true]
+    var stickPositions:[Int] = [-340, -243, -146, -49, 49, 146, 243, 340]
+    var stickColor:[String] = ["red", "red", "blue", "red", "blue", "red", "blue", "blue"]
+    var userNames:[String] = ["", "", "", "", "", "", "", ""]
+    var amountOfFeets:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
 
     
     
@@ -43,8 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print(Constants.TEAMRED)
         print(Constants.TEAMBLUE)
         
-        for i in 0...8{
-            if(i > 0){
+        for i in 0...7{
                 if(stickColor[i] == "red"){
                     //Team red
                     if(Constants.TEAMRED.count > 0){
@@ -55,7 +54,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if(Constants.TEAMBLUE.count > 0){
                     userNames[i] = Constants.TEAMBLUE[0]
                     }
-                }
             }
         }
         
@@ -78,7 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //            //teamBlue = socketTeamBlue
 //        }
         
-        for i in 0...8{
+        for i in 0...7{
             //Makes all sticks
                 sticks.append(Stick())
                 if(stickEnabled[i]){
@@ -127,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x)
         } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
-            print("wallBEFOREBEFORE \(firstBody.node?.physicsBody?.velocity.dy)")
+           // print("wallBEFOREBEFORE \(firstBody.node?.physicsBody?.velocity.dy)")
             
             theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y)
         }
