@@ -3,138 +3,138 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\7587e718e7dd070a32f2a08e1fb65af20017088b\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/92836c112e0cb3599a326c43fbfeca42e2c865be/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_007107e58bf5a90eec78f14c06781e53e1988472.jar" />
+        sha1="a3e61044038fb54cddf6b8dc79f41d2b57f42caf">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_5443c3a17cad2043060f8c2398d2344136c4d5ef.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jar="/Users/daanbefort/.android/build-cache/f3da3e5db42062c799263e5e484317b4ef26b16e/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_b0363c2b25539881f97311eabed3bd422028edd3.jar" />
+        sha1="4b746ef0fd46acb5aaf3d9ab9a4cec22c28d3211">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_68a1e4be1849b19cdf11a45ad30b5be7ef47dfe4.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\da9f927ac0f6883c95515bc5fe88c39fcaee2817\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/d78078d2ab4f510e33015a1743d3a81ace7b1761/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_ce3c21a524f9b3f05b6e967a02520f6284425fa3.jar" />
+        sha1="425c7b17887e5c3f8cbdf67ba171bc246f29b42c">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_93b9c6bd50f0d22c90218bc07ee8835c345fcff2.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\cb7f7c84fa1f42a04dc4f378dab67c14c8019713\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/c074af4ac47c87a82f50bfaa1f041603cccb630e/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_1ba5eb5a2f5a0f93bcb8c632887b9651346ea290.jar" />
+        sha1="70f23cb87278f89aa51e6f57e8f0fd5266572d95">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_0847a816414be092808ed99958eda5cc62fad838.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\628885e98181afc9d71898d45db8d7a6d598844f\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/de31586b2c5f4e5ac05630c26e86da8992edf6b6/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_aa33e6079bf174772ba8a2b7deaa9d40c54b809a.jar" />
+        sha1="d6a04527c17597019dad82777c5094a3d60d1c33">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_c0de464dbd308e805044b27c561aa0b6cfd12997.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\8e37752eb8b4f31eb59161e7a5909b85d0c38a93\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_1ba2ea19c16b1aa69d444d4b08c68462de7adb34.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.11.0\840897fcd7223a8143f1d9b6f69714e7be34fd50\okio-1.11.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\okio-1.11.0_eb466475e80c2163bd5e3a3562ee721cb4ce010a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\3cd396d28a82063c1cfe79d9e0c0bfce5740fab9\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/a8018198eb5458d6c6972320598ab46aab67c54d/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_b488b97869eb3c0933061c8b6cf8a837cf6d2663.jar" />
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_a31ea9e836175cf0863dd5224df74956b43d4b84.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\io.socket\socket.io-client\0.8.3\b30500232ff0668a47c9f91f02e6935457a52fb5\socket.io-client-0.8.3.jar"
+        jar="/Users/daanbefort/.android/build-cache/90469b4e99da187e8e3f457e4b07c906c5ba45e5/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="b30500232ff0668a47c9f91f02e6935457a52fb5">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\socket.io-client-0.8.3_da35f00439c174f5f29cff169270d9f4685dc9e6.jar" />
+        sha1="fbb206f7a119f66ce171d95aae1225a5b209a8b7">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_04803829b751921e26219a0a50398a8e087cf161.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.5.0\4b0bb6bfbecbdd42b97ff400af342bfe7f32bc83\okhttp-3.5.0.jar"
+        jar="/Users/daanbefort/.android/build-cache/87dd8a1ea56cac36ce8e55e55063861fd6214c11/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="4b0bb6bfbecbdd42b97ff400af342bfe7f32bc83">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\okhttp-3.5.0_0e8a3bba352d57676393bfd022811c21e0bdc524.jar" />
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_e31d2f351c22ff37cf0ee8fa316e7a2d7cf63e55.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\e8e2ddd50edc5876bd2cf7c02522b87444a7895b\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/51cf605016d8a2d5b22a10e9b70668042fcd73ce/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_223fd2428e441bd23f0f235eddd0c3aa2456cd33.jar" />
+        sha1="93c10d68ab5ea070f15782ae6d3a28d1f1d8f45e">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_35385e8f0714a7ed0346927a231a845c947aca3e.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\2d8f60344601b4abbd249f948a4cfb31e35fdf1d\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/f8123d4020c86b6f8adfcea2f9ed2c137a268d74/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_295669690bb3fc19b79f1928e100da75e5c2451a.jar" />
+        sha1="5cc5ef8347a6bafa14556cbd35230aa9b3431bb0">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_4861c69c1293f5467acb04b9a9c24f10fa5c5fd1.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\af73ccb18e19c559ac9ce1d01a1c150ad851d2b2\output\jars\classes.jar"
+        jar="/Users/daanbefort/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.0/support-annotations-25.3.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_717aad395bb2b90228b19374cbe512013bcfbae2.jar" />
+        sha1="dd84903d2e1af25a6081ef9038ad863cb14ca3a0">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/support-annotations-25.3.0_ca8293710e847b7a9f264cbffb86d32e03e819af.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.android\build-cache\a326c2cb1225ff3027737040980d1abeae6febe1\output\jars\classes.jar"
+        jar="/Users/daanbefort/.android/build-cache/18394f76a9689beaa0fd86bcd611f7f0be7a72db/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\classes_cdecec901310a4eafbdc9ef0e1e10c76229e7011.jar" />
+        sha1="93c1199fcb0a34b980e6fff8350daff62e696ec2">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_ce96e2c410093dc306af39e3b878346023517b38.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Lars\.gradle\caches\modules-2\files-2.1\io.socket\engine.io-client\0.8.3\854b49396e1e9f9bb0ab025062ddb49c4ed65ca1\engine.io-client-0.8.3.jar"
+        jar="/Users/daanbefort/.android/build-cache/84bbb2f6723083439560e1c8e77875cf2e1505b1/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="854b49396e1e9f9bb0ab025062ddb49c4ed65ca1">
-        <dex dex="C:\Users\Lars\AndroidStudioProjects\TableFootballAndroid\app\build\intermediates\pre-dexed\debug\engine.io-client-0.8.3_51fbe17424ab4fff0d54c893fbef22a0042d8a26.jar" />
+        sha1="518768f3200963fbfec652f498da2c9d39245234">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_04fb16979a72a8f7be06cd358476d55cc780cab3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/daanbefort/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.2_3cff52a572e0fbff24705cf2817f09abfa811a0d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/daanbefort/.android/build-cache/c88a4ff4267c676d3352e31ecd61a92c920c6b38/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9ab787a20aae245b5b3651ae0b9c38459eb37715">
+        <dex dex="/Users/daanbefort/Documents/Android Projects/FootballMirabeau/FootballGameMirabeau/app/build/intermediates/pre-dexed/debug/classes_e2bb0e6c7f98811928e04bae901a54c17c2b0106.jar" />
     </item>
 
 </items>
