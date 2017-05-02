@@ -60,6 +60,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 
     private TableFootbalController tableFootbalController;
 
+    private float swipeBegin;
+    private float swipeEnd;
+    private float swipeDelta;
+
 
     public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
         super(context);
@@ -135,15 +139,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     public boolean onTouchEvent(MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                swipeBegin = event.getY();
+            case MotionEvent.ACTION_UP:
+                swipeEnd = event.getY();
+                float swipeDelta = swipeEnd - swipeBegin;
+                System.out.println(swipeDelta + " Swipe!");
+                mSocket.emit("sendPositionXToAppleTV", swipeDelta);
             case MotionEvent.ACTION_MOVE:
                 playerPoint.set((int)event.getX(),(int)event.getY());
         }
         return true;
     }
 
-    public  void DoNothing(){
-        System.out.println("Niks");
-    }
 
     public PointF getPos(){
         PointF d = new PointF(0,0);
@@ -178,8 +185,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
             d.y = 0;
         }
         previousPos = d;
-        mSocket.emit("sendPositionY", d.x);
-        mSocket.emit("sendPositionX", d.y);
+        mSocket.emit("sendPositionYToAppleTV", d.x);
+        //mSocket.emit("sendPositionXToAppleTV", swipeDelta);
         return d;
     }
 
@@ -188,7 +195,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     }
 
     public boolean inRange() {
-        if (currentPos.y < previousPos.y + 3 && currentPos.y > previousPos.y - 3) {
+        //previousPos = getPos();
+        if (getPos().y < previousPos.y + 3 && getPos().y > previousPos.y - 3) {
             return true;
         } else {
             return false;
@@ -197,12 +205,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     }
 
     public void update(){
-        previousPos = getPos();
-        if(inRange()){
-            counter++;
-        } else {
-            counter = 0;
-        }
+        //previousPos = getPos();
+//        if(inRange()){
+//            counter++;
+//        } else {
+//            counter = 0;
+//        }
 
 
         System.out.println(getPos());
@@ -210,9 +218,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         player.update(playerPoint, yRotation);
         stick.update(playerPoint.x - 100, player.getVelocity());
 
-
-        setPos(currentPos);
-        frameID += 1;
+        frameID+=1;
         //update table
         //tableFootbalController.InsertData();
     }

@@ -33,7 +33,7 @@ public class joinScreen extends AppCompatActivity {
     private SharedPreferences sharedPrefs;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_screen);
         txtUserName = (TextView) findViewById(R.id.userName);
