@@ -87,6 +87,10 @@ public class Player extends Activity implements GameObject {
         drawStick();
     }
 
+    public void setPosition(PointF pos) {
+        this.position = new PointF(pos.x,800);
+    }
+
     public PointF getPosition() {
         return position;
     }

@@ -29,10 +29,11 @@ public class joinScreen extends AppCompatActivity {
     public String userName;
     private Socket mSocket;
     private boolean mExists = false;
-    //private final SharedPreferences settings = getSharedPreferences(Constants.PREFERENCEFILENAME, Context.MODE_PRIVATE);
+    private String prefsFile = Constants.PREFERENCEFILENAME;
+    private SharedPreferences sharedPrefs;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_screen);
         txtUserName = (TextView) findViewById(R.id.userName);
@@ -41,13 +42,19 @@ public class joinScreen extends AppCompatActivity {
         mSocket.on("usernameExists", onUsernameExists);
         mSocket.connect();
 
-//        if (settings.contains("username")){
-//            Constants.USERNAME = settings.getString("username", "NO USERNAME");
-//            mSocket.emit("connectUser", Constants.USERNAME, Constants.DEVICE, false);
-//            Intent i = new Intent(getApplicationContext(), codeScreen.class);
-//            startActivity(i);
-//            finish();
-//        }
+        sharedPrefs =  getApplicationContext().getSharedPreferences(prefsFile, MODE_PRIVATE);
+
+        if(sharedPrefs.contains("username")){
+            Toast.makeText(joinScreen.this, "There is a username saved: " + sharedPrefs.getString("username", ""), Toast.LENGTH_SHORT).show();
+            Constants.USERNAME = sharedPrefs.getString("username", "");
+            mSocket.emit("registeredUserConnect", Constants.USERNAME, Constants.DEVICE);
+            Intent i = new Intent(getApplicationContext(), codeScreen.class);
+            startActivity(i);
+            finish();
+        } else{
+            Toast.makeText(joinScreen.this, "There is no username saved", Toast.LENGTH_SHORT).show();
+        }
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
@@ -56,11 +63,15 @@ public class joinScreen extends AppCompatActivity {
         public void call(final Object... args) {
                 mExists = (boolean)args[0];
                 if (!mExists) {
-//                    SharedPreferences settings = getSharedPreferences(Constants.PREFERENCEFILENAME, 0);
-//                    SharedPreferences.Editor editor = settings.edit();
-//                    editor.putString("username", Constants.USERNAME);
-//                    // Commit the edits!
-//                    editor.commit();
+                    if (userName != ""){
+                        SharedPreferences.Editor editor = sharedPrefs.edit();
+                        editor.putString("username", userName);
+                        editor.commit();
+                    } else{
+                        SharedPreferences.Editor editor = sharedPrefs.edit();
+                        editor.putString("username", "developer");
+                        editor.commit();
+                    }
                     Intent i = new Intent(getApplicationContext(), codeScreen.class);
                     startActivity(i);
                     finish();
@@ -80,6 +91,10 @@ public class joinScreen extends AppCompatActivity {
     public void joinGame(View v) {
         userName = txtUserName.getText().toString();
         Constants.USERNAME = userName;
-        mSocket.emit("connectUser", Constants.USERNAME, Constants.DEVICE, true);
+        if (userName.equals("")){
+            mSocket.emit("developUserConnect", Constants.USERNAME, Constants.DEVICE);
+        } else{
+            mSocket.emit("newUserConnect", Constants.USERNAME, Constants.DEVICE);
+        }
     }
 }
