@@ -29,7 +29,7 @@ public class joinScreen extends AppCompatActivity {
     public String userName;
     private Socket mSocket;
     private boolean mExists = false;
-    private final SharedPreferences settings = getSharedPreferences(Constants.PREFERENCEFILENAME, Context.MODE_PRIVATE);
+    //private final SharedPreferences settings = getSharedPreferences(Constants.PREFERENCEFILENAME, Context.MODE_PRIVATE);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,13 +41,13 @@ public class joinScreen extends AppCompatActivity {
         mSocket.on("usernameExists", onUsernameExists);
         mSocket.connect();
 
-        if (settings.contains("username")){
-            Constants.USERNAME = settings.getString("username", "NO USERNAME");
-            mSocket.emit("connectUser", Constants.USERNAME, Constants.DEVICE, false);
-            Intent i = new Intent(getApplicationContext(), codeScreen.class);
-            startActivity(i);
-            finish();
-        }
+//        if (settings.contains("username")){
+//            Constants.USERNAME = settings.getString("username", "NO USERNAME");
+//            mSocket.emit("connectUser", Constants.USERNAME, Constants.DEVICE, false);
+//            Intent i = new Intent(getApplicationContext(), codeScreen.class);
+//            startActivity(i);
+//            finish();
+//        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
@@ -56,11 +56,11 @@ public class joinScreen extends AppCompatActivity {
         public void call(final Object... args) {
                 mExists = (boolean)args[0];
                 if (!mExists) {
-                    SharedPreferences settings = getSharedPreferences(Constants.PREFERENCEFILENAME, 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("username", Constants.USERNAME);
-                    // Commit the edits!
-                    editor.commit();
+//                    SharedPreferences settings = getSharedPreferences(Constants.PREFERENCEFILENAME, 0);
+//                    SharedPreferences.Editor editor = settings.edit();
+//                    editor.putString("username", Constants.USERNAME);
+//                    // Commit the edits!
+//                    editor.commit();
                     Intent i = new Intent(getApplicationContext(), codeScreen.class);
                     startActivity(i);
                     finish();
