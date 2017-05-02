@@ -10,6 +10,7 @@ import Foundation
 
 class SocketIOManager: NSObject {
     static let sharedInstance = SocketIOManager()
+    let userSettings = UserDefaults.standard
     
     // ip Huub  "http://192.168.10.28:3000"
     // ip Daan  "http://192.168.10.49:3000"
@@ -18,7 +19,14 @@ class SocketIOManager: NSObject {
     override public init() {
         super.init()
         socket.on("connect") {data, ack in
-            self.connectAppleTV();
+            if(self.userSettings.object(forKey: "joinCode") != nil){
+                self.registeredConnectAppleTV()
+                print("JoinCode is: \(self.userSettings.object(forKey: "joinCode") as! String)")
+            } else {
+                self.newConnectAppleTV();
+                print("No JoinCode")
+            }
+            
             print("socket connected")
         }
         self.socket.on("getTeams") {data, ack in
@@ -44,8 +52,12 @@ class SocketIOManager: NSObject {
     }
 
     
-    func connectAppleTV() {
-        socket.emit("connectAppleTV")
+    func newConnectAppleTV() {
+        socket.emit("newConnectAppleTV")
+    }
+    
+    func registeredConnectAppleTV() {
+        socket.emit("registeredConnectAppleTV", userSettings.object(forKey: "joinCode") as! String)
     }
     
     func establishConnection() {
