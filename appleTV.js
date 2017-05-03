@@ -3,6 +3,8 @@ function AppleTV(id) {
   this.inRoom = null;
   this.player1 = null;
   this.players = [];
+  this.teamRed = [];
+  this.teamBlue = [];
   this.playerLimit = 4;
   this.status = "open";
 };
