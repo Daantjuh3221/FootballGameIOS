@@ -14,18 +14,25 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import io.socket.client.Socket;
+
 /**
  * Created by Lars on 8-3-2017.
  */
 
 public class Splash extends AppCompatActivity {
 
-    String prefsFile = Constants.PREFERENCEFILENAME;
+    private String prefsFile = Constants.PREFERENCEFILENAME;
+    private Socket mSocket;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+
+        SocketConnection app = (SocketConnection) getApplication();
+        mSocket = app.getSocket();
+        mSocket.connect();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -33,17 +40,25 @@ public class Splash extends AppCompatActivity {
         Thread myThread = new Thread() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(), joinScreen.class);
+                Intent i = new Intent(getApplicationContext(), mainMenu.class);
                 try {
                     SharedPreferences sharedPrefs = getSharedPreferences(prefsFile, MODE_PRIVATE);
                     SharedPreferences.Editor ed;
-                    if(!sharedPrefs.contains("initialized")){
+                    if(!sharedPrefs.contains("initialized")) {
+
                         ed = sharedPrefs.edit();
 
                         //Indicate that the default shared prefs have been set
                         ed.putBoolean("initialized", true);
                         ed.commit();
                     }
+//                    } else if(sharedPrefs.contains("username")){
+//                        String username = sharedPrefs.getString("username", "");
+//                        mSocket.emit("registeredUserConnect", username, Constants.DEVICE);
+//                    } else if(sharedPrefs.contains("joinCode")){
+//                        String joinCode = sharedPrefs.getString("joinCode", "");
+//                        mSocket.emit("userJoinAppleTV", joinCode);
+//                    }
                     sleep(2000);
                     startActivity(i);
                     finish();
