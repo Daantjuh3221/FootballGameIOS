@@ -61,18 +61,14 @@ class Foot: SKSpriteNode{
         
         if(colorSprite == "red"){
             //Get red team
-            playerImages[0] = "PlayerRed1"
-            playerImages[1] = "PlayerRed2"
-            playerImages[2] = "PlayerRed3"
-            playerImages[3] = "PlayerRed4"
-            playerImages[4] = "PlayerRed5"
+            for i in 0...4{
+            playerImages[i] = "PlayerRed" + String(i + 1)
+            }
         }else{
             //Get blue team
-            playerImages[0] = "Player1"
-            playerImages[1] = "Player2"
-            playerImages[2] = "Player3"
-            playerImages[3] = "Player4"
-            playerImages[4] = "Player5"
+            for i in 0...4{
+                playerImages[i] = "Player" + String(i + 1)
+            }
         }
         
         //Draw the head/Player
@@ -180,9 +176,8 @@ class Foot: SKSpriteNode{
     }
     
     func update(swipeLength: CGFloat, positionY: CGFloat){
-        var appliedForce:CGFloat = swipeLength
+        let _:CGFloat = swipeLength
         
-        print("velo  \(theFoot.physicsBody?.velocity.dx)")
         theFoot.position.y = positionOnStick + positionY
         theHead.position.y = theFoot.position.y
         
