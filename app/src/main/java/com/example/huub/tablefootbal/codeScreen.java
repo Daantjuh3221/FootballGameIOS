@@ -61,6 +61,7 @@ public class codeScreen extends AppCompatActivity {
             mExists = (boolean)args[0];
             if (!mExists) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
+                Constants.isConnected = true;
                 editor.putString("joinCode", Constants.JOINCODE);
                 editor.commit();
                 if (Constants.isPlayerOne){
@@ -77,6 +78,7 @@ public class codeScreen extends AppCompatActivity {
 
             } else{
                 Constants.USERNAME = "";
+                Constants.isConnected = false;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

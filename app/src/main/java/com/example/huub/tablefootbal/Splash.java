@@ -40,7 +40,7 @@ public class Splash extends AppCompatActivity {
         Thread myThread = new Thread() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(), mainMenu.class);
+                Intent i = new Intent(getApplicationContext(), joinScreen.class);
                 try {
                     SharedPreferences sharedPrefs = getSharedPreferences(prefsFile, MODE_PRIVATE);
                     SharedPreferences.Editor ed;
