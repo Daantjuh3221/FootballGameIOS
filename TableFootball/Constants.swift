@@ -13,4 +13,5 @@ struct Constants {
     static var TEAMBLUE:[String] = []
     
     static var CONNECTEDPLAYERS:[String] = []
+    static var JOINCODE = "notDefined"
 }

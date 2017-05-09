@@ -21,6 +21,7 @@ class SocketIOManager: NSObject {
         socket.on("connect") {data, ack in
             if(self.userSettings.object(forKey: "joinCode") != nil){
                 self.registeredConnectAppleTV()
+                Constants.JOINCODE = self.userSettings.object(forKey: "joinCode") as! String
                 print("JoinCode is: \(self.userSettings.object(forKey: "joinCode") as! String)")
             } else {
                 self.newConnectAppleTV();
@@ -65,6 +66,7 @@ class SocketIOManager: NSObject {
     }
     
     func closeConnection() {
+        
         socket.disconnect()
     }
 }
