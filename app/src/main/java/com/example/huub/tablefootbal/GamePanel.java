@@ -18,9 +18,14 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+
+import android.support.v4.view.VelocityTrackerCompat;
+import android.view.VelocityTracker;
 
 import static com.example.huub.tablefootbal.MainThread.canvas;
 
@@ -60,9 +65,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 
     private TableFootbalController tableFootbalController;
 
-    private float swipeBegin;
-    private float swipeEnd;
-    private float swipeDelta;
+    private VelocityTracker mVelocityTracker = null;
+    private float maxXVelocity;
+    private float startVelocity;
+    private float swipeVelocity;
 
 
     public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
@@ -92,9 +98,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     }
 
     private void getSticks() {
-        sticks[0] = BitmapFactory.decodeResource(getResources(), R.drawable.stick01);
-        sticks[1] = BitmapFactory.decodeResource(getResources(), R.drawable.stick02);
-        sticks[2] = BitmapFactory.decodeResource(getResources(), R.drawable.stick03);
+        sticks[0] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick01);
+        sticks[1] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick02);
+        sticks[2] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick03);
     }
 
     @Override
@@ -134,21 +140,51 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         }
     }
 
-    //jaja
+
     @Override
-    public boolean onTouchEvent(MotionEvent event){
-        switch (event.getAction()){
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getActionMasked();
+
+        switch(action) {
             case MotionEvent.ACTION_DOWN:
-                swipeBegin = event.getY();
-            case MotionEvent.ACTION_UP:
-                swipeEnd = event.getY();
-                float swipeDelta = swipeEnd - swipeBegin;
-                System.out.println(swipeDelta + " Swipe!");
-                mSocket.emit("sendPositionXToAppleTV", swipeDelta);
+                if(mVelocityTracker == null) {
+
+                    mVelocityTracker = VelocityTracker.obtain();
+
+                    mVelocityTracker.computeCurrentVelocity(1000);
+                    startVelocity = mVelocityTracker.getXVelocity();
+                    System.out.println("StartSnelheid " + startVelocity);
+
+                }
+                else {
+                    // Reset the velocity tracker back to its initial state.
+                    mVelocityTracker.clear();
+                }
+                // Add a user's movement to the tracker.
+                mVelocityTracker.addMovement(event);
+                break;
             case MotionEvent.ACTION_MOVE:
                 playerPoint.set((int)event.getX(),(int)event.getY());
+                mVelocityTracker.addMovement(event);
+                maxXVelocity = 0;
+
+                mVelocityTracker.computeCurrentVelocity(1000);
+
+                maxXVelocity = mVelocityTracker.getYVelocity();
+
+                break;
+            case MotionEvent.ACTION_UP:
+                swipeVelocity = maxXVelocity - startVelocity;
+                System.out.println("Swipe: " + swipeVelocity);
+                mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
+            case MotionEvent.ACTION_CANCEL:
+                // Return a VelocityTracker object back to be re-used by others.
+                mVelocityTracker.recycle();
+                mVelocityTracker = null;
+                break;
         }
         return true;
+
     }
 
 
@@ -186,7 +222,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         }
         previousPos = d;
         mSocket.emit("sendPositionYToAppleTV", d.x);
-        //mSocket.emit("sendPositionXToAppleTV", swipeDelta);
+        System.out.println("Test: " + d.x);
         return d;
     }
 
