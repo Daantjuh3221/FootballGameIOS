@@ -37,6 +37,7 @@ class Foot: SKSpriteNode{
     
     var positionOnStick:CGFloat = 0
     var maxOffsets:CGFloat = 0
+    var playerImages:[String] = ["","","","",""]
     
     
     func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene, maxOffset: CGFloat){
@@ -54,11 +55,32 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.mass = 50
         theFoot.physicsBody?.isDynamic = true
         theFoot.name = "foot"
+        theFoot.zPosition = 0
+        theFoot.alpha = 0
         gameScene.addChild(theFoot)
         
-        drawHead(sprite: colorSprite, gameScene: gameScene)
+        if(colorSprite == "red"){
+            //Get red team
+            playerImages[0] = "PlayerRed1"
+            playerImages[1] = "PlayerRed2"
+            playerImages[2] = "PlayerRed3"
+            playerImages[3] = "PlayerRed4"
+            playerImages[4] = "PlayerRed5"
+        }else{
+            //Get blue team
+            playerImages[0] = "Player1"
+            playerImages[1] = "Player2"
+            playerImages[2] = "Player3"
+            playerImages[3] = "Player4"
+            playerImages[4] = "Player5"
+        }
         
-        
+        //Draw the head/Player
+        theHead.texture = SKTexture(imageNamed: playerImages[0])
+        theHead.zPosition = 1
+        theHead.position = theFoot.position
+        theHead.size = CGSize(width: theHead.size.width, height: 65)
+        gameScene.addChild(theHead)
         
         rest = true
         
@@ -70,11 +92,15 @@ class Foot: SKSpriteNode{
         startPos = theFoot.position.x
     }
     
-    func drawHead(sprite:String, gameScene: GameScene){
-        theHead.texture = SKTexture(imageNamed: sprite)
-        theHead.position = theFoot.position
-        theHead.size = CGSize(width: 35, height: 65)
-        gameScene.addChild(theHead)
+    func drawHead(sprite:String, isFliped: Bool){
+         theHead.texture = SKTexture(imageNamed: sprite)
+        
+        if(isFliped){
+            theHead.size = CGSize(width: (theHead.texture?.size().width)!/3, height: 65)
+        }else{
+            theHead.size = CGSize(width: ((theHead.texture?.size().width)!/3) * -1, height: 65)
+        }
+        
     }
     
     
@@ -93,24 +119,77 @@ class Foot: SKSpriteNode{
     
     func centreFoots(){
         //Return to centre
-        theFoot.physicsBody?.applyImpulse(CGVector(dx:(theFoot.position.x - startPos)*100 , dy:0))// -= theFoot.position.x - startPos
+            //theFoot.physicsBody?.applyImpulse(CGVector(dx:(startPos - theFoot.position.x)*100 , dy:0))
+        theFoot.physicsBody?.velocity.dx += (startPos - theFoot.position.x) * 1
+        theFoot.physicsBody?.velocity.dx *= CGFloat(0.9)
+    }
+    
+    var imageCounter:Int = 0
+    func animatePlayer(relativePosition: CGFloat){
+        
+        print("rel: \(relativePosition)")
+        print("img: \(imageCounter)")
+        var flipped:Bool = true
+        //-55 & plus 55
+        
+        
+        if(relativePosition > 0){
+            
+            //Check if image must be flipped or not
+            flipped = true
+            
+            //check which image needs to be displayed
+            if(relativePosition > 40){
+                imageCounter = 4
+            }else if(relativePosition > 30){
+                imageCounter = 3
+            }else if(relativePosition > 20){
+                imageCounter = 2
+            }else if(relativePosition > 10){
+                imageCounter = 1
+            }else {
+                //Need fix
+            }
+            
+        }
+        
+        if(relativePosition < 0){
+            //check if flipped of not
+            flipped = false
+            
+            //And the other wat around
+            if(relativePosition < -40){
+                imageCounter = 4
+            }else if(relativePosition < -30){
+                imageCounter = 3
+            }else if(relativePosition < -20){
+                imageCounter = 2
+            }else if(relativePosition < -10){
+                imageCounter = 1
+            }else {
+                //Need fix
+            }
+        }
+        if(relativePosition < 10 && relativePosition > -10){
+            imageCounter = 0
+        }
+        drawHead(sprite: playerImages[imageCounter], isFliped: flipped)
+    }
+    
+    func addImpulse(length: CGFloat){
+        theFoot.physicsBody?.applyForce(CGVector(dx:length * 80, dy:0 ))
     }
     
     func update(swipeLength: CGFloat, positionY: CGFloat){
-
         var appliedForce:CGFloat = swipeLength
         
-        clampFoots()
-       // centreFoots()
-        
         print("velo  \(theFoot.physicsBody?.velocity.dx)")
-        
-        theFoot.physicsBody?.applyImpulse(CGVector(dx:swipeLength * 20, dy:0 ))
         theFoot.position.y = positionOnStick + positionY
         theHead.position.y = theFoot.position.y
         
-        
-        
+        animatePlayer(relativePosition: (startPos - theFoot.position.x))
+        clampFoots()
+        centreFoots()
     }
     
 }
