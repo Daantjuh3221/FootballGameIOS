@@ -23,17 +23,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //GameRules
     var scoreLimit:Int = 5;
     
+    let goalShake:ScreenShake = ScreenShake()
+    
+    let gameCamera:SKCameraNode = SKCameraNode()
+    
     
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
-    var stickEnabled:[Bool] = [true, true, true, false, false, true ,false, true]
-    var stickPositions:[Int] = [-340, -243, -146, -49, 49, 146, 243, 340]
-    var stickColor:[String] = ["red", "red", "blue", "red", "blue", "red", "blue", "blue"]
-    var userNames:[String] = ["", "", "", "", "", "", "", ""]
-    var amountOfFeets:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
+    var stickEnabled:[Bool] = [false, true, false, true, false, false, true ,false, true]
+    var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
+    var stickColor:[String] = ["", "red", "red", "blue", "red", "blue", "red", "blue", "blue"]
+    var userNames:[String] = ["", "", "", "", "", "", "", "", ""]
+    var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
 
-    
     
     //Lists of both teams
     var teamBlue:[String] = []
@@ -43,7 +46,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print(Constants.TEAMRED)
         print(Constants.TEAMBLUE)
         
-        for i in 0...7{
+        addChild(gameCamera)
+        camera = gameCamera
+        
+        goalShake.Init(thisCamera: gameCamera, duration: 100, intensity: 10)
+        
+        for i in 0...8{
+            if(i > 0){
                 if(stickColor[i] == "red"){
                     //Team red
                     if(Constants.TEAMRED.count > 0){
@@ -54,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if(Constants.TEAMBLUE.count > 0){
                     userNames[i] = Constants.TEAMBLUE[0]
                     }
-            }
+            }}
         }
         
         print(userNames)
@@ -76,7 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //            //teamBlue = socketTeamBlue
 //        }
         
-        for i in 0...7{
+        for i in 0...8{
             //Makes all sticks
                 sticks.append(Stick())
                 if(stickEnabled[i]){
@@ -142,11 +151,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }//End collision
     
+  
+    
+    
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
         for i in sticks{
             i.update()
         }
         theBall.update()
+        
+        if(theBall.isScored){
+            goalShake.StartShake()
+            print("Shake")
+        }
+        
+        goalShake.Shake()
     }//End Update
 }

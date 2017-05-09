@@ -31,6 +31,12 @@ class Stick: SKSpriteNode{
         
         self.userName = userName
         
+        
+        //Make amount of feets
+        amount = amountOfFeets - 1
+        
+        makeFoots(amount: amount, gameScene: gameScene, sprite: sprite)
+        
         //Get data from socket
         let socket = SocketIOManager.sharedInstance.getSocket();
         socket.on("getPositionYforAppleTV") {data, ack in
@@ -45,6 +51,12 @@ class Stick: SKSpriteNode{
             let inputUser = (data[1] as? String)!
             if(inputUser == userName){
             self.swipeLength = (data[0] as? CGFloat)!
+                print("swipe \(self.swipeLength)")
+                
+                //Call methode here
+                for i in self.theFoots{
+                    i.addImpulse(length: self.swipeLength)
+                }
             }
         }
         
@@ -54,10 +66,6 @@ class Stick: SKSpriteNode{
         //negative = left
         // Swipelength bla bla bla
         
-        //Make amount of feets
-        amount = amountOfFeets - 1
-        
-        makeFoots(amount: amount, gameScene: gameScene, sprite: sprite)
     }
     
     func makeFoots(amount: Int, gameScene: GameScene, sprite: String ){
@@ -117,9 +125,9 @@ class Stick: SKSpriteNode{
     
     func update(){
         //Update each foot of this stick
-        print("swipe \(swipeLength)")
+        print("Update \(swipeLength)")
         for i in theFoots{
-            i.update( swipeLength: swipeLength)
+            i.update( swipeLength: swipeLength, positionY: positionY)
         }
         print(userName)
     }

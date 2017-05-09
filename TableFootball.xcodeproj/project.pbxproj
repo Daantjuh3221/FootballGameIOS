@@ -22,6 +22,7 @@
 		D125C4451E81145D00A63590 /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4441E81145D00A63590 /* Stick.swift */; };
 		D125C4491E8147FC00A63590 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4481E8147FC00A63590 /* Score.swift */; };
 		D19887B31E9E3E9A00E0C1E7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19887B21E9E3E9A00E0C1E7 /* Constants.swift */; };
+		D1E11D371EB9F0030031262C /* ScreenShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E11D361EB9F0030031262C /* ScreenShake.swift */; };
 		DF00F2201E81327B00C88A2F /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F2081E81327B00C88A2F /* SocketAckEmitter.swift */; };
 		DF00F2211E81327B00C88A2F /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F2091E81327B00C88A2F /* SocketAckManager.swift */; };
 		DF00F2221E81327B00C88A2F /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F20A1E81327B00C88A2F /* SocketAnyEvent.swift */; };
@@ -90,6 +91,7 @@
 		D125C4441E81145D00A63590 /* Stick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D125C4481E8147FC00A63590 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		D19887B21E9E3E9A00E0C1E7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D1E11D361EB9F0030031262C /* ScreenShake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShake.swift; sourceTree = "<group>"; };
 		DF00F2081E81327B00C88A2F /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
 		DF00F2091E81327B00C88A2F /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
 		DF00F20A1E81327B00C88A2F /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				DF5CED001E8BAFEC004C714C /* ConnectViewController.swift */,
 				DF5CED021E8BB5AF004C714C /* MenuViewController.swift */,
 				D19887B21E9E3E9A00E0C1E7 /* Constants.swift */,
+				D1E11D361EB9F0030031262C /* ScreenShake.swift */,
 			);
 			path = TableFootball;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				DF00F22E1E81327B00C88A2F /* SocketIOClientOption.swift in Sources */,
 				DF00F2331E81327B00C88A2F /* SocketParsable.swift in Sources */,
 				DF00F2231E81327B00C88A2F /* SocketClientManager.swift in Sources */,
+				D1E11D371EB9F0030031262C /* ScreenShake.swift in Sources */,
 				DF00F2361E81327B00C88A2F /* SSLSecurity.swift in Sources */,
 				DF00F2291E81327B00C88A2F /* SocketEngineWebsocket.swift in Sources */,
 				DF00F2201E81327B00C88A2F /* SocketAckEmitter.swift in Sources */,
