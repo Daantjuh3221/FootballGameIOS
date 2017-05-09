@@ -20,6 +20,8 @@ class Ball: SKSpriteNode {
     var touchFoot:SKNode = SKNode()
     var footNode:Foot = Foot()
     
+    var rotationSpeed:CGFloat = 0
+    
     func Init(gamescene:GameScene, scoreLimit: Int){
         //Initialize the ball here
         let imageTexture = SKTexture(imageNamed: "ballSprite")
@@ -58,8 +60,7 @@ class Ball: SKSpriteNode {
     }
     
     func collidesWithWallHorizintal(wallPosition: CGFloat){
-       // physicsBody?.velocity.dx *= -1
-        print("wallPosBefore:   \(physicsBody!.velocity.dy)")
+        
         physicsBody!.velocity.dy = 0
         var tempForce = 0
         
@@ -68,19 +69,10 @@ class Ball: SKSpriteNode {
         }else{
             tempForce = 20
         }
-      //  print("velocity:   \(physicsBody?.velocity.dy)")
-      //  print("wallPos1 \(currentVelocity)")
-        print("wallPos:   \(tempForce)")
-      //  physicsBody?.applyForce(CGVector(dx:0, dy: tempForce))
+        
         physicsBody!.applyImpulse(CGVector(dx:0, dy: tempForce))
-        print("wallPosAfter:   \(physicsBody!.velocity.dy)")
     }
     
-    func collidesWithFoot(foot: SKNode){
-        isShot = true
-        touchFoot = foot
-        
-    }
     
     func checkIfWon(){
         if(score.hasWon){
@@ -96,25 +88,6 @@ class Ball: SKSpriteNode {
             physicsBody?.velocity.dx = 0
         }
     }
-    /*
-    func handleBallToFootCollision(){
-        var positionDiff:CGVector = CGVector(dx:0,dy:0)
-        positionDiff.dx = position.x - touchFoot.position.x
-        positionDiff.dy = position.y - touchFoot.position.y
-        
-        var collisionNormal = positionDiff
-        collisionNormal = normalizeVector(vector: collisionNormal)
-        
-        var resetVector:CGVector = collisionNormal
-        position.x -= resetVector.dx/2
-        position.y -= resetVector.dy/2
-        
-        var velDiff:CGVector = CGVector(dx:0,dy:0)
-        //(self.physicsBody?.velocity)! - touchFoot.physicsBody?.velocity
-        velDiff.dx = (self.physicsBody?.velocity.dx)! - (touchFoot.physicsBody?.velocity.dx)!
-        velDiff.dy = (self.physicsBody?.velocity.dy)! - (touchFoot.physicsBody?.velocity.dy)!
-    }
-    */
     
     func update(){
         if(isScored){
@@ -135,12 +108,16 @@ class Ball: SKSpriteNode {
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
         }
-       /*
-        if(isShot){
-            isShot = false
-            //handleBallToFootCollision()
-            physicsBody?.applyForce(CGVector(dx: (position.x - touchFoot.position.x) * 5, dy: (position.y - touchFoot.position.y) * 5))
-        }*/
+        if((physicsBody?.velocity.dy)! > CGFloat(0) || (physicsBody?.velocity.dy)! < CGFloat(0)){
+            if((physicsBody?.velocity.dx)! > CGFloat(0) || (physicsBody?.velocity.dx)! < CGFloat(0)){
+            //rotate sprite
+                rotationSpeed += (physicsBody?.velocity.dx)! - (physicsBody?.velocity.dy)!
+                if(rotationSpeed > 360){
+                    rotationSpeed = -300
+                }
+                self.zRotation = rotationSpeed
+                
+            }}
     }
 }
 

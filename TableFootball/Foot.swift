@@ -103,7 +103,6 @@ class Foot: SKSpriteNode{
         
     }
     
-    
     func clampFoots(){
         //clamp foot
         if(theFoot.position.x > startPos + maxOffsets){

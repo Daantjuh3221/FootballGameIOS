@@ -49,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(gameCamera)
         camera = gameCamera
         
-        goalShake.Init(thisCamera: gameCamera, duration: 100, intensity: 10)
+        goalShake.Init(thisCamera: gameCamera, duration: 30, intensity: 50)
         
         for i in 0...8{
             if(i > 0){
@@ -144,27 +144,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.didScored()
         }
         
-        //Check if a foot touches the ball
-        if(firstBody.node?.name == "ball" && secondBody.node?.name == "foot"){
-            theBall.collidesWithFoot(foot: secondBody.node!)
-        }
         
     }//End collision
-    
-  
     
     
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
+        if(theBall.isScored){
+            goalShake.StartShake()
+            print("Shake")
+        }
         for i in sticks{
             i.update()
         }
         theBall.update()
         
-        if(theBall.isScored){
-            goalShake.StartShake()
-            print("Shake")
-        }
+        
         
         goalShake.Shake()
     }//End Update
