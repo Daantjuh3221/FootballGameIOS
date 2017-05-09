@@ -23,6 +23,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //GameRules
     var scoreLimit:Int = 5;
     
+    let cameraShake:ScreenShake = ScreenShake()
+    
+    let gameCamera:SKCameraNode = SKCameraNode()
+    
     
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
@@ -34,7 +38,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var amountOfFeets:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
 
     
-    
     //Lists of both teams
     var teamBlue:[String] = []
     var teamRed:[String] = []
@@ -42,6 +45,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         print(Constants.TEAMRED)
         print(Constants.TEAMBLUE)
+        
+        addChild(gameCamera)
+        camera = gameCamera
+        
+        cameraShake.Init(thisCamera: gameCamera, duration: 200, intensity: 10)
+        cameraShake.StartShake()
         
         for i in 0...7{
                 if(stickColor[i] == "red"){
@@ -142,11 +151,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }//End collision
     
+    
+    func screenShake(duration: CGFloat){
+        var counter = duration
+        counter -= 1
+        
+        if(counter > 0){
+        let randomNum:UInt32 = arc4random_uniform(100)
+        if(randomNum < 50){
+            gameCamera.position.x += 1
+            gameCamera.zRotation += 0.01
+        }else{
+            gameCamera.position.x -= 1
+            gameCamera.zRotation -= 0.01
+        }
+        let randomNum1:UInt32 = arc4random_uniform(100)
+        if(randomNum1 < 50){
+            gameCamera.position.x += 1
+        }else{
+            gameCamera.position.x -= 1
+        }
+        }else{
+            //return to start ops
+        }
+    }
+    
+    
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
         for i in sticks{
             i.update()
         }
         theBall.update()
+        
+        cameraShake.Shake()
     }//End Update
 }

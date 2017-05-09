@@ -63,7 +63,7 @@ class Foot: SKSpriteNode{
         rest = true
         
         positionOnStick = 0 + theFoot.position.y
-        maxOffsets = maxOffset
+        maxOffsets = maxOffset/2
         speedCounter = 0
         
         //Set value per position
@@ -78,22 +78,34 @@ class Foot: SKSpriteNode{
     }
     
     
+    func clampFoots(){
+        //clamp foot
+        if(theFoot.position.x > startPos + maxOffsets){
+            theFoot.physicsBody?.velocity.dx = 0
+            theFoot.position.x = startPos + maxOffsets - 1
+        }
+        if(theFoot.position.x < startPos - maxOffsets){
+            theFoot.physicsBody?.velocity.dx = 0
+            theFoot.position.x = startPos - maxOffsets - 1
+        }
+        //<--- End Clamp ---->
+    }
+    
+    func centreFoots(){
+        //Return to centre
+        theFoot.physicsBody?.applyImpulse(CGVector(dx:(theFoot.position.x - startPos)*100 , dy:0))// -= theFoot.position.x - startPos
+    }
+    
     func update(swipeLength: CGFloat, positionY: CGFloat){
 
         var appliedForce:CGFloat = swipeLength
         
-        ///Set foot back to its centre
-        if(theFoot.position.x > startPos){
-            //Go left
-            theFoot.physicsBody?.applyForce(CGVector(dx:-5000, dy:0 ))
-        }else if(theFoot.position.x < startPos){
-            //Go right
-            theFoot.physicsBody?.applyForce(CGVector(dx:5000, dy:0 ))
-        }
+        clampFoots()
+       // centreFoots()
         
-        //Apply impulse to the foot
+        print("velo  \(theFoot.physicsBody?.velocity.dx)")
         
-        theFoot.physicsBody?.applyForce(CGVector(dx:swipeLength * 2, dy:0 ))
+        theFoot.physicsBody?.applyImpulse(CGVector(dx:swipeLength * 20, dy:0 ))
         theFoot.position.y = positionOnStick + positionY
         theHead.position.y = theFoot.position.y
         

@@ -77,8 +77,8 @@ class Ball: SKSpriteNode {
     }
     
     func collidesWithFoot(foot: SKNode){
-        isShot = true
-        touchFoot = foot
+      //  isShot = true
+      //  touchFoot = foot
         
     }
     
