@@ -17,9 +17,49 @@ app.use(express.static("./public"));
 
 io.on("connection", function(socket) {
 
+	console.log("Someone connected")
+
     socket.on('disconnect', function(reason){
         console.log("Socket disconnected beceause of: " + reason)
-    });
+        if(checkIfUserExists(socket.id))
+        {
+            var playerToDelete = connectedPlayers[socket.id];
+            console.log("Delete user");
+            if (checkIfAppleTVExists(playerToDelete.inAppleTv)) {
+                var appleTVModify = connectedAppleTvs[playerToDelete.inAppleTv];
+                for(var i = 0; i < appleTVModify.players.length; i++){
+                console.log("deleting user in appleTV: " + appleTVModify.players[i]);
+                delete appleTVModify.players[i];
+                console.log("deleted user in appleTV: " + appleTVModify.players[i]);
+                console.log("deleted user by appleTV: " + appleTVModify);
+                }
+            }
+            delete connectedPlayers[socket.id];
+            console.log("deleted " + socket.id);
+        } else{
+            var indexForAppleTV = 0;
+        	for(var joinCodeToDelete in connectedAppleTvs){
+            console.log("deleting an appleTV");
+                var deleteTV = connectedAppleTvs[joinCodeToDelete];
+                console.log("The length of players in apple tv: " + deleteTV.players.length)
+                for(var i = 0; i < deleteTV.players.length; i++){
+                    var foundedPlayer = deleteTV.players[i];
+                    console.log("founded player: " + foundedPlayer);
+                    if (checkIfVarExist(foundedPlayer)) {
+                        var deletingPlayer = connectedPlayers[foundedPlayer];
+                        console.log("Deleted player: " + deletingPlayer);
+                        io.to(deletingPlayer.socket).emit('disconnectFromAppleTV');
+                        deletingPlayer.inAppleTv = null;
+                        console.log("disconnected player: "+ deletingPlayer.name)
+                    }
+                }
+                delete connectedAppleTvs[joinCodeToDelete];
+                console.log("deleted apple tv: " + joinCodeToDelete);
+                console.log("is appleTV deleted?: " + connectedAppleTvs[joinCodeToDelete]);
+                indexForAppleTV++;
+            }
+        }
+     });
 
 	socket.on("newUserConnect", function(name, device){
 		var exists = false
@@ -89,6 +129,7 @@ io.on("connection", function(socket) {
             joinCode = generateJoinCode();
         }
         var newAppleTV = new AppleTV(socket.id);
+        newAppleTV.joinCode = joinCode;
         connectedAppleTvs[joinCode] = newAppleTV;
         console.log("update, an apple tv has connected. With joinCode: " + joinCode);
         socket.emit("getJoinCode", joinCode);
@@ -98,6 +139,7 @@ io.on("connection", function(socket) {
     socket.on("registeredConnectAppleTV", function(joinCode) {
         console.log("WE ZIJN HIER MET JOINCODE:" + connectedAppleTvs);
         var newAppleTV = new AppleTV(socket.id);
+        newAppleTV.joinCode = joinCode;
         connectedAppleTvs[joinCode] = newAppleTV;
         console.log("update, an apple tv has connected. With joinCode: " + joinCode);
         socket.emit("getJoinCode", joinCode);
@@ -194,7 +236,8 @@ io.on("connection", function(socket) {
         }
         var appleTV = connectedAppleTvs[joinCode];
         var exists = false;
-        if (checkIfAppleTVExists(joinCode)) { 
+        if (checkIfAppleTVExists(joinCode)) {
+
             appleTV.addPlayer(socket.id);
             
             if (socket.id === appleTV.player1) {
@@ -207,7 +250,9 @@ io.on("connection", function(socket) {
             var newPlayer = connectedPlayers[socket.id];
             newPlayer.inAppleTv = joinCode;
             io.to(appleTV.id).emit('userJoinedAppleTV', newPlayer.name);
+            console.log("AppleTV exists");
         } else if(joinCode !== "1234"){
+            console.log("appleTV does not exists");
             exists = true;
         }
         socket.emit("appleTvExists", exists);
@@ -216,13 +261,30 @@ io.on("connection", function(socket) {
 
     socket.on("sendPositionYToAppleTV", function(positionY) {
         var player = connectedPlayers[socket.id];
-        var appleTV = connectedAppleTvs[player.inAppleTv];
-        io.to(appleTV.id).emit("getPositionYforAppleTV", positionY, player.name);
-    });
+        if (checkIfUserExists(socket.id)) {
+                var appleTV = connectedAppleTvs[player.inAppleTv];
+                if (checkIfAppleTVExists(player.inAppleTv)) {
+                    io.to(appleTV.id).emit("getPositionYforAppleTV", positionY, player.name);
+                } else{
+                    console.log("Apple tv does not exist");
+                }
+            } else{
+                console.log("User does not exist anymore");
+            }
+        });
     socket.on("sendPositionXToAppleTV", function(positionX) {
         var player = connectedPlayers[socket.id];
-        var appleTV = connectedAppleTvs[player.inAppleTv];
-        io.to(appleTV.id).emit("getPositionXforAppleTV", positionX, player.name);
+        if (checkIfUserExists(socket.id)) {
+            var appleTV = connectedAppleTvs[player.inAppleTv];
+            if (checkIfAppleTVExists(player.inAppleTv)) {
+                io.to(appleTV.id).emit("getPositionXforAppleTV", positionX, player.name);
+            } else{
+                console.log("Apple tv does not exist");
+            }
+        } else{
+            console.log("User does not exist anymore");
+        }
+        
     });
 
     // socket.on("createRoom", function(roomName) {
@@ -246,6 +308,21 @@ function generateJoinCode(){
 function checkIfAppleTVExists(appleTvJoinCode){
     var appleTV = connectedAppleTvs[appleTvJoinCode];
     if (typeof appleTV !== 'undefined' && appleTV !== null) { 
+        return true;
+    }
+    return false;
+}
+
+function checkIfVarExist(item){
+    if (typeof item !== 'undefined' && item !== null) { 
+        return true;
+    }
+    return false;
+}
+
+function checkIfUserExists(socketId){
+    var player = connectedPlayers[socketId];
+    if (typeof player !== 'undefined' && player !== null) { 
         return true;
     }
     return false;

@@ -1,6 +1,6 @@
 function AppleTV(id) {
   this.id = id;
-  this.inRoom = null;
+  this.joinCode = null;
   this.player1 = null;
   this.players = [];
   this.teamRed = [];
