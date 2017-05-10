@@ -84,7 +84,7 @@ public class Player extends Activity implements GameObject {
         if(position.y > screenCapY - cubeSize/2){ position.y = screenCapY-cubeSize/2;}
 
         drawCube();
-        drawStick();
+        //drawStick();
     }
 
     public void setPosition(PointF pos) {

@@ -80,21 +80,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 
         getSticks();
 
-        stick = new Stick(new Rect(200,200,400,400), Color.BLACK, sticks, deviceWidth, deviceHeight);
+        stick = new Stick(new Rect(200,200,400,400), Color.TRANSPARENT , sticks, deviceWidth, deviceHeight);
         sensorManager = sensor;
         mySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         sensorManager.registerListener(this, mySensor, sensorManager.SENSOR_DELAY_GAME);
         setFocusable(true);
 
         //Init player
-        player = new Player(new Rect(200,200,400,400), Color.TRANSPARENT, new PointF(800,1600/2));
+        player = new Player(new Rect(200,200,400,400), Color.BLACK, new PointF(800,1600/2));
         playerPoint = new PointF(600,150);
     }
 
     private void getSticks() {
-        sticks[0] = BitmapFactory.decodeResource(getResources(), R.drawable.stick01);
-        sticks[1] = BitmapFactory.decodeResource(getResources(), R.drawable.stick02);
-        sticks[2] = BitmapFactory.decodeResource(getResources(), R.drawable.stick03);
+        sticks[0] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick01);
+        sticks[1] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick02);
+        sticks[2] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick03);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
                 System.out.println(swipeDelta + " Swipe!");
                 mSocket.emit("sendPositionXToAppleTV", swipeDelta);
             case MotionEvent.ACTION_MOVE:
-                playerPoint.set((int)event.getX(),(int)event.getY());
+                playerPoint.set(((int)event.getX()-400),(int)event.getY());
         }
         return true;
     }
