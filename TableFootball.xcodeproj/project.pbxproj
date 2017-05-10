@@ -23,6 +23,19 @@
 		D125C4491E8147FC00A63590 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = D125C4481E8147FC00A63590 /* Score.swift */; };
 		D19887B31E9E3E9A00E0C1E7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19887B21E9E3E9A00E0C1E7 /* Constants.swift */; };
 		D1E11D371EB9F0030031262C /* ScreenShake.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E11D361EB9F0030031262C /* ScreenShake.swift */; };
+		D1ED78901EC3197A002353F6 /* bounce01.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED788D1EC3197A002353F6 /* bounce01.wav */; };
+		D1ED78911EC3197A002353F6 /* hardbounce01.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED788E1EC3197A002353F6 /* hardbounce01.wav */; };
+		D1ED78921EC3197A002353F6 /* bounce03.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED788F1EC3197A002353F6 /* bounce03.wav */; };
+		D1ED789C1EC31AFE002353F6 /* boune02.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78931EC31AFE002353F6 /* boune02.wav */; };
+		D1ED789D1EC31AFE002353F6 /* bounce04.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78941EC31AFE002353F6 /* bounce04.wav */; };
+		D1ED789E1EC31AFE002353F6 /* bounce05.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78951EC31AFE002353F6 /* bounce05.wav */; };
+		D1ED789F1EC31AFE002353F6 /* bounce06.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78961EC31AFE002353F6 /* bounce06.wav */; };
+		D1ED78A01EC31AFE002353F6 /* bounce07.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78971EC31AFE002353F6 /* bounce07.wav */; };
+		D1ED78A11EC31AFE002353F6 /* bounce08.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78981EC31AFE002353F6 /* bounce08.wav */; };
+		D1ED78A21EC31AFE002353F6 /* bounce09.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78991EC31AFE002353F6 /* bounce09.wav */; };
+		D1ED78A31EC31AFE002353F6 /* hardbounce02.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED789A1EC31AFE002353F6 /* hardbounce02.wav */; };
+		D1ED78A41EC31AFE002353F6 /* bounce010.wav in Resources */ = {isa = PBXBuildFile; fileRef = D1ED789B1EC31AFE002353F6 /* bounce010.wav */; };
+		D1ED78A71EC32CB7002353F6 /* cheering.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D1ED78A61EC32CB7002353F6 /* cheering.mp3 */; };
 		DF00F2201E81327B00C88A2F /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F2081E81327B00C88A2F /* SocketAckEmitter.swift */; };
 		DF00F2211E81327B00C88A2F /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F2091E81327B00C88A2F /* SocketAckManager.swift */; };
 		DF00F2221E81327B00C88A2F /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F20A1E81327B00C88A2F /* SocketAnyEvent.swift */; };
@@ -92,6 +105,19 @@
 		D125C4481E8147FC00A63590 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		D19887B21E9E3E9A00E0C1E7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D1E11D361EB9F0030031262C /* ScreenShake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShake.swift; sourceTree = "<group>"; };
+		D1ED788D1EC3197A002353F6 /* bounce01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce01.wav; sourceTree = "<group>"; };
+		D1ED788E1EC3197A002353F6 /* hardbounce01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hardbounce01.wav; sourceTree = "<group>"; };
+		D1ED788F1EC3197A002353F6 /* bounce03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce03.wav; sourceTree = "<group>"; };
+		D1ED78931EC31AFE002353F6 /* boune02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boune02.wav; sourceTree = "<group>"; };
+		D1ED78941EC31AFE002353F6 /* bounce04.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce04.wav; sourceTree = "<group>"; };
+		D1ED78951EC31AFE002353F6 /* bounce05.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce05.wav; sourceTree = "<group>"; };
+		D1ED78961EC31AFE002353F6 /* bounce06.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce06.wav; sourceTree = "<group>"; };
+		D1ED78971EC31AFE002353F6 /* bounce07.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce07.wav; sourceTree = "<group>"; };
+		D1ED78981EC31AFE002353F6 /* bounce08.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce08.wav; sourceTree = "<group>"; };
+		D1ED78991EC31AFE002353F6 /* bounce09.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce09.wav; sourceTree = "<group>"; };
+		D1ED789A1EC31AFE002353F6 /* hardbounce02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hardbounce02.wav; sourceTree = "<group>"; };
+		D1ED789B1EC31AFE002353F6 /* bounce010.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bounce010.wav; sourceTree = "<group>"; };
+		D1ED78A61EC32CB7002353F6 /* cheering.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cheering.mp3; sourceTree = "<group>"; };
 		DF00F2081E81327B00C88A2F /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
 		DF00F2091E81327B00C88A2F /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
 		DF00F20A1E81327B00C88A2F /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
@@ -154,6 +180,7 @@
 				D125C4261E81131F00A63590 /* TableFootballTests */,
 				D125C4311E81131F00A63590 /* TableFootballUITests */,
 				D125C40B1E81131E00A63590 /* Products */,
+				D1ED78A51EC31B89002353F6 /* SoundEffects */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +235,26 @@
 				D125C4341E81131F00A63590 /* Info.plist */,
 			);
 			path = TableFootballUITests;
+			sourceTree = "<group>";
+		};
+		D1ED78A51EC31B89002353F6 /* SoundEffects */ = {
+			isa = PBXGroup;
+			children = (
+				D1ED78A61EC32CB7002353F6 /* cheering.mp3 */,
+				D1ED788D1EC3197A002353F6 /* bounce01.wav */,
+				D1ED788E1EC3197A002353F6 /* hardbounce01.wav */,
+				D1ED788F1EC3197A002353F6 /* bounce03.wav */,
+				D1ED78931EC31AFE002353F6 /* boune02.wav */,
+				D1ED78941EC31AFE002353F6 /* bounce04.wav */,
+				D1ED78951EC31AFE002353F6 /* bounce05.wav */,
+				D1ED78961EC31AFE002353F6 /* bounce06.wav */,
+				D1ED78971EC31AFE002353F6 /* bounce07.wav */,
+				D1ED78981EC31AFE002353F6 /* bounce08.wav */,
+				D1ED78991EC31AFE002353F6 /* bounce09.wav */,
+				D1ED789A1EC31AFE002353F6 /* hardbounce02.wav */,
+				D1ED789B1EC31AFE002353F6 /* bounce010.wav */,
+			);
+			name = SoundEffects;
 			sourceTree = "<group>";
 		};
 		DF00F2071E81327B00C88A2F /* Source */ = {
@@ -356,11 +403,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1ED789C1EC31AFE002353F6 /* boune02.wav in Resources */,
+				D1ED78A71EC32CB7002353F6 /* cheering.mp3 in Resources */,
+				D1ED78A41EC31AFE002353F6 /* bounce010.wav in Resources */,
+				D1ED789F1EC31AFE002353F6 /* bounce06.wav in Resources */,
+				D1ED789D1EC31AFE002353F6 /* bounce04.wav in Resources */,
 				D125C4101E81131E00A63590 /* GameScene.sks in Resources */,
 				D125C4121E81131E00A63590 /* Actions.sks in Resources */,
+				D1ED78A31EC31AFE002353F6 /* hardbounce02.wav in Resources */,
 				D125C4141E81131E00A63590 /* Game.xcassets in Resources */,
 				D125C41B1E81131E00A63590 /* Main.storyboard in Resources */,
 				D125C41D1E81131E00A63590 /* Assets.xcassets in Resources */,
+				D1ED78A01EC31AFE002353F6 /* bounce07.wav in Resources */,
+				D1ED78901EC3197A002353F6 /* bounce01.wav in Resources */,
+				D1ED78921EC3197A002353F6 /* bounce03.wav in Resources */,
+				D1ED78911EC3197A002353F6 /* hardbounce01.wav in Resources */,
+				D1ED78A11EC31AFE002353F6 /* bounce08.wav in Resources */,
+				D1ED789E1EC31AFE002353F6 /* bounce05.wav in Resources */,
+				D1ED78A21EC31AFE002353F6 /* bounce09.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

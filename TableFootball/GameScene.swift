@@ -31,11 +31,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
-    var stickEnabled:[Bool] = [false, true, false, true, false, false, true ,false, true]
-    var stickPositions:[Int] = [0, -340, -243, -146, -49, 49, 146, 243, 340]
-    var stickColor:[String] = ["", "red", "red", "blue", "red", "blue", "red", "blue", "blue"]
-    var userNames:[String] = ["", "", "", "", "", "", "", "", ""]
-    var amountOfFeets:[Int] = [0, 1, 2, 3, 5, 5, 3, 2, 1]
+    var stickEnabled:[Bool] = [true, true, true, true, true, true ,true, true]
+    var stickPositions:[Int] = [-370, -260, -150, -40, 40, 150, 260, 370]
+    var stickColor:[String] = ["red", "red", "blue", "red", "blue", "red", "blue", "blue"]
+    var userNames:[String] = ["", "", "", "", "", "", "", ""]
+    var amountOfFeets:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
 
     
     //Lists of both teams
@@ -51,8 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         goalShake.Init(thisCamera: gameCamera, duration: 30, intensity: 50)
         
-        for i in 0...8{
-            if(i > 0){
+        for i in 0...7{
                 if(stickColor[i] == "red"){
                     //Team red
                     if(Constants.TEAMRED.count > 0){
@@ -63,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if(Constants.TEAMBLUE.count > 0){
                     userNames[i] = Constants.TEAMBLUE[0]
                     }
-            }}
+            }
         }
         
         print(userNames)
@@ -85,16 +84,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //            //teamBlue = socketTeamBlue
 //        }
         
-        for i in 0...8{
+        for i in 0...7{
             //Makes all sticks
                 sticks.append(Stick())
                 if(stickEnabled[i]){
-                if(self.childNode(withName: "stick0" + String(i)) != nil){
-                    sticks[i] = self.childNode(withName: "stick0" + String(i)) as! Stick
+                if(self.childNode(withName: "stick0" + String(i + 1)) != nil){
+                    sticks[i] = self.childNode(withName: "stick0" + String(i + 1)) as! Stick
                     sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i])
                     }}else{
                     //Makes unused sticks invisible
-                    self.childNode(withName: "stick0" + String(i))?.alpha = 0
+                    self.childNode(withName: "stick0" + String(i + 1))?.alpha = 0
             }
         }
     }// End did move
@@ -138,10 +137,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y)
         }
-        
         //Check if there is made a goal
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "goal"){
             theBall.didScored()
+        }
+        
+        if(firstBody.node?.name == "ball" && secondBody.node?.name == "foot"){
+            //play sound
+            theBall.collidesWithFoot()
+            
+        }else if(firstBody.node?.name == "foot" && secondBody.node?.name == "ball"){
+            //play sound
+            theBall.collidesWithFoot()
         }
         
         

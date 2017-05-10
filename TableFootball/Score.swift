@@ -54,6 +54,17 @@ class Score:SKSpriteNode{
         //Red scores
         scoreRed += 1
         scoreRedLBL.text = "Score:  \(scoreRed)"
+        
+        //Set splash screen
+        setText(text: String(scoreRed) + " : " + String(scoreBlue), textF: scoreLBL, textS: scoreLBLShadow)
+        scoreLBL.alpha = 1
+        scoreLBLShadow.alpha = 1
+        
+        setText(text: "GOOOOAAAAAALLL", textF: winLabel, textS: winLabelShadow)
+        winLabel.fontColor = UIColor.red
+        winLabelShadow.alpha = 1
+        winLabel.alpha = 1
+        
         checkWinConditions()
     }
     
@@ -61,6 +72,17 @@ class Score:SKSpriteNode{
         //Blue scores
         scoreBlue += 1
         scoreBlueLBL.text = "Score \(scoreBlue)"
+        
+        //Set splash screen
+        setText(text: String(scoreRed) + " : " + String(scoreBlue), textF: scoreLBL, textS: scoreLBLShadow)
+        scoreLBL.alpha = 1
+        scoreLBLShadow.alpha = 1
+        
+        setText(text: "GOOOOAAAAAALLL", textF: winLabel, textS: winLabelShadow)
+        winLabel.fontColor = UIColor.blue
+        winLabelShadow.alpha = 1
+        winLabel.alpha = 1
+        
         checkWinConditions()
     }
     
@@ -91,9 +113,4 @@ class Score:SKSpriteNode{
         textF.text = text
         textS.text = text
     }
-   /*
-    func setScoreLabel(text: String){
-        scoreLBL.text = text
-        scoreLBLShadow.text = text
-    }*/
 }

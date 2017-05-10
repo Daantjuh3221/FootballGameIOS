@@ -37,8 +37,13 @@ class Foot: SKSpriteNode{
     
     var positionOnStick:CGFloat = 0
     var maxOffsets:CGFloat = 0
-    var playerImages:[String] = ["","","","",""]
     
+    //Animation var
+    var playerImages:[String] = ["","","","",""]
+    var imageCounter:Int = 0
+    
+    //Turn sound
+    var soundHardBounce:[SKAction] = []
     
     func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene, maxOffset: CGFloat){
         
@@ -51,12 +56,11 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody = SKPhysicsBody(rectangleOf: theFoot.frame.size)
         theFoot.physicsBody?.allowsRotation = false
         theFoot.physicsBody?.affectedByGravity = false
-        //theFoot.physicsBody?.isDynamic = true
         theFoot.physicsBody?.mass = 50
         theFoot.physicsBody?.isDynamic = true
         theFoot.name = "foot"
         theFoot.zPosition = 0
-        theFoot.alpha = 0
+        theFoot.alpha = 0.0
         gameScene.addChild(theFoot)
         
         if(colorSprite == "red"){
@@ -71,11 +75,15 @@ class Foot: SKSpriteNode{
             }
         }
         
+        //get the hard bounce
+        for i in 0...1{
+            soundHardBounce.append(SKAction.playSoundFileNamed("hardbounce0" + String(i + 1) + ".wav", waitForCompletion: false))
+        }
+        
         //Draw the head/Player
-        theHead.texture = SKTexture(imageNamed: playerImages[0])
+        drawHead(sprite: playerImages[0], isFliped: true)
         theHead.zPosition = 1
         theHead.position = theFoot.position
-        theHead.size = CGSize(width: theHead.size.width, height: 65)
         gameScene.addChild(theHead)
         
         rest = true
@@ -88,13 +96,19 @@ class Foot: SKSpriteNode{
         startPos = theFoot.position.x
     }
     
+    //Wekrt nog niet
+    func playShotSound(){
+        let randomSound:Int = Int(arc4random_uniform(2))
+        run(soundHardBounce[randomSound])
+    }
+    
     func drawHead(sprite:String, isFliped: Bool){
          theHead.texture = SKTexture(imageNamed: sprite)
         
         if(isFliped){
-            theHead.size = CGSize(width: (theHead.texture?.size().width)!/3, height: 65)
+            theHead.size = CGSize(width: (theHead.texture?.size().width)!/3.5, height: 50)
         }else{
-            theHead.size = CGSize(width: ((theHead.texture?.size().width)!/3) * -1, height: 65)
+            theHead.size = CGSize(width: ((theHead.texture?.size().width)!/3.5) * -1, height: 50)
         }
         
     }
@@ -119,7 +133,7 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.velocity.dx *= CGFloat(0.9)
     }
     
-    var imageCounter:Int = 0
+    //Geen mooide code
     func animatePlayer(relativePosition: CGFloat){
         
         print("rel: \(relativePosition)")
@@ -142,8 +156,6 @@ class Foot: SKSpriteNode{
                 imageCounter = 2
             }else if(relativePosition > 10){
                 imageCounter = 1
-            }else {
-                //Need fix
             }
             
         }
@@ -161,8 +173,6 @@ class Foot: SKSpriteNode{
                 imageCounter = 2
             }else if(relativePosition < -10){
                 imageCounter = 1
-            }else {
-                //Need fix
             }
         }
         if(relativePosition < 10 && relativePosition > -10){
@@ -172,11 +182,12 @@ class Foot: SKSpriteNode{
     }
     
     func addImpulse(length: CGFloat){
+        //Sensitivity is now 80! can be changed in options menu
         theFoot.physicsBody?.applyForce(CGVector(dx:length * 80, dy:0 ))
+        playShotSound()
     }
     
     func update(swipeLength: CGFloat, positionY: CGFloat){
-        let _:CGFloat = swipeLength
         
         theFoot.position.y = positionOnStick + positionY
         theHead.position.y = theFoot.position.y
