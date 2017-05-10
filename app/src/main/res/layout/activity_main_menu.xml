@@ -11,21 +11,61 @@
         android:layout_height="wrap_content"
         android:onClick="playLocal"
         android:text="Play Local Game"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginTop="24dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
         android:enabled="false"
         android:onClick="playMultiplayer"
         android:text="Play Multiplayer"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/playLocalButton"
+        android:layout_marginTop="41dp" />
+
+    <TextView
+        android:id="@+id/lblJoinedWith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lblJoinCode"
+        android:layout_marginTop="14dp"
+        android:text="You are joined with:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/lblJoinCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:text="AppleTVCode"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:textColor="@android:color/background_light"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/lblJoinedStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not defined"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:textColor="@android:color/background_light"
+        android:layout_below="@+id/lblJoinCode"
+        android:layout_alignStart="@+id/lblJoinCode" />
+
+    <ImageView
+        android:id="@+id/imgRefreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_refresh_black_24dp"
+        android:layout_alignTop="@+id/playLocalButton"
+        android:layout_alignStart="@+id/lblJoinedStatus" />
 
 
 </RelativeLayout>

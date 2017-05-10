@@ -56,7 +56,7 @@
         <activity
             android:name=".waiting_screen"
             android:label="@string/title_activity_waiting_screen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
