@@ -29,6 +29,13 @@ class Ball: SKSpriteNode {
     var soundSoftBounce:[SKAction] = []
     var cheerSound:[SKAction] = []
     
+    var firstTouches:String = ""
+    var secondTouches:String = ""
+    
+    var lastTouches:String = ""
+    
+    var redFalseScored:Bool = false
+    
     func Init(gamescene:GameScene, scoreLimit: Int){
         //Initialize the ball here
         let imageTexture = SKTexture(imageNamed: "ballSprite")
@@ -64,7 +71,37 @@ class Ball: SKSpriteNode {
         run(cheerSound[0])
     }
     
-    func collidesWithWallVertical(wallPosition: CGFloat){
+    func setTouches(currentTouch: String){
+        /*
+         this method checks which two objects have been touches the last
+         In this way you can check if a goal is allowed or not
+         */
+        if(currentTouch != firstTouches){
+            secondTouches = firstTouches
+            firstTouches = currentTouch
+        }
+        
+        print("Touch First: " + firstTouches)
+        print("Touch Second: " + secondTouches)
+    }
+    
+    
+    func isGoalAllowed() -> Bool{
+        /*
+         Checks if a goal is allowed or not. returns the outcome !
+         AKA game rules
+         */
+        if(firstTouches == "WALL"){
+            return false
+        }else if(firstTouches == "FOOT"){
+            return true
+        } else {
+            return true
+        }
+    }
+
+    
+    func collidesWithWallVertical(wallPosition: CGFloat, currentTouch:String){
         
         physicsBody!.velocity.dx = 0
         var tempForce = 0
@@ -75,10 +112,12 @@ class Ball: SKSpriteNode {
             tempForce = 20
         }
         physicsBody!.applyImpulse(CGVector(dx:tempForce, dy: 0))
+        setTouches(currentTouch: currentTouch)
         playerBounceSound()
+    
     }
     
-    func collidesWithWallHorizintal(wallPosition: CGFloat){
+    func collidesWithWallHorizintal(wallPosition: CGFloat, currentTouch:String){
         
         physicsBody!.velocity.dy = 0
         var tempForce = 0
@@ -90,15 +129,15 @@ class Ball: SKSpriteNode {
         }
         
         physicsBody!.applyImpulse(CGVector(dx:0, dy: tempForce))
+        setTouches(currentTouch: currentTouch)
         playerBounceSound()
     }
     
-    func collidesWithFoot(){
+    func collidesWithFoot(currentTouch: String){
         //Play sound
+        setTouches(currentTouch: currentTouch)
         playerBounceSound()
     }
-    
-    
     
     func playerBounceSound(){
         let randomSound:Int = Int(arc4random_uniform(10))
@@ -124,6 +163,10 @@ class Ball: SKSpriteNode {
         //Checks if is scored, adds score and resets the ball
         if(isScored){
             isScored = false
+            if(isGoalAllowed()){
+                /*
+                 This will be done when a goal is allowed
+                 */
             if(position.x < 0){
                 //Left scored (Blue)
                 score.blueScored()
@@ -134,8 +177,22 @@ class Ball: SKSpriteNode {
             }
             checkIfWon()
             
-            //Get ball out of screen and set timer to 80
-            position = CGPoint(x:-12000, y:-12000)
+            }else{
+                //this will be done when a goal is disallowed
+                if(position.x < 0){
+                    //Blue scored false
+                    score.blueFalseScore()
+                    redFalseScored = false
+                    
+                }else{
+                    //red score false
+                    score.redFalseScore()
+                    redFalseScored = true
+                }
+            }
+            
+            //Set the ball to its offscreen position and set the pause timer
+            position = Constants.STARTPOINT_OFFSCREEN
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
             goalCounter = 80
@@ -148,10 +205,24 @@ class Ball: SKSpriteNode {
         }
 
         if(!isPlaying && goalCounter <= 1){
+            if(isGoalAllowed()){
             isPlaying = true
-            position = CGPoint(x:0, y :260)
-            physicsBody?.velocity.dx = 0
+            position = Constants.STARTPOINT_CENTRE
+            
+                //Gives a random velocity to the ball
+            let randomVel:CGFloat = CGFloat(arc4random_uniform(100))
+            
+            physicsBody?.velocity.dx = randomVel
             physicsBody?.velocity.dy = -100
+            }else{
+                isPlaying = true
+                if(redFalseScored){
+                    position = Constants.STARTPOINT_TEAMBLUE
+                }else{
+                    position = Constants.STARTPOINT_TEAMRED
+                }
+                
+            }
         }
         //Check if splash screen needs to fade & fade if needed
         if(!score.hasWon){
@@ -164,7 +235,7 @@ class Ball: SKSpriteNode {
                 score.winLabelShadow.alpha -= 0.01
             }
         }else{
-            position = CGPoint(x:-12000, y:-12000)
+            position = Constants.STARTPOINT_OFFSCREEN
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
         }
@@ -180,6 +251,7 @@ class Ball: SKSpriteNode {
                 self.zRotation = rotationSpeed
                 
             }}
-    }
+    
 }
 
+}

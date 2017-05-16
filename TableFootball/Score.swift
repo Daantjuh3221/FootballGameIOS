@@ -30,6 +30,7 @@ class Score:SKSpriteNode{
     var hasWon:Bool = false
     
     func Init(gamescene: GameScene, _scoreLimit: Int){
+        //Initial scores
         scoreRed = 0
         scoreBlue = 0
         
@@ -84,6 +85,30 @@ class Score:SKSpriteNode{
         winLabel.alpha = 1
         
         checkWinConditions()
+    }
+    
+    func redFalseScore(){
+        //Set splash screen
+        setText(text: "BLUE GETS THE BALL", textF: scoreLBL, textS: scoreLBLShadow)
+        scoreLBL.alpha = 1
+        scoreLBLShadow.alpha = 1
+        
+        setText(text: "No GOAL!", textF: winLabel, textS: winLabelShadow)
+        winLabel.fontColor = UIColor.red
+        winLabelShadow.alpha = 1
+        winLabel.alpha = 1
+    }
+    
+    func blueFalseScore(){
+        //Set splash screen
+        setText(text: "RED GETS THE BALL", textF: scoreLBL, textS: scoreLBLShadow)
+        scoreLBL.alpha = 1
+        scoreLBLShadow.alpha = 1
+        
+        setText(text: "No GOAL!", textF: winLabel, textS: winLabelShadow)
+        winLabel.fontColor = UIColor.blue
+        winLabelShadow.alpha = 1
+        winLabel.alpha = 1
     }
     
     func checkWinConditions(){

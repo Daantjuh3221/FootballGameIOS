@@ -21,11 +21,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var theBall:Ball = Ball()
     
     //GameRules
-    var scoreLimit:Int = 5;
+    var scoreLimit:Int = 10;
     
     let goalShake:ScreenShake = ScreenShake()
     
     let gameCamera:SKCameraNode = SKCameraNode()
+    
     
     
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
@@ -51,6 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         goalShake.Init(thisCamera: gameCamera, duration: 30, intensity: 50)
         
+        //<---Team divide and stick devide! ---->
         for i in 0...7{
                 if(stickColor[i] == "red"){
                     //Team red
@@ -66,6 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         print(userNames)
+        
         
         physicsWorld.contactDelegate = self
         
@@ -86,6 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         for i in 0...7{
             //Makes all sticks
+            //Using the arrays made above
                 sticks.append(Stick())
                 if(stickEnabled[i]){
                 if(self.childNode(withName: "stick0" + String(i + 1)) != nil){
@@ -130,12 +134,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         //Apply tthe collision with the walls
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "wall"){
-            theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x)
+            theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x, currentTouch: "WALL")
         } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
            // print("wallBEFOREBEFORE \(firstBody.node?.physicsBody?.velocity.dy)")
             
-            theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y)
+            theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y, currentTouch: "WALL")
         }
         //Check if there is made a goal
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "goal"){
@@ -144,11 +148,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "foot"){
             //play sound
-            theBall.collidesWithFoot()
+            theBall.collidesWithFoot(currentTouch: "FOOT")
+            secondBody.node?.alpha = 0
             
         }else if(firstBody.node?.name == "foot" && secondBody.node?.name == "ball"){
             //play sound
-            theBall.collidesWithFoot()
+            theBall.collidesWithFoot(currentTouch: "FOOT")
         }
         
         
@@ -157,7 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
-        if(theBall.isScored){
+        if(theBall.isScored && theBall.isGoalAllowed()){
             goalShake.StartShake()
             print("Shake")
         }
@@ -165,9 +170,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             i.update()
         }
         theBall.update()
-        
-        
-        
         goalShake.Shake()
     }//End Update
 }

@@ -50,17 +50,17 @@ class Foot: SKSpriteNode{
         //Create Cube as a Foot
         // let theFoot = SKSpriteNode(imageNamed: "red")
         theFoot.texture = SKTexture(imageNamed: colorSprite)
-        theFoot.size = CGSize(width: 25, height: 50)
+        theFoot.size = size
         theFoot.position.x = postionX
         theFoot.position.y = positionY
         theFoot.physicsBody = SKPhysicsBody(rectangleOf: theFoot.frame.size)
         theFoot.physicsBody?.allowsRotation = false
         theFoot.physicsBody?.affectedByGravity = false
-        theFoot.physicsBody?.mass = 50
+        theFoot.physicsBody?.mass = Constants.FOOT_MASS
         theFoot.physicsBody?.isDynamic = true
         theFoot.name = "foot"
         theFoot.zPosition = 0
-        theFoot.alpha = 0.0
+        theFoot.alpha = 1.0
         gameScene.addChild(theFoot)
         
         if(colorSprite == "red"){
@@ -75,7 +75,7 @@ class Foot: SKSpriteNode{
             }
         }
         
-        //get the hard bounce
+        //get the hard bounce sound
         for i in 0...1{
             soundHardBounce.append(SKAction.playSoundFileNamed("hardbounce0" + String(i + 1) + ".wav", waitForCompletion: false))
         }
@@ -98,6 +98,7 @@ class Foot: SKSpriteNode{
     
     //Wekrt nog niet
     func playShotSound(){
+        //This method plays a random sound whenever it touches the ball
         let randomSound:Int = Int(arc4random_uniform(2))
         run(soundHardBounce[randomSound])
     }
@@ -106,15 +107,16 @@ class Foot: SKSpriteNode{
          theHead.texture = SKTexture(imageNamed: sprite)
         
         if(isFliped){
-            theHead.size = CGSize(width: (theHead.texture?.size().width)!/3.5, height: 50)
+            theHead.size = CGSize(width: (theHead.texture?.size().width)!/3.5, height: Constants.FOOT_HEAD_HEIGHT)
         }else{
-            theHead.size = CGSize(width: ((theHead.texture?.size().width)!/3.5) * -1, height: 50)
+            theHead.size = CGSize(width: ((theHead.texture?.size().width)!/3.5) * -1, height: Constants.FOOT_HEAD_HEIGHT)
         }
         
     }
     
     func clampFoots(){
         //clamp foot
+        //Makes sure the foots stays within their range
         if(theFoot.position.x > startPos + maxOffsets){
             theFoot.physicsBody?.velocity.dx = 0
             theFoot.position.x = startPos + maxOffsets - 1
@@ -127,20 +129,21 @@ class Foot: SKSpriteNode{
     }
     
     func centreFoots(){
-        //Return to centre
-            //theFoot.physicsBody?.applyImpulse(CGVector(dx:(startPos - theFoot.position.x)*100 , dy:0))
+        //Return foots to centre
         theFoot.physicsBody?.velocity.dx += (startPos - theFoot.position.x) * 1
         theFoot.physicsBody?.velocity.dx *= CGFloat(0.9)
     }
     
-    //Geen mooide code
+    //<--- Geen mooide code --->!!!!!!!!!!!!!!!!
     func animatePlayer(relativePosition: CGFloat){
-        
+        /*
+ 
+         This method makes the animatiopn of the player
+
         print("rel: \(relativePosition)")
         print("img: \(imageCounter)")
+ */
         var flipped:Bool = true
-        //-55 & plus 55
-        
         
         if(relativePosition > 0){
             
@@ -182,8 +185,8 @@ class Foot: SKSpriteNode{
     }
     
     func addImpulse(length: CGFloat){
-        //Sensitivity is now 80! can be changed in options menu
-        theFoot.physicsBody?.applyForce(CGVector(dx:length * 80, dy:0 ))
+        //Makes the swipe possible, so the player can shoot the ball
+        theFoot.physicsBody?.applyForce(CGVector(dx:length * Constants.PLAYER_SENSITIVITY, dy:0 ))
         playShotSound()
     }
     
