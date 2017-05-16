@@ -171,6 +171,7 @@ public class localGameSettings extends AppCompatActivity {
         mSocket.emit("chooseSideRed");
     }
 
+
     public void joinTeamBlue (View v) {
         mBtnRed.setEnabled(true);
         mBtnMidden.setEnabled(true);
