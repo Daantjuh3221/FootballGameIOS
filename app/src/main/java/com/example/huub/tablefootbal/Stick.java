@@ -26,6 +26,8 @@ public class  Stick extends Activity implements GameObject {
     private int direction;
     private int stickSensitivity;
 
+    private Float swipeVelocity = 0.0F;
+
     public Stick (Rect cube, int color, Bitmap[] stick, int deviceWidth, int deviceHeight) {
 
         this.stick = stick;
@@ -44,23 +46,29 @@ public class  Stick extends Activity implements GameObject {
 
     }
 
-    public void update(Float x, Float playerVelocity) {
+    public void update(Float x, Float swipeVelocity) {
 
-        animationLimit = (int) (stickSensitivity / playerVelocity);
+        if (swipeVelocity == getSwipeVelocity()) {
+            swipeVelocity /= 10;
+        }
+
+        System.out.println(swipeVelocity);
+
+        animationLimit = (int) (stickSensitivity / swipeVelocity);
         if(animationLimit < 0){
             animationLimit = -animationLimit;
         }
-        if(playerVelocity == 0){
+        if(swipeVelocity == 0){
             animationLimit = stickSensitivity;
         }
 
-        if (playerVelocity > 10) {
+        if (swipeVelocity > 10) {
             direction = 1;
         }
-        if (playerVelocity < -10) {
+        if (swipeVelocity < -10) {
             direction = -1;
         }
-        if (playerVelocity < 10 && playerVelocity > -10) {
+        if (swipeVelocity < 10 && swipeVelocity > -10) {
             direction = 0;
         }
         //System.out.println(playerVelocity);
@@ -76,6 +84,16 @@ public class  Stick extends Activity implements GameObject {
             }
             aanimationCounter = 0;
         }
+
+        setSwipeVelocity(swipeVelocity);
+    }
+
+    public void setSwipeVelocity(Float swipeVelocity) {
+        this.swipeVelocity = swipeVelocity;
+    }
+
+    public float getSwipeVelocity() {
+        return this.swipeVelocity;
     }
 
     @Override
