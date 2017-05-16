@@ -223,6 +223,8 @@ public class localGameSettings extends AppCompatActivity {
         };
         Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
         System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
+        Constants.TEAMBLUE = mPlayersBlue;
+        Constants.TEAMRED = mPlayersRed;
         mSocket.emit("startGame");
         startActivity(i);
         finish();
