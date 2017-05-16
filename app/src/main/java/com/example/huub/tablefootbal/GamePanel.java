@@ -13,12 +13,15 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -27,6 +30,7 @@ import io.socket.emitter.Emitter;
 import android.support.v4.view.VelocityTrackerCompat;
 import android.view.VelocityTracker;
 
+import static android.content.Context.VIBRATOR_SERVICE;
 import static com.example.huub.tablefootbal.MainThread.canvas;
 
 
@@ -70,6 +74,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private float startVelocity;
     private float swipeVelocity;
 
+    private Vibrator buzz;
+
 
     public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
         super(context);
@@ -95,6 +101,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         //Init player
         player = new Player(new Rect(200,200,400,400), Color.TRANSPARENT, new PointF(800,1600/2));
         playerPoint = new PointF(600,150);
+
+
     }
 
     private void getSticks() {
@@ -102,6 +110,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         sticks[1] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick02);
         sticks[2] = BitmapFactory.decodeResource(getResources(), R.drawable.newstick03);
     }
+
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy){
@@ -144,15 +154,23 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getActionMasked();
+        // get pointer index from the event object
+        int pointerIndex = event.getActionIndex();
+
+        // get pointer ID
+        int pointerId = event.getPointerId(pointerIndex);
+
+        buzz = (Vibrator)this.getContext().getSystemService(VIBRATOR_SERVICE);
 
         switch(action) {
             case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN:
                 if(mVelocityTracker == null) {
 
                     mVelocityTracker = VelocityTracker.obtain();
 
                     mVelocityTracker.computeCurrentVelocity(1000);
-                    startVelocity = mVelocityTracker.getXVelocity();
+                    startVelocity = mVelocityTracker.getXVelocity(pointerIndex);
                     System.out.println("StartSnelheid " + startVelocity);
 
                 }
@@ -164,20 +182,29 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
                 mVelocityTracker.addMovement(event);
                 break;
             case MotionEvent.ACTION_MOVE:
-                playerPoint.set((int)event.getX() - 400,(int)event.getY());
-                mVelocityTracker.addMovement(event);
-                maxXVelocity = 0;
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
+                    if(i == 0){
+                        playerPoint.set((int)event.getX(i),(int)event.getY(i));
+                    }
+                    if(i == 1){
+                        mVelocityTracker.addMovement(event);
+                        maxXVelocity = 0;
 
-                mVelocityTracker.computeCurrentVelocity(1000);
+                        mVelocityTracker.computeCurrentVelocity(1000);
 
-                maxXVelocity = mVelocityTracker.getYVelocity();
-
+                        maxXVelocity = mVelocityTracker.getYVelocity(i);
+                    }
+                }
                 break;
             case MotionEvent.ACTION_UP:
-                //swipedata
-                swipeVelocity = maxXVelocity - startVelocity;
-                System.out.println("Swipe: " + swipeVelocity);
-                mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
+            case MotionEvent.ACTION_POINTER_UP:
+                if(pointerIndex == 1){
+                    swipeVelocity = maxXVelocity - startVelocity;
+                    System.out.println("Swipe: " + swipeVelocity);
+                    mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
+                    buzz.vibrate(50);
+                }
+                break;
             case MotionEvent.ACTION_CANCEL:
                 // Return a VelocityTracker object back to be re-used by others.
                 mVelocityTracker.recycle();
@@ -250,10 +277,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 //        }
 
 
-        //System.out.println(getPos());
-        //System.out.println(inRange());
+        System.out.println(getPos());
+        System.out.println(inRange());
         player.update(playerPoint, yRotation);
-        stick.update(playerPoint.x - 100, swipeVelocity/10);
+        stick.update(playerPoint.x - 100, player.getVelocity());
 
         frameID+=1;
         //update table
@@ -263,7 +290,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     @Override
     public void draw(Canvas canvas){
         super.draw(canvas);
-        canvas.drawColor(Color.WHITE);
+        if (Constants.TEAMRED.contains(Constants.USERNAME)) {
+            canvas.drawColor(Color.RED);
+        } else {
+            canvas.drawColor(Color.BLUE);
+        }
         player.draw(canvas);
         stick.draw(canvas);
 
