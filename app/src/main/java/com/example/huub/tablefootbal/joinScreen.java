@@ -65,6 +65,7 @@ public class joinScreen extends AppCompatActivity {
                 if (!mExists) {
                     if (userName != ""){
                         SharedPreferences.Editor editor = sharedPrefs.edit();
+                        Constants.USERNAME = userName;
                         editor.putString("username", userName);
                         editor.commit();
                     } else{
@@ -90,11 +91,17 @@ public class joinScreen extends AppCompatActivity {
 
     public void joinGame(View v) {
         userName = txtUserName.getText().toString();
-        Constants.USERNAME = userName;
-        if (userName.equals("")){
-            mSocket.emit("developUserConnect", Constants.USERNAME, Constants.DEVICE);
+        if (userName.equals(""))
+        {
+            Toast.makeText(joinScreen.this, "Fill in a name", Toast.LENGTH_LONG).show();
         } else{
-            mSocket.emit("newUserConnect", Constants.USERNAME, Constants.DEVICE);
+            Constants.USERNAME = userName;
+                if (userName.equals("")){
+                    mSocket.emit("developUserConnect", Constants.USERNAME, Constants.DEVICE);
+                } else{
+                    mSocket.emit("newUserConnect", Constants.USERNAME, Constants.DEVICE);
+                }
         }
+
     }
 }

@@ -85,12 +85,16 @@ public class mainMenu extends AppCompatActivity {
     private Emitter.Listener onAppleTVDisconnect = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
+            System.out.println("JOOEEHOEEE 3");
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     mJoinStatus.setText(Constants.DISCONNECTEDTEXT);
                     mJoinStatus.setTextColor(Color.RED);
                     Constants.isConnected = false;
+                    Intent i = new Intent(getApplicationContext(), mainMenu.class);
+                    startActivity(i);
+                    finish();
                 }
             });
         }
