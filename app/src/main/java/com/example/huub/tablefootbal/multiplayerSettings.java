@@ -15,6 +15,8 @@ import java.util.List;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
+import static com.example.huub.tablefootbal.R.id.playLocalGame;
+
 public class multiplayerSettings extends AppCompatActivity {
 
     private ListView mListViewBlue;
@@ -24,6 +26,7 @@ public class multiplayerSettings extends AppCompatActivity {
     private Button mBtnBlue;
     private Button mBtnRed;
     private Button mBtnMidden;
+    //private Button mBtnPlay;
 
     private ArrayAdapter mAdapterBlue;
     private ArrayAdapter mAdapterRed;
@@ -63,6 +66,7 @@ public class multiplayerSettings extends AppCompatActivity {
         mBtnMidden = (Button) findViewById(R.id.joinMultiplayerTeamMidden);
         mBtnBlue = (Button) findViewById(R.id.joinMultiplayerTeamBlue);
         mBtnRed = (Button) findViewById(R.id.joinMultiplayerTeamRed);
+        //mBtnPlay = (Button) findViewById(R.id.playLocalGame);
 
         updateUI();
 

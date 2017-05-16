@@ -30,11 +30,14 @@ public class mainMenu extends AppCompatActivity {
     private ImageView mRefreshButton;
     private Button mPlayLocal;
 
+    private static boolean isConnected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        mPlayLocal = (Button) findViewById(R.id.playLocalButton);
         mJoinCode = (TextView)findViewById(R.id.lblJoinCode);
         mJoinStatus = (TextView)findViewById(R.id.lblJoinedStatus);
         mRefreshButton = (ImageView) findViewById(R.id.imgRefreshButton);
@@ -45,10 +48,16 @@ public class mainMenu extends AppCompatActivity {
             System.out.println("OK: We zijn bij isconnected check");
             mJoinStatus.setTextColor(Color.GREEN);
             mJoinStatus.setText(Constants.JOINEDTEXT);
+            mPlayLocal.setEnabled(Constants.isConnected);
+            setIsConnected(true);
         } else{
             mJoinStatus.setTextColor(Color.RED);
             mJoinStatus.setText(Constants.DISCONNECTEDTEXT);
+            mPlayLocal.setEnabled(Constants.isConnected);
+            setIsConnected(false);
+
         }
+
 
 
         SocketConnection app = (SocketConnection) getApplication();
@@ -79,6 +88,14 @@ public class mainMenu extends AppCompatActivity {
     public void playMultiplayer (View v) {
         Intent i = new Intent(getApplicationContext(), multiplayerSettings.class);
         startActivity(i);
+    }
+
+    public void setIsConnected(boolean isConnected) {
+        this.isConnected = isConnected;
+    }
+
+    public static boolean getIsConnected() {
+        return isConnected;
     }
 
 

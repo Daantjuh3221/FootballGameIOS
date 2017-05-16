@@ -145,15 +145,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getActionMasked();
+        // get pointer index from the event object
+        int pointerIndex = event.getActionIndex();
+
+        // get pointer ID
+        int pointerId = event.getPointerId(pointerIndex);
+
 
         switch(action) {
             case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN:
                 if(mVelocityTracker == null) {
 
                     mVelocityTracker = VelocityTracker.obtain();
 
                     mVelocityTracker.computeCurrentVelocity(1000);
-                    startVelocity = mVelocityTracker.getXVelocity();
+                    startVelocity = mVelocityTracker.getXVelocity(pointerIndex);
                     System.out.println("StartSnelheid " + startVelocity);
 
                 }
@@ -165,20 +172,28 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
                 mVelocityTracker.addMovement(event);
                 break;
             case MotionEvent.ACTION_MOVE:
-                playerPoint.set((int)event.getX() - 400,(int)event.getY());
-                mVelocityTracker.addMovement(event);
-                maxXVelocity = 0;
+                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
+                    if(i == 0){
+                        playerPoint.set((int)event.getX(i),(int)event.getY(i));
+                    }
+                    if(i == 1){
+                        mVelocityTracker.addMovement(event);
+                        maxXVelocity = 0;
 
-                mVelocityTracker.computeCurrentVelocity(1000);
+                        mVelocityTracker.computeCurrentVelocity(1000);
 
-                maxXVelocity = mVelocityTracker.getYVelocity();
-
+                        maxXVelocity = mVelocityTracker.getYVelocity(i);
+                    }
+                }
                 break;
             case MotionEvent.ACTION_UP:
-                //swipedata
-                swipeVelocity = maxXVelocity - startVelocity;
-                System.out.println("Swipe: " + swipeVelocity);
-                mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
+            case MotionEvent.ACTION_POINTER_UP:
+                if(pointerIndex == 1){
+                    swipeVelocity = maxXVelocity - startVelocity;
+                    System.out.println("Swipe: " + swipeVelocity);
+                    mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
+                }
+                break;
             case MotionEvent.ACTION_CANCEL:
                 // Return a VelocityTracker object back to be re-used by others.
                 mVelocityTracker.recycle();
@@ -251,10 +266,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 //        }
 
 
-        //System.out.println(getPos());
-        //System.out.println(inRange());
+        System.out.println(getPos());
+        System.out.println(inRange());
         player.update(playerPoint, yRotation);
-        stick.update(playerPoint.x - 100, swipeVelocity/10);
+        stick.update(playerPoint.x - 100, player.getVelocity());
 
         frameID+=1;
         //update table

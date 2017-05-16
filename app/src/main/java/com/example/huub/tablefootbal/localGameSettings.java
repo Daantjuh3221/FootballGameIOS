@@ -24,6 +24,9 @@ public class localGameSettings extends AppCompatActivity {
     private Button mBtnBlue;
     private Button mBtnRed;
     private Button mBtnMidden;
+    private Button mBtnPlay;
+
+    private static boolean isConnected;
 
     private ArrayAdapter mAdapterBlue;
     private ArrayAdapter mAdapterRed;
@@ -63,6 +66,7 @@ public class localGameSettings extends AppCompatActivity {
         mBtnMidden = (Button) findViewById(R.id.joinTeamMidden);
         mBtnBlue = (Button) findViewById(R.id.joinTeamBlue);
         mBtnRed = (Button) findViewById(R.id.joinTeamRed);
+        mBtnPlay = (Button) findViewById(R.id.playLocalGame);
 
         updateUI();
 
@@ -130,6 +134,9 @@ public class localGameSettings extends AppCompatActivity {
 
 
     private void updateUI() {
+
+        mBtnPlay.setEnabled(mainMenu.getIsConnected());
+
         // If the list adapter is null, a new one will be instantiated and set on our list view.
         if (mAdapterBlue == null) {
             mAdapterBlue = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, mPlayersBlue);
