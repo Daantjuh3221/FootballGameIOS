@@ -25,14 +25,16 @@ class Stick: SKSpriteNode{
     
     var swipeLength:CGFloat = 0
     
-    func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String, userName:String ){
+    var footName:String = ""
+    
+    func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String, userName:String, footName:String){
         //Begins in centre of screen,
         position.y = 0
         position.x = positionX
         
         self.userName = userName
         
-        
+        self.footName = footName
         //Make amount of feets
         amount = amountOfFeets - 1
         
@@ -73,28 +75,28 @@ class Stick: SKSpriteNode{
         switch amount{
         case 0: // 1 foot
             for i in 0...amount{
-                theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 266)
+                theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 266, footName: footName)
             }
             break;
         case 1: //2 foots
             for i in 0...amount{
                 if(i == 0){
-                    theFoots[i].Init(postionX: position.x, positionY: 92, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 92)
+                    theFoots[i].Init(postionX: position.x, positionY: 92, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 92, footName: footName)
                 } else {
                     theFoots.append(Foot())
-                    theFoots[i].Init(postionX: position.x, positionY: -92, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 92)
+                    theFoots[i].Init(postionX: position.x, positionY: -92, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene, maxOffset: 92, footName: footName)
                 }
             }
         case 2: //3 foots
             for i in 0...amount{
                 if(i == 0){
-                    theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108)
+                    theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108, footName: footName)
                 } else{
                     theFoots.append(Foot())
                     if(i == 1){
-                        theFoots[i].Init(postionX: position.x, positionY: -180, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108)
+                        theFoots[i].Init(postionX: position.x, positionY: -180, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108, footName: footName)
                     }else{
-                        theFoots[i].Init(postionX: position.x, positionY: 180, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108)
+                        theFoots[i].Init(postionX: position.x, positionY: 180, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 108, footName: footName)
                     }
                 }
             }
@@ -102,23 +104,23 @@ class Stick: SKSpriteNode{
         case 4: // 5 foots
             for i in 0...amount{
                 if(i == 0){
-                    theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                    theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68, footName: footName)
                 } else{
                     theFoots.append(Foot())
                     if(i == 1){
-                        theFoots[i].Init(postionX: position.x, positionY: -220, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                        theFoots[i].Init(postionX: position.x, positionY: -220, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68, footName: footName)
                     }else if (i == 2){
-                        theFoots[i].Init(postionX: position.x, positionY: 220, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                        theFoots[i].Init(postionX: position.x, positionY: 220, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68, footName: footName)
                     }else if(i == 3){
-                        theFoots[i].Init(postionX: position.x, positionY: 110, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                        theFoots[i].Init(postionX: position.x, positionY: 110, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68, footName: footName)
                     }else{
-                        theFoots[i].Init(postionX: position.x, positionY: -110, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68)
+                        theFoots[i].Init(postionX: position.x, positionY: -110, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 68, footName: footName)
                     }
                 }}
             break;
         default: // default 1 foot
             for i in 0...amount{
-                theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 266)
+                theFoots[i].Init(postionX: position.x, positionY: 0, size: Constants.FOOT_SIZE, name: "foot", colorSprite: sprite, gameScene: gameScene,  maxOffset: 266, footName: footName)
             }
             break;
         }

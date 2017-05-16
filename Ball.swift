@@ -36,6 +36,8 @@ class Ball: SKSpriteNode {
     
     var redFalseScored:Bool = false
     
+    var redInPosession:Bool = false
+    
     func Init(gamescene:GameScene, scoreLimit: Int){
         //Initialize the ball here
         let imageTexture = SKTexture(imageNamed: "ballSprite")
@@ -88,18 +90,48 @@ class Ball: SKSpriteNode {
     
     func isGoalAllowed() -> Bool{
         /*
-         Checks if a goal is allowed or not. returns the outcome !
+         Checks if a goal is allowed or not. returns the outcome (True || False)!
          AKA game rules
-         */
-        if(firstTouches == "WALL"){
+         
+         - foot1 = red keeper
+         - foot2 = red defence
+         - foot3 = blue attack
+         - foot4 = red midfield
+         - foot5 = blue midfield
+         - foot6 = red attack
+         - foot7 = blue defence
+         - foot8 = red keeper
+         
+         - wall = wall... duh
+ */
+        if(firstTouches == "wall"){
+            //Cant score with the wall
             return false
-        }else if(firstTouches == "FOOT"){
-            return true
-        } else {
+        }
+        
+        if(firstTouches.contains("foot")){
+            //What happens when its a foot
+            if(firstTouches.contains("4") || firstTouches.contains("5")){
+                //Midfield cant score
+                return false
+            }else {
+                //Default return
+                return true
+            }
+        }else {
+            //default return
             return true
         }
     }
 
+    func checkPosession() -> String{
+        //This method checks which team has posession and returns a String with the team name
+        var teamPos:String = ""
+        let lastTouch:[String] = [firstTouches, secondTouches]
+        
+        
+        return teamPos
+    }
     
     func collidesWithWallVertical(wallPosition: CGFloat, currentTouch:String){
         
@@ -199,11 +231,12 @@ class Ball: SKSpriteNode {
             isPlaying = false
         }
         
-        
+        //Goal counter drain
         if(goalCounter >= 0){
             goalCounter -= 1
         }
 
+        //If counter has ended
         if(!isPlaying && goalCounter <= 1){
             if(isGoalAllowed()){
             isPlaying = true
@@ -211,8 +244,14 @@ class Ball: SKSpriteNode {
             
                 //Gives a random velocity to the ball
             let randomVel:CGFloat = CGFloat(arc4random_uniform(100))
-            
-            physicsBody?.velocity.dx = randomVel
+                let random:CGFloat = CGFloat(arc4random_uniform(100))
+                var x:CGFloat?
+                if(random > 50){
+                    x = 1
+                }else {
+                    x = -1
+                }
+            physicsBody?.velocity.dx = randomVel * x!
             physicsBody?.velocity.dy = -100
             }else{
                 isPlaying = true

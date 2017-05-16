@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
     var stickEnabled:[Bool] = [true, true, true, true, true, true ,true, true]
-    var stickPositions:[Int] = [-370, -260, -150, -40, 40, 150, 260, 370]
+    var stickPositions:[Int] = [-390, -280, -170, -60, 60, 170, 280, 390]
     var stickColor:[String] = ["red", "red", "blue", "red", "blue", "red", "blue", "blue"]
     var userNames:[String] = ["", "", "", "", "", "", "", ""]
     var amountOfFeets:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
@@ -94,7 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if(stickEnabled[i]){
                 if(self.childNode(withName: "stick0" + String(i + 1)) != nil){
                     sticks[i] = self.childNode(withName: "stick0" + String(i + 1)) as! Stick
-                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i])
+                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i], footName: "foot" + String(i + 1))
                     }}else{
                     //Makes unused sticks invisible
                     self.childNode(withName: "stick0" + String(i + 1))?.alpha = 0
@@ -134,25 +134,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
         //Apply tthe collision with the walls
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "wall"){
-            theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x, currentTouch: "WALL")
+            theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x, currentTouch: "wall")
         } else
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
            // print("wallBEFOREBEFORE \(firstBody.node?.physicsBody?.velocity.dy)")
             
-            theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y, currentTouch: "WALL")
+            theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y, currentTouch: "wall")
         }
         //Check if there is made a goal
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "goal"){
             theBall.didScored()
         }
         
-        if(firstBody.node?.name == "ball" && secondBody.node?.name == "foot"){
-            //play sound
-            theBall.collidesWithFoot(currentTouch: "FOOT")
+        if((firstBody.node?.name?.contains("foot"))! && secondBody.node?.name == "ball"){
+            //fixes the collision between foot and ball
+            theBall.collidesWithFoot(currentTouch: (firstBody.node?.name)!)
             
-        }else if(firstBody.node?.name == "foot" && secondBody.node?.name == "ball"){
-            //play sound
-            theBall.collidesWithFoot(currentTouch: "FOOT")
+        }else if(firstBody.node?.name == "ball" && (secondBody.node?.name?.contains("foot"))!){
+            //fixes the collision between foot and ball
+            theBall.collidesWithFoot(currentTouch: (secondBody.node?.name)!)
         }
         
         

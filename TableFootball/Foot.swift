@@ -16,6 +16,7 @@ class Foot: SKSpriteNode{
     var maxOffset:CGFloat = 0
     var minOffset:CGFloat = 0
     
+    var Team = "TeamBlue"
     
     var counter = 60
     
@@ -45,7 +46,7 @@ class Foot: SKSpriteNode{
     //Turn sound
     var soundHardBounce:[SKAction] = []
     
-    func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene, maxOffset: CGFloat){
+    func Init(postionX: CGFloat, positionY: CGFloat, size: CGSize, name:String, colorSprite:String, gameScene: GameScene, maxOffset: CGFloat, footName:String){
         
         //Create Cube as a Foot
         // let theFoot = SKSpriteNode(imageNamed: "red")
@@ -58,7 +59,7 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.affectedByGravity = false
         theFoot.physicsBody?.mass = Constants.FOOT_MASS
         theFoot.physicsBody?.isDynamic = true
-        theFoot.name = "foot"
+        theFoot.name = footName
         theFoot.zPosition = 0
         theFoot.alpha = 0.0
         gameScene.addChild(theFoot)
@@ -89,7 +90,7 @@ class Foot: SKSpriteNode{
         rest = true
         
         positionOnStick = 0 + theFoot.position.y
-        maxOffsets = maxOffset/2
+        maxOffsets = (maxOffset/2) - 5
         speedCounter = 0
         
         //Set value per position
