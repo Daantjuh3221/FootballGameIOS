@@ -149,7 +149,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(firstBody.node?.name == "ball" && secondBody.node?.name == "foot"){
             //play sound
             theBall.collidesWithFoot(currentTouch: "FOOT")
-            secondBody.node?.alpha = 0
             
         }else if(firstBody.node?.name == "foot" && secondBody.node?.name == "ball"){
             //play sound

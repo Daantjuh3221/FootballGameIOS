@@ -60,7 +60,7 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.isDynamic = true
         theFoot.name = "foot"
         theFoot.zPosition = 0
-        theFoot.alpha = 1.0
+        theFoot.alpha = 0.0
         gameScene.addChild(theFoot)
         
         if(colorSprite == "red"){
