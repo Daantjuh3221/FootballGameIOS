@@ -132,6 +132,5 @@ class Stick: SKSpriteNode{
         for i in theFoots{
             i.update( swipeLength: swipeLength, positionY: positionY)
         }
-        print(userName)
     }
 }

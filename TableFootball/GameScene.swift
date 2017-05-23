@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
     var stickEnabled:[Bool] = [true, true, true, true, true, true ,true, true]
-    var stickPositions:[Int] = [-390, -280, -170, -60, 60, 170, 280, 390]
+    var stickPositions:[Int] = [-400, -300, -180, -65, 65, 180, 300, 400]
     var stickColor:[String] = ["red", "red", "blue", "red", "blue", "red", "blue", "blue"]
     var userNames:[String] = ["", "", "", "", "", "", "", ""]
     var amountOfFeets:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
@@ -56,13 +56,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for i in 0...7{
                 if(stickColor[i] == "red"){
                     //Team red
-                    if(Constants.TEAMRED.count > 0){
+                    if(Constants.TEAMRED.count > 0 && Constants.TEAMRED.count < 2){
+                        //If one player is connected
                     userNames[i] = Constants.TEAMRED[0]
+                    }else if(Constants.TEAMRED.count > 1 && Constants.TEAMRED.count < 3){
+                        //if 2 players are connected
+                        if(i < 3){
+                            //Defender
+                            userNames[i] = Constants.TEAMRED[0]
+                        }else{
+                            //Attacker
+                            userNames[i] = Constants.TEAMRED[1]
+                        }
+                    }else if (Constants.TEAMRED.count > 1){
+                        if(i < 3){
+                            //Defender
+                            userNames[i] = Constants.TEAMRED[0]
+                        }else{
+                            //Attacker
+                            userNames[i] = Constants.TEAMRED[1]
+                        }
+                        //<--- Max players is 2 for now ---->
                     }
                 }else{
                     //Team blue
-                    if(Constants.TEAMBLUE.count > 0){
+                    if(Constants.TEAMBLUE.count > 0 && Constants.TEAMBLUE.count < 2){
+                        //If 1 player is connected
                     userNames[i] = Constants.TEAMBLUE[0]
+                    }else if(Constants.TEAMBLUE.count > 1 && Constants.TEAMBLUE.count < 3){
+                        //if 2 players are connected
+                        if(i < 5){
+                            //Attackers
+                            userNames[i] = Constants.TEAMBLUE[0]
+                        }else{
+                            //Defenders
+                            userNames[i] = Constants.TEAMBLUE[1]
+                        }
+                    }else if(Constants.TEAMBLUE.count > 2){
+                        //If more than 2 players
+                        if(i < 5){
+                            //Attackers
+                            userNames[i] = Constants.TEAMBLUE[0]
+                        }else{
+                            //Defenders
+                            userNames[i] = Constants.TEAMBLUE[1]
+                        }
+                        //<--- Max players is 2 for now ---->
                     }
             }
         }
@@ -151,7 +190,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.collidesWithFoot(currentTouch: (firstBody.node?.name)!)
             
         }else if(firstBody.node?.name == "ball" && (secondBody.node?.name?.contains("foot"))!){
-            //fixes the collision between foot and ball
+            //fixes the collision between ball and foot
             theBall.collidesWithFoot(currentTouch: (secondBody.node?.name)!)
         }
         

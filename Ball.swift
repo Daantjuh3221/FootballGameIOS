@@ -126,9 +126,31 @@ class Ball: SKSpriteNode {
 
     func checkPosession() -> String{
         //This method checks which team has posession and returns a String with the team name
+        //Returns "red" || "blue"
+        /*
+         1 = r
+         2 = r
+         3 = b
+         4 = r
+         5 = b
+         6 = r
+         7 = b
+         8 = b
+         */
         var teamPos:String = ""
-        let lastTouch:[String] = [firstTouches, secondTouches]
         
+        let teamRed:[String] = ["foot1", "foot2", "foot4", "foot6"]
+        let teamBlue:[String] = ["foot3", "foot5", "foot7", "foot8"]
+        
+        
+        if(teamRed.contains(firstTouches) && teamRed.contains(secondTouches)){
+                teamPos = "red"
+        }
+        
+        if(teamBlue.contains(firstTouches) && teamBlue.contains(secondTouches)){
+            teamPos = "blue"
+        }
+
         
         return teamPos
     }
@@ -188,6 +210,8 @@ class Ball: SKSpriteNode {
             
             physicsBody?.velocity.dy = 0
             physicsBody?.velocity.dx = 0
+            
+            //Go to home scene
         }
     }
     
