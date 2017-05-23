@@ -1,18 +1,12 @@
 package com.example.huub.tablefootbal;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import io.socket.client.Socket;
 
@@ -20,54 +14,99 @@ import io.socket.client.Socket;
  * Created by Lars on 8-3-2017.
  */
 
-public class Splash extends AppCompatActivity {
+public class Splash extends AppCompatActivity implements SocketConnection.onSocketGotLoginEvent, SocketConnection.onErrorSocketEvent {
 
     private String prefsFile = Constants.PREFERENCEFILENAME;
     private Socket mSocket;
+    private boolean mUsername;
+    private boolean mAppleTV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
+
+        //Set socketconnection
         SocketConnection app = (SocketConnection) getApplication();
-        mSocket = app.getSocket();
+        mSocket = app.getSocket(this);
         mSocket.connect();
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);;
 
-
-        Thread myThread = new Thread() {
-            @Override
-            public void run() {
-                Intent i = new Intent(getApplicationContext(), joinScreen.class);
-                try {
-                    SharedPreferences sharedPrefs = getSharedPreferences(prefsFile, MODE_PRIVATE);
-                    SharedPreferences.Editor ed;
-                    if(!sharedPrefs.contains("initialized")) {
-
-                        ed = sharedPrefs.edit();
-
-                        //Indicate that the default shared prefs have been set
-                        ed.putBoolean("initialized", true);
-                        ed.commit();
-                    }
-//                    } else if(sharedPrefs.contains("username")){
-//                        String username = sharedPrefs.getString("username", "");
-//                        mSocket.emit("registeredUserConnect", username, Constants.DEVICE);
-//                    } else if(sharedPrefs.contains("joinCode")){
-//                        String joinCode = sharedPrefs.getString("joinCode", "");
-//                        mSocket.emit("userJoinAppleTV", joinCode);
-//                    }
-                    sleep(2000);
-                    startActivity(i);
-                    finish();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        SharedPreferences sharedPrefs = getSharedPreferences(prefsFile, MODE_PRIVATE);
+        SharedPreferences.Editor ed;
+        if(!sharedPrefs.contains("initialized")) {
+            ed = sharedPrefs.edit();
+            //Indicate that the default shared prefs have been set
+            ed.putBoolean("initialized", true);
+            ed.commit();
+            System.out.println("is not initialized");
+        } else{
+            System.out.println("is initialized");
+            mUsername = sharedPrefs.contains("username");
+            mAppleTV = sharedPrefs.contains("joinCode");
+            if (mUsername){
+                System.out.println("username exists");
+                String username = sharedPrefs.getString("username", "");
+                Constants.USERNAME = username;
+                mSocket.emit("registeredUserConnect", username, Constants.DEVICE);
+            }else {
+                System.out.println("username does not exists");
+                Intent i = new Intent(this, joinScreen.class);
+                startActivity(i);
+                finish();
             }
-        };
-        myThread.start();
+        }
     }
 
+    @Override
+    public void loginSucceeded(boolean loginSucceeded) {
+        if (loginSucceeded){
+            Constants.isLogedin = true;
+            Intent i = new Intent(this, mainMenu.class);
+            startActivity(i);
+            finish();
+
+        } else{
+            Toast.makeText(this, "login failed", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, joinScreen.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
+    @Override
+    public void usernameExists(boolean usernameExists) {
+
+    }
+
+    @Override
+    public void connectedToAppleTV(boolean connectedToAppleTV) {
+        if (connectedToAppleTV){
+
+        }
+    }
+
+    @Override
+    public void isPlayerOne(boolean isPlayerOne) {
+        if (isPlayerOne){
+            //go to waiting screen
+        }
+    }
+
+    @Override
+    public void disconnected() {
+        Toast.makeText(this, "The server is down", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void socketError(String error) {
+        Toast.makeText(this, "error: "  + error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void socketConnectError(String error) {
+        Toast.makeText(this, "Connection error: could not connect to the server!", Toast.LENGTH_LONG).show();
+    }
 }

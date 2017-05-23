@@ -81,7 +81,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         this.tableFootbalController = tableFootbalController;
 
         SocketConnection app = (SocketConnection) tableFootbalController.getApplication();
-        mSocket = app.getSocket();
+        mSocket = app.getSocket(context);
         mSocket.connect();
 
         getSticks();

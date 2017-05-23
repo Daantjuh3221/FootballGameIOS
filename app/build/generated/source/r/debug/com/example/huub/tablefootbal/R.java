@@ -3258,6 +3258,7 @@ containing a value of this type.
         public static final int basic=0x7f0d0015;
         public static final int beginning=0x7f0d003f;
         public static final int bottom=0x7f0d002e;
+        public static final int btnJoinGame=0x7f0d0083;
         public static final int button=0x7f0d008f;
         public static final int buttonPanel=0x7f0d0059;
         public static final int cancel_action=0x7f0d00ae;
@@ -3306,7 +3307,6 @@ containing a value of this type.
         public static final int imgRefreshButton=0x7f0d0093;
         public static final int info=0x7f0d00b7;
         public static final int item_touch_helper_previous_elevation=0x7f0d0005;
-        public static final int joinGameButton=0x7f0d0083;
         public static final int joinMultiplayerTeamBlue=0x7f0d0099;
         public static final int joinMultiplayerTeamMidden=0x7f0d0095;
         public static final int joinMultiplayerTeamRed=0x7f0d009a;
@@ -3565,15 +3565,17 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f070023;
         public static final int dummy_button=0x7f070036;
         public static final int dummy_content=0x7f070037;
-        public static final int password_toggle_content_description=0x7f070038;
-        public static final int path_password_eye=0x7f070039;
-        public static final int path_password_eye_mask_strike_through=0x7f07003a;
-        public static final int path_password_eye_mask_visible=0x7f07003b;
-        public static final int path_password_strike_through=0x7f07003c;
+        public static final int hello_blank_fragment=0x7f070038;
+        public static final int password_toggle_content_description=0x7f070039;
+        public static final int path_password_eye=0x7f07003a;
+        public static final int path_password_eye_mask_strike_through=0x7f07003b;
+        public static final int path_password_eye_mask_visible=0x7f07003c;
+        public static final int path_password_strike_through=0x7f07003d;
         public static final int search_menu_title=0x7f070024;
         public static final int status_bar_notification_info_overflow=0x7f070025;
-        public static final int title_activity_fullscreen=0x7f07003d;
-        public static final int title_activity_waiting_screen=0x7f07003e;
+        public static final int title_activity_fullscreen=0x7f07003e;
+        public static final int title_activity_main=0x7f07003f;
+        public static final int title_activity_waiting_screen=0x7f070040;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f0900a1;
