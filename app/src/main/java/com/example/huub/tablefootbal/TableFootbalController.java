@@ -2,6 +2,7 @@ package com.example.huub.tablefootbal;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,10 @@ public class TableFootbalController extends Activity {
         setContentView(gPanel);
 
             }
+
+
+
+
 
 
 }
