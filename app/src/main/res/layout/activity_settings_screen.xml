@@ -80,12 +80,13 @@
         android:id="@+id/editAppleButton"
         android:layout_width="180dp"
         android:layout_height="50dp"
-        android:textSize="15dp"
-        android:textStyle="bold"
         android:layout_alignStart="@+id/nameEditButton"
         android:layout_below="@+id/nameEditButton"
         android:layout_marginTop="19dp"
-        android:text="Change Apple TV" />
+        android:onClick="changeAppleID"
+        android:text="Change Apple TV"
+        android:textSize="15dp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

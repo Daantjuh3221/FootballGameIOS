@@ -111,6 +111,47 @@ public class MainMenuSettings extends AppCompatActivity {
         dialog.show();
     }
 
+    public void changeAppleID(View view) {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.layout_custom_dialog_apple, null);
+        final EditText etApple = (EditText) alertLayout.findViewById(R.id.et_apple);
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Change Apple ID");
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(false);
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getBaseContext(), "Apple ID remains " + Constants.JOINCODE, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                String user = etApple.getText().toString();
+                if (!(user.isEmpty())) {
+                    Constants.JOINCODE = user;
+                    mAppleTV.setText(user);
+                    editor.putString("userJoinAppleTV", user);
+                    editor.commit();
+                    Toast.makeText(getBaseContext(), "Apple ID: " + user, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getBaseContext(), "Apple ID remains " + Constants.JOINCODE, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
 
     public void returnButton(View v) {
         Intent i = new Intent(getApplicationContext(), mainMenu.class);
