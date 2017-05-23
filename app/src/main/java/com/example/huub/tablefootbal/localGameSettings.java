@@ -1,6 +1,7 @@
 package com.example.huub.tablefootbal;
 
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,17 +40,22 @@ public class localGameSettings extends AppCompatActivity {
     private Socket mSocket;
     private final String username = Constants.USERNAME;
 
+    private Vibrator myVib;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_game_settings);
+
         SocketConnection app = (SocketConnection) getApplication();
         mSocket = app.getSocket(this);
         mSocket.on("addPlayerToTeamRed", chooseSideRed);
         mSocket.on("addPlayerToTeamBlue", chooseSideBlue);
         mSocket.on("addPlayerToTeamMidden", chooseSideMidden);
         mSocket.connect();
+
+        myVib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -162,6 +168,7 @@ public class localGameSettings extends AppCompatActivity {
     }
 
     public void joinTeamRed (View v) {
+        myVib.vibrate(50);
         mBtnRed.setEnabled(false);
         mBtnMidden.setEnabled(true);
         mBtnBlue.setEnabled(true);
@@ -178,7 +185,9 @@ public class localGameSettings extends AppCompatActivity {
         mSocket.emit("chooseSideRed");
     }
 
+
     public void joinTeamBlue (View v) {
+        myVib.vibrate(50);
         mBtnRed.setEnabled(true);
         mBtnMidden.setEnabled(true);
         mBtnBlue.setEnabled(false);
@@ -196,6 +205,7 @@ public class localGameSettings extends AppCompatActivity {
     }
 
     public void joinTeamMidden (View v) {
+        myVib.vibrate(50);
         mBtnRed.setEnabled(true);
         mBtnMidden.setEnabled(false);
         mBtnBlue.setEnabled(true);
@@ -222,6 +232,8 @@ public class localGameSettings extends AppCompatActivity {
         };
         Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
         System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
+        Constants.TEAMBLUE = mPlayersBlue;
+        Constants.TEAMRED = mPlayersRed;
         mSocket.emit("startGame");
         startActivity(i);
         finish();

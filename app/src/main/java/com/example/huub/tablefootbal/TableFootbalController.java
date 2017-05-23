@@ -15,6 +15,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class TableFootbalController extends Activity {
 
     private GamePanel gPanel;
