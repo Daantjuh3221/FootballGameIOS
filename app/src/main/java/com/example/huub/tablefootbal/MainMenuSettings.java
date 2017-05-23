@@ -113,7 +113,7 @@ public class MainMenuSettings extends AppCompatActivity {
 
     public void changeAppleID(View view) {
         LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.layout_custom_dialog_apple, null);
+        View alertLayout = inflater.inflate(R.layout.layout_custom_dialog_apple , null);
         final EditText etApple = (EditText) alertLayout.findViewById(R.id.et_apple);
 
 
