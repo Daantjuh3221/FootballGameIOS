@@ -1,8 +1,6 @@
 package com.example.huub.tablefootbal;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -37,7 +32,7 @@ public class mainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        mPlayLocal = (Button) findViewById(R.id.playLocalButton);
+        mPlayLocal = (Button) findViewById(R.id.startgameButton);
         mJoinCode = (TextView)findViewById(R.id.lblJoinCode);
         mJoinStatus = (TextView)findViewById(R.id.lblJoinedStatus);
         mRefreshButton = (ImageView) findViewById(R.id.imgRefreshButton);
@@ -61,7 +56,7 @@ public class mainMenu extends AppCompatActivity {
 
 
         SocketConnection app = (SocketConnection) getApplication();
-        mSocket = app.getSocket();
+        mSocket = app.getSocket(this);
         mSocket.on("disconnectFromAppleTV",onAppleTVDisconnect);
         //mSocket.on("appleTvExists",reconnectWithAppleTV);
         mSocket.connect();
@@ -86,8 +81,8 @@ public class mainMenu extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void playMultiplayer (View v) {
-        Intent i = new Intent(getApplicationContext(), multiplayerSettings.class);
+    public void selectSettings (View v) {
+        Intent i = new Intent(getApplicationContext(), MainMenuSettings.class);
         startActivity(i);
     }
 

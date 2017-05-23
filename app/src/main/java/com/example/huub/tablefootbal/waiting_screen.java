@@ -23,7 +23,7 @@ public class waiting_screen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         SocketConnection app = (SocketConnection) getApplication();
-        mSocket = app.getSocket();
+        mSocket = app.getSocket(this);
         mSocket.on("startLocal", onStartLocal);
         mSocket.connect();
     }

@@ -49,7 +49,7 @@ public class localGameSettings extends AppCompatActivity {
         setContentView(R.layout.activity_local_game_settings);
 
         SocketConnection app = (SocketConnection) getApplication();
-        mSocket = app.getSocket();
+        mSocket = app.getSocket(this);
         mSocket.on("addPlayerToTeamRed", chooseSideRed);
         mSocket.on("addPlayerToTeamBlue", chooseSideBlue);
         mSocket.on("addPlayerToTeamMidden", chooseSideMidden);
