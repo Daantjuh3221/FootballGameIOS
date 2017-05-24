@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import io.socket.client.Socket;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Lars on 8-3-2017.
  */
@@ -31,7 +33,7 @@ public class joinScreen extends AppCompatActivity implements SocketConnection.on
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_screen);
         txtUserName = (TextView) findViewById(R.id.userName);
-        btnJoinGame = (Button) findViewById(R.id.btnJoinGame);
+        btnJoinGame = (Button) findViewById(R.id.joinGameButton);
         SocketConnection app = (SocketConnection) getApplication();
         mSocket = app.getSocket(this);
         sharedPrefs =  getApplicationContext().getSharedPreferences(prefsFile, MODE_PRIVATE);
