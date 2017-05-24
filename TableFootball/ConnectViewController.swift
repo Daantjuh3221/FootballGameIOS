@@ -12,6 +12,11 @@ import UIKit
 class ConnectViewController: UIViewController {
     
     @IBOutlet weak var listConnectedPlayers: UITextView!
+    
+    //List of both teams
+    @IBOutlet weak var redList: UITextView!
+    @IBOutlet weak var blueList: UITextView!
+    
     var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     var strLabel = UILabel()
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -23,7 +28,7 @@ class ConnectViewController: UIViewController {
     override
     func viewDidLoad() {
         super.viewDidLoad()
-        self.listConnectedPlayers.text.append("\n")
+        //self.listConnectedPlayers.text.append("\n")
 //        activityIndicator.center = self.view.center
 //        activityIndicator.hidesWhenStopped = true
 //        //activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
@@ -34,12 +39,16 @@ class ConnectViewController: UIViewController {
         
         activityIndicator("Waiting for players...")
         
+        
+        self.listConnectedPlayers.text = ""
+        
         let socket = SocketIOManager.sharedInstance.getSocket();
         socket.on("userJoinedAppleTV") {data, ack in
             Constants.CONNECTEDPLAYERS.append((data[0] as? String)!)
             
-            self.listConnectedPlayers.text.append((data[0] as? String)!)
-            self.listConnectedPlayers.text.append(",")
+           // self.redList.text.append((data[0] as? String)!)
+            //self.redList.text.append(",")
+            
             
             self.i += 1
             self.strLabel.text = "Waiting for players. \(self.i) joined"
@@ -50,7 +59,70 @@ class ConnectViewController: UIViewController {
             self.userSettings.set(joinCode, forKey: "joinCode")
         }
         
+        socket.on("addPlayerToTeamRed"){data, ack in
+            //Adds player to list if its not allready on the list
+            if(!Constants.TEAMRED.contains((data[0] as? String)!)){
+                Constants.TEAMRED.append((data[0] as? String)!)
+            }
+            
+            //Check if other list contains player and delete it
+            if let index = Constants.TEAMBLUE.index(of: (data[0] as? String)!) {
+                Constants.TEAMBLUE.remove(at: index)
+            }
+            
+            updatePlayerList()
+        }
+        socket.on("addPlayerToTeamBlue"){data, ack in
+            //Adds player to list if its not allready on the list
+            if(!Constants.TEAMBLUE.contains((data[0] as? String)!)){
+                Constants.TEAMBLUE.append((data[0] as? String)!)
+            }
+            
+            //Check if other list contains player and delete it
+            if let index = Constants.TEAMRED.index(of: (data[0] as? String)!) {
+                Constants.TEAMRED.remove(at: index)
+            }
+            
+            updatePlayerList()
+        }
+ 
+        func updatePlayerList(){
+            //Updates both player lists!
+            self.blueList.text = "Team Blue: \n"
+            self.redList.text = "Team Red: \n"
+            
+            for players in Constants.TEAMBLUE{
+                self.blueList.text = "Team Blue: \n" + (players) + ", "
+                //self.blueList.text.append(", ")
+                print("list: blue: " + players)
+            }
+            for players in Constants.TEAMRED{
+                self.redList.text = "Team Red: \n" + (players) + ", "
+                //self.redList.text.append(", ")
+                print("list: red: " + players)
+            }
+        }
+        
+        socket.on("addPlayerToTeamMidden"){data, ack in
+            //Removes player from both list
+            //Check if other list contains player and delete it
+            if let index = Constants.TEAMBLUE.index(of: (data[0] as? String)!) {
+                Constants.TEAMBLUE.remove(at: index)
+            }
+            
+            //Check if other list contains player and delete it
+            if let index = Constants.TEAMRED.index(of: (data[0] as? String)!) {
+                Constants.TEAMRED.remove(at: index)
+            }
+            
+            updatePlayerList()
+        }
+        
         socket.on("startGameOnAppleTV") {data, ack in
+            //Reset both team list. So no invisible player are playing
+            //Constants.TEAMRED.removeAll()
+            //Constants.TEAMBLUE.removeAll()
+            
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "GameViewController") as! UINavigationController
             self.present(vc, animated: true, completion: nil)

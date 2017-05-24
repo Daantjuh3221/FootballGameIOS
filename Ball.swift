@@ -87,7 +87,6 @@ class Ball: SKSpriteNode {
         print("Touch Second: " + secondTouches)
     }
     
-    
     func isGoalAllowed() -> Bool{
         /*
          Checks if a goal is allowed or not. returns the outcome (True || False)!
