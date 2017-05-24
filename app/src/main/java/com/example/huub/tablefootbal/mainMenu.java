@@ -59,7 +59,7 @@ public class mainMenu extends AppCompatActivity {
 
 
         SocketConnection app = (SocketConnection) getApplication();
-        mSocket = app.getSocket();
+        mSocket = app.getSocket(this);
         mSocket.on("disconnectFromAppleTV",onAppleTVDisconnect);
         //mSocket.on("appleTvExists",reconnectWithAppleTV);
         mSocket.connect();
