@@ -31,7 +31,7 @@ public class joinScreen extends AppCompatActivity implements SocketConnection.on
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_screen);
         txtUserName = (TextView) findViewById(R.id.userName);
-        btnJoinGame = (Button) findViewById(R.id.btnJoinGame);
+        btnJoinGame = (Button) findViewById(R.id.joinGameButton);
         SocketConnection app = (SocketConnection) getApplication();
         mSocket = app.getSocket(this);
         sharedPrefs =  getApplicationContext().getSharedPreferences(prefsFile, MODE_PRIVATE);
@@ -54,6 +54,8 @@ public class joinScreen extends AppCompatActivity implements SocketConnection.on
         //
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
+
 
     @Override
     public void isPlayerOne(boolean playerOne){

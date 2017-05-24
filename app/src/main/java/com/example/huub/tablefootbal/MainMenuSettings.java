@@ -64,7 +64,7 @@ public class MainMenuSettings extends AppCompatActivity {
         mUserName.setText(USERNAME);
         mAppleTV.setText(JOINCODE);
 
-        mSocket = app.getSocket();
+        mSocket = app.getSocket(this);
         mSocket.connect();
 
 
