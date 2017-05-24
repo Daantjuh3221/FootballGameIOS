@@ -3,17 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/footballfield">
+    android:background="@drawable/mainmenu">
 
     <Button
-        android:id="@+id/btnJoinGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/joinGameButton"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:background="@drawable/custom_button"
+        android:onClick="joinGame"
+        android:text="Join Game"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:onClick="joinGame"
-        android:text="Join Game" />
+        android:layout_marginBottom="48dp" />
 
     <EditText
         android:id="@+id/userName"
