@@ -67,16 +67,23 @@ public class MainMenuSettings extends AppCompatActivity {
         mSocket = app.getSocket(this);
         mSocket.connect();
 
+
+        //Set fullscreen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+    //This method will be triggered when user clicks change username button
     public void changeUsername(View view) {
+        // Activate new layout source to function as popup
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.layout_custom_dialog, null);
+        // Initiate its EditText
         final EditText etUsername = (EditText) alertLayout.findViewById(R.id.et_username);
 
 
+
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        // Set popup title
         alert.setTitle("Change username");
         // this is set the view from XML inside AlertDialog
         alert.setView(alertLayout);
@@ -92,10 +99,12 @@ public class MainMenuSettings extends AppCompatActivity {
 
         alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
+            //This method will be triggered whenever the confirm option is chosen within the popup
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                     String user = etUsername.getText().toString();
+                // if the popup textfield is not empty, the input value will override constant USERNAME, else it will remain the previous value
                     if (!(user.isEmpty())) {
                     Constants.USERNAME = user;
                     mUserName.setText(user);
