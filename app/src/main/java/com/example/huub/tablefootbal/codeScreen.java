@@ -28,6 +28,7 @@ public class codeScreen extends AppCompatActivity {
 
         SocketConnection app = (SocketConnection) getApplication();
         mSocket = app.getSocket(this);
+
         mSocket.on("appleTvExists", onAppleTvExists);
         mSocket.on("isPlayerOne", onIsPlayerOne);
         mSocket.connect();
