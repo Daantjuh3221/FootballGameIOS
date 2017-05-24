@@ -42,6 +42,12 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
             ed.putBoolean("initialized", true);
             ed.commit();
             System.out.println("is not initialized");
+
+            System.out.println("username does not exists");
+            Intent i = new Intent(this, joinScreen.class);
+            startActivity(i);
+            finish();
+
         } else{
             System.out.println("is initialized");
             mUsername = sharedPrefs.contains("username");
@@ -92,6 +98,11 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
 
     @Override
     public void connectedToAppleTV(boolean connectedToAppleTV) {
+        if (connectedToAppleTV){
+
+        } else{
+
+        }
     }
 
     @Override
