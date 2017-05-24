@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundfootballfield"
+    tools:context="com.example.huub.tablefootbal.connectToApple">
+
+    <Button
+        android:id="@+id/btnJoinCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="85dp"
+        android:text="Connect to the apple tv" />
+
+    <TextView
+        android:id="@+id/lblInfoJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Fill in the Join code:"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/txtJoinCode" />
+
+    <EditText
+        android:id="@+id/txtJoinCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:textColor="@android:color/background_light"
+        android:layout_above="@+id/btnJoinCode"
+        android:layout_alignStart="@+id/btnJoinCode"
+        android:layout_marginBottom="32dp" />
+
+</RelativeLayout>

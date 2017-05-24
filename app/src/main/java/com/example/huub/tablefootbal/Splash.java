@@ -46,6 +46,9 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
             System.out.println("is initialized");
             mUsername = sharedPrefs.contains("username");
             mAppleTV = sharedPrefs.contains("joinCode");
+            if (mAppleTV){
+                Constants.JOINCODE = sharedPrefs.getString("joinCode","");
+            }
             if (mUsername){
                 System.out.println("username exists");
                 String username = sharedPrefs.getString("username", "");
@@ -64,10 +67,16 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
     public void loginSucceeded(boolean loginSucceeded) {
         if (loginSucceeded){
             Constants.isLogedin = true;
-            Intent i = new Intent(this, mainMenu.class);
-            startActivity(i);
-            finish();
-
+            if(mAppleTV){
+                mSocket.emit("userJoinAppleTV", Constants.JOINCODE);
+                Intent i = new Intent(this, mainMenu.class);
+                startActivity(i);
+                finish();
+            } else{
+                Intent i = new Intent(this, mainMenu.class);
+                startActivity(i);
+                finish();
+            }
         } else{
             Toast.makeText(this, "login failed", Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, joinScreen.class);
@@ -83,9 +92,6 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
 
     @Override
     public void connectedToAppleTV(boolean connectedToAppleTV) {
-        if (connectedToAppleTV){
-
-        }
     }
 
     @Override
@@ -103,10 +109,16 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
     @Override
     public void socketError(String error) {
         Toast.makeText(this, "error: "  + error, Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, joinScreen.class);
+        startActivity(i);
+        finish();
     }
 
     @Override
     public void socketConnectError(String error) {
         Toast.makeText(this, "Connection error: could not connect to the server!", Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, joinScreen.class);
+        startActivity(i);
+        finish();
     }
 }

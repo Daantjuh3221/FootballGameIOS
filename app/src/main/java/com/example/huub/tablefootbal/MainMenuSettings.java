@@ -145,13 +145,13 @@ public class MainMenuSettings extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                String user = etApple.getText().toString();
-                if (!(user.isEmpty())) {
-                    Constants.JOINCODE = user;
-                    mAppleTV.setText(user);
-                    editor.putString("userJoinAppleTV", user);
+                String appleID = etApple.getText().toString();
+                if (!(appleID.isEmpty())) {
+                    Constants.JOINCODE = appleID;
+                    mAppleTV.setText(appleID);
+                    editor.putString("joinCode", appleID);
                     editor.commit();
-                    Toast.makeText(getBaseContext(), "Apple ID: " + user, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Apple ID: " + appleID, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getBaseContext(), "Apple ID remains " + Constants.JOINCODE, Toast.LENGTH_SHORT).show();
                 }

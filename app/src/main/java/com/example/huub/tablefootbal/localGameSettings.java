@@ -141,7 +141,7 @@ public class localGameSettings extends AppCompatActivity {
 
     private void updateUI() {
 
-        mBtnPlay.setEnabled(mainMenu.getIsConnected());
+        mBtnPlay.setEnabled(false);
 
         // If the list adapter is null, a new one will be instantiated and set on our list view.
         if (mAdapterBlue == null) {

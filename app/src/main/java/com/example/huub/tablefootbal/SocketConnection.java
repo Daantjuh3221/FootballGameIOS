@@ -3,7 +3,10 @@ package com.example.huub.tablefootbal;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import java.net.URISyntaxException;
 
@@ -26,6 +29,9 @@ public class SocketConnection extends Application {
     private Socket mSocket;
     {
         try {
+            IO.Options opt = new IO.Options();
+            opt.reconnection = true;
+            opt.reconnectionAttempts = 5;
             mSocket = IO.socket(Constants.SERVER_URL);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
@@ -52,8 +58,9 @@ public class SocketConnection extends Application {
         mSocket.on("disconnect", onDisconnect);
         mSocket.on("connect_error", onSocketConnectError);
         mSocket.on("error", onSocketError);
-        mSocket.on("connected", onConnect);
+        mSocket.on(Socket.EVENT_CONNECT, onConnect);
         mSocket.on("usernameExists", onUsernameExists);
+        mSocket.on("appleTvExists", onAppleTvExists);
         return mSocket;
     }
 
@@ -79,6 +86,7 @@ public class SocketConnection extends Application {
             public void run() {
             if (mErrorListener != null){
                 mErrorListener.disconnected();
+                mSocket.disconnect();
                 mSocket.off();
                 System.out.println("DISCONNECTED");
             } else{
@@ -99,6 +107,9 @@ public class SocketConnection extends Application {
             public void run() {
                 if (mErrorListener != null){
                     mErrorListener.socketError(args[0].toString());
+                    mErrorListener.disconnected();
+                    mSocket.disconnect();
+                    mSocket.off();
                     System.out.println("SOCKET ERROR");
                 } else{
                     System.out.println("Mlistener is null");
@@ -116,6 +127,8 @@ public class SocketConnection extends Application {
                 public void run() {
                     if (mErrorListener != null){
                         mErrorListener.socketConnectError(args[0].toString());
+                        mSocket.disconnect();
+                        mSocket.off();
                         System.out.println("CONNECT ERROR");
                     } else{
                         System.out.println("Mlistener is null");
@@ -138,6 +151,31 @@ public class SocketConnection extends Application {
             } else{
                 System.out.println("Mlistener is null");
             }
+        }
+    };
+
+    private Emitter.Listener onAppleTvExists = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            ((Activity)(mContext)).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    boolean exists = (boolean)args[0];
+                    if (mLoginListener != null){
+                        if (exists) {
+                            System.out.println("Apple tv exist");
+                            Constants.isConnected = exists;
+                            mLoginListener.connectedToAppleTV(exists);
+                        } else{
+                            System.out.println("Apple tv does not exist");
+                            mLoginListener.connectedToAppleTV(exists);
+                        }
+                    } else{
+                        System.out.println("mlistener is null");
+                    }
+                }
+            });
+
         }
     };
 
