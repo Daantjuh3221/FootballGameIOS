@@ -20,6 +20,7 @@ import io.socket.emitter.Emitter;
 public class mainMenu extends AppCompatActivity {
 
     private Socket mSocket;
+    private TextView mUsername;
     private TextView mJoinCode;
     private TextView mJoinStatus;
     private ImageView mRefreshButton;
@@ -33,11 +34,13 @@ public class mainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         mPlayLocal = (Button) findViewById(R.id.startgameButton);
+        mUsername = (TextView)findViewById(R.id.username);
         mJoinCode = (TextView)findViewById(R.id.lblJoinCode);
         mJoinStatus = (TextView)findViewById(R.id.lblJoinedStatus);
         mRefreshButton = (ImageView) findViewById(R.id.imgRefreshButton);
 
         System.out.println("OK: isconnected is" + Constants.isConnected);
+        mUsername.setText(Constants.USERNAME);
         mJoinCode.setText(Constants.JOINCODE);
         if (Constants.isConnected){
             System.out.println("OK: We zijn bij isconnected check");
