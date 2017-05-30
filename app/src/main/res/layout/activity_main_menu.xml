@@ -34,6 +34,13 @@
         android:layout_alignBaseline="@+id/usernameHeader"
         android:layout_alignStart="@+id/settingsButton" />
 
+    <ImageView
+        android:id="@+id/userimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/user" />
+
     <TextView
         android:id="@+id/lblJoinedWith"
         android:layout_width="wrap_content"
@@ -45,6 +52,39 @@
         android:text="Player"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
         android:textColor="@android:color/background_light"
+        android:layout_toEndOf="@+id/userimg" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFF00"
+        android:typeface="monospace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:layout_alignStart="@+id/lblJoinedWith"
+        android:layout_below="@+id/lblJoinedWith"
+        android:text="Username" />
+
+    <ImageView
+        android:id="@+id/appleimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userimg"
+        android:layout_toStartOf="@+id/lblJoinCode"
+        app:srcCompat="@drawable/apple" />
+
+    <TextView
+        android:id="@+id/appletvheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:typeface="monospace"
+        android:text="Apple TV"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:textColor="@android:color/background_light"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/userimg"
         android:layout_toEndOf="@+id/userimg" />
 
     <TextView
@@ -78,45 +118,6 @@
         android:layout_below="@+id/lblJoinedStatus"
         android:layout_alignStart="@+id/serverstatus" />
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFF00"
-        android:typeface="monospace"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-        android:layout_alignStart="@+id/lblJoinedWith"
-        android:layout_below="@+id/lblJoinedWith"
-        android:text="Username" />
-
-    <TextView
-        android:id="@+id/appletvheader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:typeface="monospace"
-        android:text="Apple TV"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-        android:textColor="@android:color/background_light"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/userimg"
-        android:layout_toEndOf="@+id/userimg" />
-
-    <ImageView
-        android:id="@+id/userimg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/user" />
-
-    <ImageView
-        android:id="@+id/appleimg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userimg"
-        android:layout_toStartOf="@+id/lblJoinCode"
-        app:srcCompat="@drawable/apple" />
 
     <ImageView
         android:id="@+id/serverimg"

@@ -23,6 +23,7 @@
         <EditText
             android:id="@+id/et_apple"
             android:layout_width="0dp"
+            android:maxLength="12"
             android:layout_height="wrap_content"
             android:layout_weight=".7"
             android:imeOptions="actionDone"
@@ -31,5 +32,16 @@
             android:singleLine="true" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:text="12 characters max!" />
 
-    </LinearLayout>
+
+</LinearLayout>

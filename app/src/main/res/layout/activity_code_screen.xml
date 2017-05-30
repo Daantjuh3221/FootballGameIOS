@@ -10,7 +10,8 @@
         android:id="@+id/codeText"
         android:layout_width="250dp"
         android:layout_height="80dp"
-        android:layout_marginTop="44dp"
+        android:maxLength="12"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_alignParentTop="true"
@@ -26,7 +27,7 @@
 
     <Button
         android:id="@+id/submitCodeButton"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="80dp"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -36,5 +37,5 @@
         android:text="Submit Code"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp" />
+        android:layout_marginBottom="45dp" />
 </RelativeLayout>
