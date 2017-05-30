@@ -26,8 +26,6 @@ public class mainMenu extends AppCompatActivity {
     private ImageView mRefreshButton;
     private Button mPlayLocal;
 
-    private static boolean isConnected;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,39 +37,44 @@ public class mainMenu extends AppCompatActivity {
         mJoinStatus = (TextView)findViewById(R.id.lblJoinedStatus);
         mRefreshButton = (ImageView) findViewById(R.id.imgRefreshButton);
 
-        System.out.println("OK: isconnected is" + Constants.isConnected);
         mUsername.setText(Constants.USERNAME);
-        mJoinCode.setText(Constants.JOINCODE);
-        if (Constants.isConnected){
-            System.out.println("OK: We zijn bij isconnected check");
+        if (Constants.isConnectedServer){
             mJoinStatus.setTextColor(Color.GREEN);
             mJoinStatus.setText(Constants.JOINEDTEXT);
-            mPlayLocal.setEnabled(Constants.isConnected);
-            setIsConnected(true);
         } else{
             mJoinStatus.setTextColor(Color.RED);
             mJoinStatus.setText(Constants.DISCONNECTEDTEXT);
-            mPlayLocal.setEnabled(Constants.isConnected);
-            setIsConnected(false);
+        }
 
+        if (Constants.isConnectedAppleTV){
+            mJoinCode.setText(Constants.JOINCODE);
+        } else{
+            mJoinCode.setText(Constants.DISCONNECTEDTEXT);
+            mJoinCode.setTextColor(Color.RED);
+        }
+
+        if (Constants.isConnectedAppleTV == true
+                && Constants.isConnectedServer == true){
+            mPlayLocal.setEnabled(true);
+        } else{
+            mPlayLocal.setEnabled(false);
         }
 
 
 
         SocketConnection app = (SocketConnection) getApplication();
         mSocket = app.getSocket(this);
-        mSocket.on("disconnectFromAppleTV",onAppleTVDisconnect);
         //mSocket.on("appleTvExists",reconnectWithAppleTV);
         mSocket.connect();
 
-        mRefreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSocket.emit("userJoinAppleTV", Constants.JOINCODE);
-                Animation rotation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.rotation_clockwise);
-                mRefreshButton.startAnimation(rotation);
-            }
-        });
+//        mRefreshButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mSocket.emit("userJoinAppleTV", Constants.JOINCODE);
+//                Animation rotation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.rotation_clockwise);
+//                mRefreshButton.startAnimation(rotation);
+//            }
+//        });
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -89,32 +92,6 @@ public class mainMenu extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void setIsConnected(boolean isConnected) {
-        this.isConnected = isConnected;
-    }
-
-    public static boolean getIsConnected() {
-        return isConnected;
-    }
-
-
-    private Emitter.Listener onAppleTVDisconnect = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            System.out.println("JOOEEHOEEE 3");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mJoinStatus.setText(Constants.DISCONNECTEDTEXT);
-                    mJoinStatus.setTextColor(Color.RED);
-                    Constants.isConnected = false;
-                    Intent i = new Intent(getApplicationContext(), mainMenu.class);
-                    startActivity(i);
-                    finish();
-                }
-            });
-        }
-    };
 //    private Emitter.Listener reconnectWithAppleTV = new Emitter.Listener() {
 //        @Override
 //        public void call(final Object... args) {
