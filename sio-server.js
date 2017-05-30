@@ -191,6 +191,11 @@ io.on("connection", function(socket) {
         var player = connectedPlayers[socket.id];
         var appleTV = connectedAppleTvs[player.inAppleTv];
         console.log(player.name + " chose a side");
+		
+		//Home screen list
+		var newPlayer = connectedPlayers[socket.id];
+         io.to(appleTV.id).emit('addPlayerToTeamRed', newPlayer.name);
+		
         for (var i = 0; i < appleTV.players.length; i++) {
         	console.log(appleTV.players[i] + " === " + socket.id);
         	if (appleTV.players[i] === socket.id) {
@@ -206,6 +211,11 @@ io.on("connection", function(socket) {
         var player = connectedPlayers[socket.id];
         var appleTV = connectedAppleTvs[player.inAppleTv];
         console.log(player.name + " chose a side");
+		
+		//Home screen list
+		var newPlayer = connectedPlayers[socket.id];
+         io.to(appleTV.id).emit('addPlayerToTeamBlue', newPlayer.name);
+		
         for (var i = 0; i < appleTV.players.length; i++) {
         	console.log(appleTV.players[i] + " === " + socket.id);
         	if (appleTV.players[i] === socket.id) {
@@ -222,6 +232,11 @@ io.on("connection", function(socket) {
         var player = connectedPlayers[socket.id];
         var appleTV = connectedAppleTvs[player.inAppleTv];
         console.log(player.name + " chose a side");
+		
+		//Home screen list
+		var newPlayer = connectedPlayers[socket.id];
+         io.to(appleTV.id).emit('addPlayerToTeamMidden', newPlayer.name);
+		
         for (var i = 0; i < appleTV.players.length; i++) {
         	console.log(appleTV.players[i] + " === " + socket.id);
         	if (appleTV.players[i] === socket.id) {
