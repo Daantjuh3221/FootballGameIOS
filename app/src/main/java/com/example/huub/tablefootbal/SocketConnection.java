@@ -71,7 +71,7 @@ public class SocketConnection extends Application {
         @Override
         public void call(final Object... args) {
             System.out.println("Connected");
-            Constants.isConnected = true;
+            Constants.isConnectedServer = true;
         }
     };
 
@@ -164,7 +164,7 @@ public class SocketConnection extends Application {
                     if (mLoginListener != null){
                         if (exists) {
                             System.out.println("Apple tv exist");
-                            Constants.isConnected = exists;
+                            Constants.isConnectedAppleTV = exists;
                             mLoginListener.connectedToAppleTV(exists);
                         } else{
                             System.out.println("Apple tv does not exist");

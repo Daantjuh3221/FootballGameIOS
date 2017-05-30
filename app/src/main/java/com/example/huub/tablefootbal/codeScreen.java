@@ -62,7 +62,7 @@ public class codeScreen extends AppCompatActivity {
             mExists = (boolean)args[0];
             if (!mExists) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                Constants.isConnected = true;
+                Constants.isConnectedAppleTV = true;
                 editor.putString("joinCode", Constants.JOINCODE);
                 editor.commit();
                 if (Constants.isPlayerOne){
@@ -79,7 +79,7 @@ public class codeScreen extends AppCompatActivity {
 
             } else{
                 Constants.USERNAME = "";
-                Constants.isConnected = false;
+                Constants.isConnectedAppleTV = false;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
