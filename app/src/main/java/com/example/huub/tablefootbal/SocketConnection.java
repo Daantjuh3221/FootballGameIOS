@@ -31,7 +31,6 @@ public class SocketConnection extends Application {
         try {
             IO.Options opt = new IO.Options();
             opt.reconnection = true;
-            opt.reconnectionAttempts = 5;
             mSocket = IO.socket(Constants.SERVER_URL);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
@@ -59,6 +58,10 @@ public class SocketConnection extends Application {
         mSocket.on("connect_error", onSocketConnectError);
         mSocket.on("error", onSocketError);
         mSocket.on(Socket.EVENT_CONNECT, onConnect);
+        mSocket.on(Socket.EVENT_RECONNECT_ATTEMPT, onReconnectAttempt);
+        mSocket.on(Socket.EVENT_RECONNECT_FAILED, onReconnectFailed);
+        mSocket.on(Socket.EVENT_RECONNECTING, onReconnecting);
+
         mSocket.on("usernameExists", onUsernameExists);
         mSocket.on("appleTvExists", onAppleTvExists);
         return mSocket;
@@ -76,6 +79,34 @@ public class SocketConnection extends Application {
     };
 
     ///////////////////////////
+    //Reconnect handeling
+    //////////////////////////
+    private Emitter.Listener onReconnectAttempt = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            System.out.println("Reconnect Atempt: " + args[0].toString());
+            if (args.toString().equals("5")){
+                mSocket.disconnect();
+                mSocket.off();
+            }
+        }
+    };
+
+    private Emitter.Listener onReconnectFailed = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            System.out.println("Reconnect Failed: " + args[0].toString());
+        }
+    };
+
+    private Emitter.Listener onReconnecting = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            System.out.println("Reconnecting: " + args[0].toString());
+        }
+    };
+
+    ///////////////////////////
     //Error handeling
     //////////////////////////
     private Emitter.Listener onDisconnect = new Emitter.Listener() {
@@ -86,9 +117,10 @@ public class SocketConnection extends Application {
             public void run() {
             if (mErrorListener != null){
                 mErrorListener.disconnected();
-                mSocket.disconnect();
-                mSocket.off();
+                //mSocket.disconnect();
                 System.out.println("DISCONNECTED");
+                Constants.isConnectedAppleTV = false;
+                Constants.isConnectedServer = false;
             } else{
                 System.out.println("Mlistener is null");
             }
@@ -108,8 +140,8 @@ public class SocketConnection extends Application {
                 if (mErrorListener != null){
                     mErrorListener.socketError(args[0].toString());
                     mErrorListener.disconnected();
-                    mSocket.disconnect();
-                    mSocket.off();
+//                    mSocket.disconnect();
+//                    mSocket.off();
                     System.out.println("SOCKET ERROR");
                 } else{
                     System.out.println("Mlistener is null");
@@ -127,8 +159,8 @@ public class SocketConnection extends Application {
                 public void run() {
                     if (mErrorListener != null){
                         mErrorListener.socketConnectError(args[0].toString());
-                        mSocket.disconnect();
-                        mSocket.off();
+//                        mSocket.disconnect();
+//                        mSocket.off();
                         System.out.println("CONNECT ERROR");
                     } else{
                         System.out.println("Mlistener is null");
@@ -162,8 +194,9 @@ public class SocketConnection extends Application {
                 public void run() {
                     boolean exists = (boolean)args[0];
                     if (mLoginListener != null){
+                        System.out.println("value that we get is: " + exists);
                         if (exists) {
-                            System.out.println("Apple tv exist");
+                            System.out.println("Apple tv exist value that we get is: " + exists);
                             Constants.isConnectedAppleTV = exists;
                             mLoginListener.connectedToAppleTV(exists);
                         } else{

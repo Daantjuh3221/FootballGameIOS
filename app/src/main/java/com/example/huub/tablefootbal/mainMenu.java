@@ -6,14 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 //tja
 
@@ -34,7 +31,7 @@ public class mainMenu extends AppCompatActivity {
         mPlayLocal = (Button) findViewById(R.id.startgameButton);
         mUsername = (TextView)findViewById(R.id.username);
         mJoinCode = (TextView)findViewById(R.id.lblJoinCode);
-        mJoinStatus = (TextView)findViewById(R.id.lblJoinedStatus);
+        mJoinStatus = (TextView)findViewById(R.id.lblServerStatus);
         mRefreshButton = (ImageView) findViewById(R.id.imgRefreshButton);
 
         mUsername.setText(Constants.USERNAME);
@@ -46,6 +43,8 @@ public class mainMenu extends AppCompatActivity {
             mJoinStatus.setText(Constants.DISCONNECTEDTEXT);
         }
 
+
+        System.out.println("value in main menu is: " + Constants.isConnectedAppleTV);
         if (Constants.isConnectedAppleTV){
             mJoinCode.setText(Constants.JOINCODE);
         } else{

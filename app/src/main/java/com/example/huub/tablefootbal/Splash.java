@@ -75,9 +75,6 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
             Constants.isLogedin = true;
             if(mAppleTV){
                 mSocket.emit("userJoinAppleTV", Constants.JOINCODE);
-                Intent i = new Intent(this, mainMenu.class);
-                startActivity(i);
-                finish();
             } else{
                 Intent i = new Intent(this, mainMenu.class);
                 startActivity(i);
@@ -98,18 +95,22 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
 
     @Override
     public void connectedToAppleTV(boolean connectedToAppleTV) {
-        if (connectedToAppleTV){
-
+        System.out.println("connectedToAppleTV?: " + connectedToAppleTV);
+        if (Constants.isPlayerOne){
+            Intent i = new Intent(this, mainMenu.class);
+            startActivity(i);
+            finish();
         } else{
-
+            Intent i = new Intent(this, waiting_screen.class);
+            startActivity(i);
+            finish();
         }
+
     }
 
     @Override
     public void isPlayerOne(boolean isPlayerOne) {
-        if (isPlayerOne){
-            //go to waiting screen
-        }
+
     }
 
     @Override

@@ -163,8 +163,15 @@ public class MainMenuSettings extends AppCompatActivity {
 
 
     public void returnButton(View v) {
-        Intent i = new Intent(getApplicationContext(), mainMenu.class);
-        startActivity(i);
-        finish();
+        if (Constants.isPlayerOne){
+            Intent i = new Intent(getApplicationContext(), mainMenu.class);
+            startActivity(i);
+            finish();
+        } else{
+            Intent i = new Intent(getApplicationContext(), waiting_screen.class);
+            startActivity(i);
+            finish();
+        }
+
     }
 }

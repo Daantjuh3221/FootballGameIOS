@@ -91,8 +91,9 @@ public class localGameSettings extends AppCompatActivity {
                     if (mPlayersMidden.contains(sendedUsername)){
                         mPlayersMidden.remove(sendedUsername);
                     }
-                    updateUI();
                     mPlayersRed.add(sendedUsername);
+                    updateUI();
+
                 }
             });
         }
@@ -111,8 +112,9 @@ public class localGameSettings extends AppCompatActivity {
                     if (mPlayersMidden.contains(sendedUsername)){
                         mPlayersMidden.remove(sendedUsername);
                     }
-                    updateUI();
                     mPlayersBlue.add(sendedUsername);
+                    updateUI();
+
                 }
             });
         }
@@ -131,8 +133,9 @@ public class localGameSettings extends AppCompatActivity {
                     if (mPlayersBlue.contains(sendedUsername)){
                         mPlayersBlue.remove(sendedUsername);
                     }
-                    updateUI();
                     mPlayersMidden.add(sendedUsername);
+                    updateUI();
+
                 }
             });
         }
@@ -141,30 +144,29 @@ public class localGameSettings extends AppCompatActivity {
 
     private void updateUI() {
 
-        mBtnPlay.setEnabled(false);
 
         // If the list adapter is null, a new one will be instantiated and set on our list view.
         if (mAdapterBlue == null) {
             mAdapterBlue = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, mPlayersBlue);
             mListViewBlue.setAdapter(mAdapterBlue);
-        }else {
-            // When the adapter is not null, it has to know what to do when our dataset changes, when a change happens we need to call this method on the adapter so that it will update internally.
-            mAdapterBlue.notifyDataSetChanged();
         }
         if (mAdapterRed == null) {
             mAdapterRed = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mPlayersRed);
             mListViewRed.setAdapter(mAdapterRed);
-        }else {
-            // When the adapter is not null, it has to know what to do when our dataset changes, when a change happens we need to call this method on the adapter so that it will update internally.
-            mAdapterRed.notifyDataSetChanged();
         }
         if (mAdapterMidden == null) {
             mAdapterMidden = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, mPlayersMidden);
             mListViewMidden.setAdapter(mAdapterMidden);
-        } else {
-            // When the adapter is not null, it has to know what to do when our dataset changes, when a change happens we need to call this method on the adapter so that it will update internally.
-            mAdapterMidden.notifyDataSetChanged();
         }
+        mAdapterMidden.notifyDataSetChanged();
+        mAdapterRed.notifyDataSetChanged();
+        mAdapterBlue.notifyDataSetChanged();
+
+
+
+//        if (mListViewBlue.getCount() <= 1 && mListViewRed.getCount() <= 1 && mListViewMidden.getCount() != 0){
+//            mBtnPlay.setEnabled(false);
+//        }
     }
 
     public void joinTeamRed (View v) {

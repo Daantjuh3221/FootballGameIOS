@@ -59,7 +59,7 @@
         android:layout_below="@+id/appletvheader" />
 
     <TextView
-        android:id="@+id/lblJoinedStatus"
+        android:id="@+id/lblServerStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:typeface="monospace"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_refresh_black_24dp"
         android:layout_marginTop="2dp"
-        android:layout_below="@+id/lblJoinedStatus"
+        android:layout_below="@+id/lblWaitingText"
         android:layout_alignStart="@+id/serverstatus" />
 
     <TextView
