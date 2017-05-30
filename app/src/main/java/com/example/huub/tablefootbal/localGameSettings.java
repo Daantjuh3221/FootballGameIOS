@@ -74,6 +74,7 @@ public class localGameSettings extends AppCompatActivity {
         mBtnRed = (Button) findViewById(R.id.joinTeamRed);
         mBtnPlay = (Button) findViewById(R.id.playLocalGame);
 
+
         updateUI();
 
     }
