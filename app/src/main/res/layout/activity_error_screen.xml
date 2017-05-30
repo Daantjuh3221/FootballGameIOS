@@ -30,7 +30,7 @@
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/custom_text_background"
+        android:background="@drawable/custom_text_background_error"
         android:text="Default error Default error Default error Default error Default error" />
 
 </RelativeLayout>
