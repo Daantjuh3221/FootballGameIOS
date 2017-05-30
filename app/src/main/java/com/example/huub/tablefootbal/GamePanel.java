@@ -75,7 +75,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private float startVelocity;
     private float swipeVelocity;
 
-    private Vibrator buzz;
+    private Vibrator myVib;
 
 
 
@@ -162,7 +162,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         // get pointer ID
         int pointerId = event.getPointerId(pointerIndex);
 
-        buzz = (Vibrator)this.getContext().getSystemService(VIBRATOR_SERVICE);
+        myVib = (Vibrator)this.getContext().getSystemService(VIBRATOR_SERVICE);
 
         switch(action) {
             case MotionEvent.ACTION_DOWN:
@@ -204,7 +204,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
                     swipeVelocity = maxXVelocity - startVelocity;
                     System.out.println("Swipe: " + swipeVelocity);
                     mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
-                    buzz.vibrate(50);
+                    myVib.vibrate(Constants.VIBRATIONDEFAULT);
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:

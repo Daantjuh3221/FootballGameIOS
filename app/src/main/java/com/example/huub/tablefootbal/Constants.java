@@ -20,4 +20,7 @@ public class Constants {
     public static List TEAMBLUE;
     public static List TEAMRED;
     public static final String PREFERENCEFILENAME = "OverallPreferences";
+    public static final int VIBRATIONDEFAULT = 50;
+    public static final long [] VIBRATIONGOAL = {0, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 1000};
+    public static final long [] VIBRATIONLOSE = {0, 250, 500, 250, 500, 1000};
 }
