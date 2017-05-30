@@ -113,6 +113,25 @@ class Ball: SKSpriteNode {
         }
         
         if(firstTouches.contains("foot")){
+            //Checks if its a own goal
+            if(position.x > 0){
+                //red scored own goal
+                if(checkPosession() == "red"){
+                    return false
+                }else if(checkPosession() == "blue"){
+                    return true
+                }
+            }else {
+                //invert if blue scored own goal
+                if(checkPosession() == "red"){
+                    return true
+                }else if(checkPosession() == "blue"){
+                    return false
+                }
+            }
+            
+            
+            
             //What happens when its a foot
             if(firstTouches.contains("4") || firstTouches.contains("5")){
                 //Midfield cant score
