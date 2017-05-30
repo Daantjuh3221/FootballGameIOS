@@ -119,6 +119,7 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
 
     @Override
     public void socketError(String error) {
+        Constants.isConnectedServer = false;
         Toast.makeText(this, "error: "  + error, Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, joinScreen.class);
         startActivity(i);
@@ -127,6 +128,7 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
 
     @Override
     public void socketConnectError(String error) {
+        Constants.isConnectedServer = false;
         Toast.makeText(this, "Connection error: could not connect to the server!", Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, joinScreen.class);
         startActivity(i);
