@@ -85,6 +85,27 @@ class ConnectViewController: UIViewController {
             
             updatePlayerList()
         }
+        socket.on("addPlayerToTeamMidden"){data, ack in
+            //Removes player from both list
+            //Check if other list contains player and delete it
+            if let index = Constants.TEAMBLUE.index(of: (data[0] as? String)!) {
+                Constants.TEAMBLUE.remove(at: index)
+            }
+            
+            //Check if other list contains player and delete it
+            if let index = Constants.TEAMRED.index(of: (data[0] as? String)!) {
+                Constants.TEAMRED.remove(at: index)
+            }
+            
+            updatePlayerList()
+        }
+        
+        /*
+         //Send team list
+         var newPlayer = connectedPlayers[socket.id];
+         io.to(appleTV.id).emit('addPlayerToTeamMidden', newPlayer.name);
+ 
+         */
  
         func updatePlayerList(){
             //Updates both player lists!
@@ -101,21 +122,6 @@ class ConnectViewController: UIViewController {
                 //self.redList.text.append(", ")
                 print("list: red: " + players)
             }
-        }
-        
-        socket.on("addPlayerToTeamMidden"){data, ack in
-            //Removes player from both list
-            //Check if other list contains player and delete it
-            if let index = Constants.TEAMBLUE.index(of: (data[0] as? String)!) {
-                Constants.TEAMBLUE.remove(at: index)
-            }
-            
-            //Check if other list contains player and delete it
-            if let index = Constants.TEAMRED.index(of: (data[0] as? String)!) {
-                Constants.TEAMRED.remove(at: index)
-            }
-            
-            updatePlayerList()
         }
         
         socket.on("startGameOnAppleTV") {data, ack in

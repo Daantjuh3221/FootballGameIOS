@@ -27,7 +27,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let gameCamera:SKCameraNode = SKCameraNode()
     
-    
+    //Gameover Var
+    var gameOverCounter = 120
     
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
@@ -69,6 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             userNames[i] = Constants.TEAMRED[1]
                         }
                     }else if (Constants.TEAMRED.count > 1){
+                        //If more than 2 players are connected
                         if(i < 3){
                             //Defender
                             userNames[i] = Constants.TEAMRED[0]
@@ -106,9 +108,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        print(userNames)
-        
-        
         physicsWorld.contactDelegate = self
         
         //Init the ball
@@ -118,13 +117,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             theBall.Init(gamescene: self, scoreLimit: scoreLimit)
         }
         
-//        //Username list must be equal to list send to server!
-//        //To-Do code here
-//        let socket = SocketIOManager.sharedInstance.getSocket();
-//        socket.on("") {data, ack in
-//            //teamRed = socketTeamRed
-//            //teamBlue = socketTeamBlue
-//        }
         
         for i in 0...7{
             //Makes all sticks
@@ -200,14 +192,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
+        
+        //Start a screenshake
         if(theBall.isScored && theBall.isGoalAllowed()){
             goalShake.StartShake()
-            print("Shake")
         }
+        
+        //Updates all sticks
         for i in sticks{
             i.update()
         }
+        
+        //Update the ball
         theBall.update()
+        
+        //Allows screenshake
         goalShake.Shake()
+        
+        //Check if game is won and go to home screen
+        if(theBall.isGameOver()){
+            gameOverCounter -= 1
+            if(gameOverCounter < 1){
+                //Go to home screen
+                
+            }
+        }
     }//End Update
 }

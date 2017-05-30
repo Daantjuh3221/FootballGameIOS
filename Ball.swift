@@ -144,10 +144,10 @@ class Ball: SKSpriteNode {
         
         if(teamRed.contains(firstTouches) && teamRed.contains(secondTouches)){
                 teamPos = "red"
-        }
-        
-        if(teamBlue.contains(firstTouches) && teamBlue.contains(secondTouches)){
+        }else if(teamBlue.contains(firstTouches) && teamBlue.contains(secondTouches)){
             teamPos = "blue"
+        }else {
+            teamPos = ""
         }
 
         
@@ -211,6 +211,14 @@ class Ball: SKSpriteNode {
             physicsBody?.velocity.dx = 0
             
             //Go to home scene
+        }
+    }
+    
+    func isGameOver() -> Bool{
+        if(score.hasWon){
+            return true
+        }else{
+            return false
         }
     }
     

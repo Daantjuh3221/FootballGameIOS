@@ -39,11 +39,7 @@ class SocketIOManager: NSObject {
                 print(players)
                 Constants.TEAMRED.append((players as? String)!)
             }
-            
-            //            personTeamBlue = (data[0] as? String)!
-            //            personTeamRed = (data[1] as? String)!
         }
-        //socket.onAny {print("Got event: \($0.event), with items: \($0.items)")}
         
         
     }

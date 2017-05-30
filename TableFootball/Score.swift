@@ -116,19 +116,19 @@ class Score:SKSpriteNode{
             //Someone has won
             //setText(text: String(scoreRed) + " : " + String(scoreBlue))
             setText(text: String(scoreRed) + " : " + String(scoreBlue), textF: scoreLBL, textS: scoreLBLShadow)
-                
+            
+            hasWon = true
+            
             if(scoreRed > scoreBlue){
                 //Red has won
                 winLabel.fontColor = UIColor.red
                 setText(text: "Red has won", textF: winLabel, textS: winLabelShadow)
                 winnerRed = true
-                hasWon = true
             }else if(scoreBlue > scoreRed){
                 //Blue has won
                 winLabel.fontColor = UIColor.blue
                 setText(text: "Blue has won!", textF: winLabel, textS: winLabelShadow)
                 winnerRed = false
-                hasWon = true
             }
         }
     }
