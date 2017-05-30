@@ -79,6 +79,7 @@ public class mainMenu extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+
     public void playLocal (View v) {
 
         mSocket.emit("playLocal");

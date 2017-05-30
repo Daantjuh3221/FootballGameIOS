@@ -63,6 +63,8 @@ public class joinScreen extends AppCompatActivity implements SocketConnection.on
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+
+
     @Override
     public void isPlayerOne(boolean playerOne){
 

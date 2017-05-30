@@ -168,8 +168,11 @@ public class localGameSettings extends AppCompatActivity {
         }
     }
 
+    //knop om voor team rood te kiezen
+    //bij het selecteren van de knop vibreert de telefoon even
+    //wanneer er eenmaal op de knop gedrukt is, wordt deze uitgeschakeld en de andere 2 knoppen op het scherm ingeschakeld
     public void joinTeamRed (View v) {
-        myVib.vibrate(50);
+        myVib.vibrate(Constants.VIBRATIONDEFAULT);
         mBtnRed.setEnabled(false);
         mBtnMidden.setEnabled(true);
         mBtnBlue.setEnabled(true);
@@ -187,8 +190,11 @@ public class localGameSettings extends AppCompatActivity {
     }
 
 
+    //knop om voor team blauw te kiezen
+    //bij het selecteren van de knop vibreert de telefoon even
+    //wanneer er eenmaal op de knop gedrukt is, wordt deze uitgeschakeld en de andere 2 knoppen op het scherm ingeschakeld
     public void joinTeamBlue (View v) {
-        myVib.vibrate(50);
+        myVib.vibrate(Constants.VIBRATIONDEFAULT);
         mBtnRed.setEnabled(true);
         mBtnMidden.setEnabled(true);
         mBtnBlue.setEnabled(false);
@@ -205,8 +211,9 @@ public class localGameSettings extends AppCompatActivity {
         mSocket.emit("chooseSideBlue");
     }
 
+
     public void joinTeamMidden (View v) {
-        myVib.vibrate(50);
+        myVib.vibrate(Constants.VIBRATIONDEFAULT);
         mBtnRed.setEnabled(true);
         mBtnMidden.setEnabled(false);
         mBtnBlue.setEnabled(true);
