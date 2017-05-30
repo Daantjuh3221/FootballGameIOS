@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/footballfield">
+    android:background="@drawable/mainmenu">
 
     <EditText
         android:id="@+id/codeText"
@@ -25,8 +25,12 @@
 
     <Button
         android:id="@+id/submitCodeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:background="@drawable/custom_button"
         android:onClick="submitCode"
         android:text="Submit Code"
         android:layout_alignParentBottom="true"
