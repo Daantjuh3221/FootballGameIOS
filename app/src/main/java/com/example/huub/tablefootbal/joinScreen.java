@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import io.socket.client.Socket;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Lars on 8-3-2017.
  */
