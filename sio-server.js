@@ -105,7 +105,8 @@ io.on("connection", function(socket) {
         	connectedPlayers[socket.id] = {"name" : name, "inAppleTv" : null, "device": device, "team": null, "socket": socket.id};
 	        sockets.push(socket);
 	        console.log("update, " + connectedPlayers[socket.id].name + " is online.");
-        }
+        } 
+        io.to(socket.id).emit("loginSucceeded", true);
 	});
 
     socket.on("checkSocketID", function() {
@@ -170,14 +171,20 @@ io.on("connection", function(socket) {
     socket.on("playLocal", function() {
         console.log("I want to play local");
         var player = connectedPlayers[socket.id];
-        var appleTV = connectedAppleTvs[player.inAppleTv];
-        console.log(appleTV.players);
-        for (var i = 0; i < appleTV.players.length; i++) {
-            if (appleTV.players[i] === socket.id) {
-            } else {
-                io.to(appleTV.players[i]).emit('startLocal');
+        if (checkIfVarExist(player)) {
+            var appleTV = connectedAppleTvs[player.inAppleTv];
+            if (checkIfVarExist(appleTV)) {
+                console.log(appleTV.players);
+                for (var i = 0; i < appleTV.players.length; i++) {
+                    if (appleTV.players[i] === socket.id) {
+                    } else {
+                        io.to(appleTV.players[i]).emit('startLocal');
+                    }
+                }
             }
-        };
+            
+        }
+        
     });
 
     socket.on("chooseSideRed", function() {
@@ -227,13 +234,6 @@ io.on("connection", function(socket) {
     });
 
     socket.on("userJoinAppleTV", function(joinCode) {
-        
-    	//VERWIJDER
-        if (joinCode === "1234") {
-        	var newAppleTV = new AppleTV(joinCode);
-	        connectedAppleTvs[joinCode] = newAppleTV;
-	        console.log("update, an apple tv has connected. With joinCode: " + joinCode);
-        }
         var appleTV = connectedAppleTvs[joinCode];
         var exists = false;
         if (checkIfAppleTVExists(joinCode)) {
@@ -244,16 +244,16 @@ io.on("connection", function(socket) {
                 io.to(socket.id).emit('isPlayerOne', true);
             } else {
             	//VERWIJDER
-                io.to(socket.id).emit('isPlayerOne', true);
+                io.to(socket.id).emit('isPlayerOne', false);
             }
             //io.to(socket.id).emit('isPlayerOne', isPlayerOne);
             var newPlayer = connectedPlayers[socket.id];
             newPlayer.inAppleTv = joinCode;
+            exists = true;
             io.to(appleTV.id).emit('userJoinedAppleTV', newPlayer.name);
             console.log("AppleTV exists");
-        } else if(joinCode !== "1234"){
+        } else {
             console.log("appleTV does not exists");
-            exists = true;
         }
         socket.emit("appleTvExists", exists);
     });
