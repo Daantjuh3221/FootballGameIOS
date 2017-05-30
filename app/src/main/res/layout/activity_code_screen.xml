@@ -8,20 +8,21 @@
 
     <EditText
         android:id="@+id/codeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_marginTop="44dp"
         android:ems="10"
-        android:hint="Code"
         android:inputType="textPersonName"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColorHint="#ffffff"
-        android:textColor="#ffffff"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
-        android:shadowDx="5"
-        android:shadowDy="5"/>
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:background="@drawable/custom_edittext"
+        android:hint="Enter your code..."/>
 
     <Button
         android:id="@+id/submitCodeButton"

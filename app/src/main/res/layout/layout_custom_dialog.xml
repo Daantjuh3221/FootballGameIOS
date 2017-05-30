@@ -14,6 +14,9 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:typeface="monospace"
+            android:textStyle="bold"
             android:layout_weight=".3"
             android:text="Username:" />
 
@@ -22,6 +25,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".7"
+            android:textColor="#000000"
+            android:typeface="monospace"
             android:imeOptions="actionDone"
             android:singleLine="true" />
     </LinearLayout>
