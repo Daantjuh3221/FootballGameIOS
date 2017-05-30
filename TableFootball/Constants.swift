@@ -17,6 +17,10 @@ struct Constants {
     static var CONNECTEDPLAYERS:[String] = []
     static var JOINCODE = "notDefined"
     
+    //Used for team on begin screen
+    static var TEAMREDLIST:[String] = []
+    static var TEAMBLUELIST:[String] = []
+    
     //All positions off the ball
     static let STARTPOINT_TEAMBLUE:CGPoint = CGPoint(x:350,y:0)
     static let STARTPOINT_TEAMRED:CGPoint = CGPoint(x:-350,y:0)

@@ -199,10 +199,10 @@
 			children = (
 				DF00F2381E81328400C88A2F /* Util */,
 				D125C40D1E81131E00A63590 /* AppDelegate.swift */,
-				D125C40F1E81131E00A63590 /* GameScene.sks */,
 				D125C4111E81131E00A63590 /* Actions.sks */,
 				D125C4131E81131E00A63590 /* Game.xcassets */,
 				D125C4151E81131E00A63590 /* GameScene.swift */,
+				D125C40F1E81131E00A63590 /* GameScene.sks */,
 				D125C4171E81131E00A63590 /* GameViewController.swift */,
 				D125C4191E81131E00A63590 /* Main.storyboard */,
 				D125C41C1E81131E00A63590 /* Assets.xcassets */,

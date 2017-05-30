@@ -38,6 +38,9 @@ class Ball: SKSpriteNode {
     
     var redInPosession:Bool = false
     
+    //Socket
+    let socket = SocketIOManager.sharedInstance.getSocket();
+    
     func Init(gamescene:GameScene, scoreLimit: Int){
         //Initialize the ball here
         let imageTexture = SKTexture(imageNamed: "ballSprite")
@@ -71,6 +74,7 @@ class Ball: SKSpriteNode {
     func didScored(){
         isScored = true
         run(cheerSound[0])
+        
     }
     
     func setTouches(currentTouch: String){
@@ -233,10 +237,16 @@ class Ball: SKSpriteNode {
             if(position.x < 0){
                 //Left scored (Blue)
                 score.blueScored()
+                
+                //Emit to socket if scored
+                socket.emit("goalisscored", "blue")
             }
             else{
                 //Right Scored (Red)
                 score.redScores()
+                
+                //Emit to socket if scored
+                socket.emit("goalisscored", "red")
             }
             checkIfWon()
             

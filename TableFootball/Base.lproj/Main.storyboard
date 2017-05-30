@@ -30,7 +30,7 @@
         <!--Connect View Controller-->
         <scene sceneID="GEq-Gf-xiK">
             <objects>
-                <viewController id="6Fy-WT-fUI" customClass="ConnectViewController" customModule="TableFootball" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConnectViewController" id="6Fy-WT-fUI" customClass="ConnectViewController" customModule="TableFootball" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aSH-mf-VT1"/>
                         <viewControllerLayoutGuide type="bottom" id="3CW-LW-cvP"/>

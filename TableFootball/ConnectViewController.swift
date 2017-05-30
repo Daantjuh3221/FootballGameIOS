@@ -100,12 +100,6 @@ class ConnectViewController: UIViewController {
             updatePlayerList()
         }
         
-        /*
-         //Send team list
-         var newPlayer = connectedPlayers[socket.id];
-         io.to(appleTV.id).emit('addPlayerToTeamMidden', newPlayer.name);
- 
-         */
  
         func updatePlayerList(){
             //Updates both player lists!
@@ -125,13 +119,11 @@ class ConnectViewController: UIViewController {
         }
         
         socket.on("startGameOnAppleTV") {data, ack in
-            //Reset both team list. So no invisible player are playing
-            //Constants.TEAMRED.removeAll()
-            //Constants.TEAMBLUE.removeAll()
             
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "GameViewController") as! UINavigationController
             self.present(vc, animated: true, completion: nil)
+            
         }
     }
     

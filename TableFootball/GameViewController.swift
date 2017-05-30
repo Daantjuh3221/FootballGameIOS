@@ -38,10 +38,28 @@ class GameViewController: UIViewController {
                     view.showsFPS = true
                     view.showsNodeCount = true
                 }
+                
+                sceneNode.viewController = self
+                
             }
         }
     }
 
+    func goToHome(){
+        //Go to join Screen
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ConnectViewController")  as! ConnectViewController
+        self.present(vc, animated: true, completion: nil)
+        
+        //Clear listst
+        Constants.TEAMBLUE.removeAll()
+        Constants.TEAMRED.removeAll()
+        Constants.TEAMREDLIST.removeAll()
+        Constants.TEAMBLUELIST.removeAll()
+        
+        //Emit to the android phones to go back
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.

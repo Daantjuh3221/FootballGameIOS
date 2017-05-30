@@ -30,6 +30,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Gameover Var
     var gameOverCounter = 120
     
+    // we need to make sure to set this when we create our GameScene
+    var viewController: GameViewController!
+    
     //set sticks  on or of (1, 2, 3, 4, 5, 6, 7, 8)th Stcick
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
@@ -43,6 +46,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Lists of both teams
     var teamBlue:[String] = []
     var teamRed:[String] = []
+    
+    
+    
     
     override func didMove(to view: SKView) {
         print(Constants.TEAMRED)
@@ -131,6 +137,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     self.childNode(withName: "stick0" + String(i + 1))?.alpha = 0
             }
         }
+        
+        
+        
     }// End did move
     
     override func sceneDidLoad() {
@@ -189,9 +198,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }//End collision
     
+    func goToHomeScreen(){
+        //Switch to home screen and reset list
+        self.viewController.goToHome()
+        
+        //reset game rules
+        let socket = SocketIOManager.sharedInstance.getSocket();
+        socket.emit("resetgamedata")
+    }
     
+    //var i = 50
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
+        
+        //i -= 1
+        //if(i < 0){
+        //    goToHomeScreen()
+        //}
         
         //Start a screenshake
         if(theBall.isScored && theBall.isGoalAllowed()){
@@ -214,7 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameOverCounter -= 1
             if(gameOverCounter < 1){
                 //Go to home screen
-                
+                goToHomeScreen()
             }
         }
     }//End Update

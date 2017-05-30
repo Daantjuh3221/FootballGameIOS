@@ -20,7 +20,7 @@ class Score:SKSpriteNode{
     var scoreLBLShadow = SKLabelNode()
     
     //Score
-    var scoreRed:Int = 0
+    var scoreRed:Int = 3
     var scoreBlue:Int = 0
     
     //Score limit, can be set in the constructor
