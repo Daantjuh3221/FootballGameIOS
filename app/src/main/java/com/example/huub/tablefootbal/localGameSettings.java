@@ -16,7 +16,7 @@ import java.util.List;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class localGameSettings extends AppCompatActivity {
+public class localGameSettings extends AppCompatActivity implements SocketConnection.onPlayGameEvent {
 
     private ListView mListViewBlue;
     private ListView mListViewRed;
@@ -73,6 +73,9 @@ public class localGameSettings extends AppCompatActivity {
         mBtnBlue = (Button) findViewById(R.id.joinTeamBlue);
         mBtnRed = (Button) findViewById(R.id.joinTeamRed);
         mBtnPlay = (Button) findViewById(R.id.playLocalGame);
+        if (!Constants.isPlayerOne){
+            mBtnPlay.setText("Ready");
+        }
 
         updateUI();
 
@@ -163,10 +166,12 @@ public class localGameSettings extends AppCompatActivity {
         mAdapterBlue.notifyDataSetChanged();
 
 
+        if (Constants.isPlayerOne){
+            if (mListViewBlue.getCount() <= 1 && mListViewRed.getCount() <= 1 && mListViewMidden.getCount() != 0){
+                mBtnPlay.setEnabled(false);
+            }
+        }
 
-//        if (mListViewBlue.getCount() <= 1 && mListViewRed.getCount() <= 1 && mListViewMidden.getCount() != 0){
-//            mBtnPlay.setEnabled(false);
-//        }
     }
 
     public void joinTeamRed (View v) {
@@ -226,18 +231,36 @@ public class localGameSettings extends AppCompatActivity {
 
 
     public void playLocalGame(View v) {
-        for (String player:mPlayersBlue) {
-            mSocket.emit("addPlayer", "teamBlue", player);
-        };
-        for (String player:mPlayersRed) {
-            mSocket.emit("addPlayer", "teamRed", player);
-        };
-        Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
-        System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
-        Constants.TEAMBLUE = mPlayersBlue;
-        Constants.TEAMRED = mPlayersRed;
-        mSocket.emit("startGame");
-        startActivity(i);
-        finish();
+
+        if (Constants.isPlayerOne){
+            for (String player:mPlayersBlue) {
+                mSocket.emit("addPlayer", "teamBlue", player);
+            };
+            for (String player:mPlayersRed) {
+                mSocket.emit("addPlayer", "teamRed", player);
+            };
+            Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+            System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
+            Constants.TEAMBLUE = mPlayersBlue;
+            Constants.TEAMRED = mPlayersRed;
+            mSocket.emit("startGame");
+
+            startActivity(i);
+            finish();
+        } else{
+            mBtnPlay.setEnabled(false);
+            mListViewMidden.setEnabled(false);
+            mListViewBlue.setEnabled(false);
+            mListViewRed.setEnabled(false);
+            mBtnPlay.setText("Waiting for player one");
+            mSocket.emit("playerReady");
+        }
+
+
+    }
+
+    @Override
+    public void enableStart() {
+        mBtnPlay.setEnabled(true);
     }
 }

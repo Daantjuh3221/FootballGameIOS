@@ -3,10 +3,7 @@ package com.example.huub.tablefootbal;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import java.net.URISyntaxException;
 
@@ -23,6 +20,7 @@ public class SocketConnection extends Application {
 
     private boolean loginSucceeded;
     private Context mContext;
+    private onPlayGameEvent mPlayGameListener;
     private onErrorSocketEvent mErrorListener;
     private onSocketGotLoginEvent mLoginListener;
 
@@ -45,6 +43,9 @@ public class SocketConnection extends Application {
             if(mContext instanceof onSocketGotLoginEvent) {
                 mLoginListener = (onSocketGotLoginEvent) mContext;
             }
+            if(mContext instanceof onPlayGameEvent) {
+                mPlayGameListener = (onPlayGameEvent) mContext;
+            }
             if(mContext instanceof onErrorSocketEvent) {
                 mErrorListener = (onErrorSocketEvent) mContext;
             }
@@ -57,6 +58,8 @@ public class SocketConnection extends Application {
         mSocket.on("disconnect", onDisconnect);
         mSocket.on("connect_error", onSocketConnectError);
         mSocket.on("error", onSocketError);
+        mSocket.on("startLocal", onStartLocal);
+        mSocket.on("allPlayersAreReady", onAllPlayersAreReady);
         mSocket.on(Socket.EVENT_CONNECT, onConnect);
         mSocket.on(Socket.EVENT_RECONNECT_ATTEMPT, onReconnectAttempt);
         mSocket.on(Socket.EVENT_RECONNECT_FAILED, onReconnectFailed);
@@ -66,6 +69,27 @@ public class SocketConnection extends Application {
         mSocket.on("appleTvExists", onAppleTvExists);
         return mSocket;
     }
+
+    private Emitter.Listener onAllPlayersAreReady = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            ((Activity)(mContext)).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mPlayGameListener != null){
+                        mPlayGameListener.enableStart();
+                    } else{
+                        System.out.println("Mlistener is null");
+                    }
+                }
+            });
+
+        }
+    };
+
+
+
+
 
     ///////////////////////////
     //Connect handeling
@@ -186,6 +210,23 @@ public class SocketConnection extends Application {
         }
     };
 
+    private Emitter.Listener onStartLocal = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            ((Activity)(mContext)).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mLoginListener != null){
+                        mLoginListener.startLocal();
+                    } else{
+                        System.out.println("mlistener is null");
+                    }
+                }
+            });
+
+        }
+    };
+
     private Emitter.Listener onAppleTvExists = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -241,6 +282,11 @@ public class SocketConnection extends Application {
         }
     };
 
+    public interface onPlayGameEvent {
+        void enableStart();
+
+    }
+
     public interface onErrorSocketEvent {
         void disconnected();
         void socketError(String error);
@@ -251,6 +297,7 @@ public class SocketConnection extends Application {
     public interface onSocketGotLoginEvent {
         void isPlayerOne(boolean playerOne);
         void loginSucceeded(boolean loginSucceeded);
+        void startLocal();
         void usernameExists(boolean usernameExists);
         void connectedToAppleTV(boolean connectedToAppleTV);
     }

@@ -31,7 +31,7 @@ public class mainMenu extends AppCompatActivity {
         mPlayLocal = (Button) findViewById(R.id.startgameButton);
         mUsername = (TextView)findViewById(R.id.username);
         mJoinCode = (TextView)findViewById(R.id.lblJoinCode);
-        mJoinStatus = (TextView)findViewById(R.id.lblServerStatus);
+        mJoinStatus = (TextView)findViewById(R.id.lblJoinedStatus);
         mRefreshButton = (ImageView) findViewById(R.id.imgRefreshButton);
 
         mUsername.setText(Constants.USERNAME);

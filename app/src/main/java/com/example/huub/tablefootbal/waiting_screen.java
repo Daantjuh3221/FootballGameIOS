@@ -55,6 +55,7 @@ public class waiting_screen extends AppCompatActivity {
     public void selectSettings (View v) {
         Intent i = new Intent(getApplicationContext(), MainMenuSettings.class);
         startActivity(i);
+        finish();
     }
 
 }

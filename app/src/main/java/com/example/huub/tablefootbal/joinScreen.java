@@ -74,6 +74,11 @@ public class joinScreen extends AppCompatActivity implements SocketConnection.on
     }
 
     @Override
+    public void startLocal() {
+
+    }
+
+    @Override
     public void usernameExists(boolean usernameExists) {
         if (usernameExists){
             Toast.makeText(this, "Username already exists, choose another", Toast.LENGTH_LONG).show();

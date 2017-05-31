@@ -89,6 +89,13 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
     }
 
     @Override
+    public void startLocal() {
+        Intent i = new Intent(this, localGameSettings.class);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
     public void usernameExists(boolean usernameExists) {
 
     }
