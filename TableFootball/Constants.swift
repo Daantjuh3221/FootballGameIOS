@@ -31,9 +31,9 @@ struct Constants {
     
     
     //Player and foot settings
-    static let FOOT_SIZE:CGSize = CGSize(width: 25, height: 50)
+    static let FOOT_SIZE:CGSize = CGSize(width: 25, height: 30)
     static let FOOT_MASS:CGFloat = CGFloat(50)
-    static let FOOT_HEAD_HEIGHT:CGFloat = CGFloat(50)
+    static let FOOT_HEAD_HEIGHT:CGFloat = CGFloat(30)
     //Player var settings
     static var PLAYER_SENSITIVITY:CGFloat = CGFloat(80)
     

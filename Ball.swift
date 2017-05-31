@@ -308,8 +308,10 @@ class Ball: SKSpriteNode {
 
         //If counter has ended
         if(!isPlaying && goalCounter <= 1){
-            if(isGoalAllowed()){
+            
             isPlaying = true
+            
+            if(isGoalAllowed()){
             position = Constants.STARTPOINT_CENTRE
             
                 //Gives a random velocity to the ball
@@ -324,7 +326,6 @@ class Ball: SKSpriteNode {
             physicsBody?.velocity.dx = randomVel * x!
             physicsBody?.velocity.dy = -100
             }else{
-                isPlaying = true
                 if(redFalseScored){
                     position = Constants.STARTPOINT_TEAMBLUE
                 }else{
