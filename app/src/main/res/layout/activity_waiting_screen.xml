@@ -39,7 +39,7 @@
         android:typeface="monospace"
         android:text="AppleTVCode"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-        android:textColor="#FFFF00"
+        android:textColor="#00FF00"
         android:layout_alignStart="@+id/lblJoinedWith"
         android:layout_below="@+id/appletvheader" />
 
@@ -69,7 +69,7 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFFF00"
+        android:textColor="#00FF00"
         android:typeface="monospace"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
         android:layout_alignStart="@+id/lblJoinedWith"

@@ -61,6 +61,7 @@
         <activity
             android:name=".waiting_screen"
             android:label="@string/title_activity_waiting_screen"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

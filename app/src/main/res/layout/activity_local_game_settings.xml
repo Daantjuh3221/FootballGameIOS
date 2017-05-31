@@ -134,6 +134,10 @@
         android:layout_alignStart="@+id/joinTeamBlue"
         android:layout_alignTop="@+id/listViewMidden"
         android:layout_marginStart="13dp"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#00ff00"
         android:clickable="false"
         android:contextClickable="false"
         android:fadeScrollbars="false"
@@ -142,6 +146,6 @@
         android:longClickable="false"
         android:scrollbars="none"
         android:divider="@null"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="0dp" />
 
 </RelativeLayout>
