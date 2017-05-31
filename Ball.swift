@@ -113,6 +113,7 @@ class Ball: SKSpriteNode {
  */
         if(firstTouches == "wall"){
             //Cant score with the wall
+            score.foulText(message: "Scored by wall")
             return false
         }
         
@@ -122,6 +123,7 @@ class Ball: SKSpriteNode {
                 //red scored own goal
                 if(checkPosession() == "red"){
                     //own goal red
+                    score.foulText(message: "Own Goal Red")
                     return false
                 }else if(checkPosession() == "blue"){
                     //goal blue
@@ -134,6 +136,7 @@ class Ball: SKSpriteNode {
                     return true
                 }else if(checkPosession() == "blue"){
                     //own goal blue
+                    score.foulText(message: "Own Goal Blue")
                     return false
                 }
             }
@@ -143,6 +146,7 @@ class Ball: SKSpriteNode {
             //What happens when its a foot
             if(firstTouches.contains("4") || firstTouches.contains("5")){
                 //Midfield cant score
+                score.foulText(message: "Midfield can't score!")
                 return false
             }else {
                 //Default return

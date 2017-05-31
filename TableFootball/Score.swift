@@ -87,6 +87,15 @@ class Score:SKSpriteNode{
         checkWinConditions()
     }
     
+    func foulText(message: String){
+        setText(text: message, textF: scoreLBL, textS: scoreLBLShadow)
+        setText(text: "No GOAL!", textF: winLabel, textS: winLabelShadow)
+        scoreLBL.alpha = 0.7
+        scoreLBLShadow.alpha = 0.7
+        winLabel.alpha = 0.7
+        winLabelShadow.alpha = 0.7
+    }
+    
     func redFalseScore(){
         //Set splash screen
         setText(text: "BLUE GETS THE BALL", textF: scoreLBL, textS: scoreLBLShadow)
