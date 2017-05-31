@@ -39,6 +39,7 @@ class ConnectViewController: UIViewController {
         
         activityIndicator("Waiting for players...")
         
+        updatePlayerList()
         
         self.listConnectedPlayers.text = ""
         
@@ -61,62 +62,47 @@ class ConnectViewController: UIViewController {
         
         socket.on("addPlayerToTeamRed"){data, ack in
             //Adds player to list if its not allready on the list
-            if(!Constants.TEAMRED.contains((data[0] as? String)!)){
-                Constants.TEAMRED.append((data[0] as? String)!)
+            if(!Constants.TEAMREDLIST.contains((data[0] as? String)!)){
+                Constants.TEAMREDLIST.append((data[0] as? String)!)
             }
             
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMBLUE.index(of: (data[0] as? String)!) {
-                Constants.TEAMBLUE.remove(at: index)
+            if let index = Constants.TEAMBLUELIST.index(of: (data[0] as? String)!) {
+                Constants.TEAMBLUELIST.remove(at: index)
             }
             
-            updatePlayerList()
+            self.updatePlayerList()
         }
         socket.on("addPlayerToTeamBlue"){data, ack in
             //Adds player to list if its not allready on the list
-            if(!Constants.TEAMBLUE.contains((data[0] as? String)!)){
-                Constants.TEAMBLUE.append((data[0] as? String)!)
+            if(!Constants.TEAMBLUELIST.contains((data[0] as? String)!)){
+                Constants.TEAMBLUELIST.append((data[0] as? String)!)
             }
             
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMRED.index(of: (data[0] as? String)!) {
-                Constants.TEAMRED.remove(at: index)
+            if let index = Constants.TEAMREDLIST.index(of: (data[0] as? String)!) {
+                Constants.TEAMREDLIST.remove(at: index)
             }
             
-            updatePlayerList()
+            self.updatePlayerList()
         }
         socket.on("addPlayerToTeamMidden"){data, ack in
             //Removes player from both list
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMBLUE.index(of: (data[0] as? String)!) {
-                Constants.TEAMBLUE.remove(at: index)
+            if let index = Constants.TEAMBLUELIST.index(of: (data[0] as? String)!) {
+                Constants.TEAMBLUELIST.remove(at: index)
             }
             
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMRED.index(of: (data[0] as? String)!) {
-                Constants.TEAMRED.remove(at: index)
+            if let index = Constants.TEAMREDLIST.index(of: (data[0] as? String)!) {
+                Constants.TEAMREDLIST.remove(at: index)
             }
             
-            updatePlayerList()
+            self.updatePlayerList()
         }
         
  
-        func updatePlayerList(){
-            //Updates both player lists!
-            self.blueList.text = "Team Blue: \n"
-            self.redList.text = "Team Red: \n"
-            
-            for players in Constants.TEAMBLUE{
-                self.blueList.text = "Team Blue: \n" + (players) + ", "
-                //self.blueList.text.append(", ")
-                print("list: blue: " + players)
-            }
-            for players in Constants.TEAMRED{
-                self.redList.text = "Team Red: \n" + (players) + ", "
-                //self.redList.text.append(", ")
-                print("list: red: " + players)
-            }
-        }
+        
         
         socket.on("startGameOnAppleTV") {data, ack in
             
@@ -124,6 +110,21 @@ class ConnectViewController: UIViewController {
             let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "GameViewController") as! UINavigationController
             self.present(vc, animated: true, completion: nil)
             
+        }
+    }
+    
+    func updatePlayerList(){
+        //Updates both player lists!
+        self.blueList.text = "Team Blue: \n"
+        self.redList.text = "Team Red: \n"
+        
+        for players in Constants.TEAMBLUELIST{
+            self.blueList.text.append("\(players) \n")
+            print("list: blue: " + players)
+        }
+        for players in Constants.TEAMREDLIST{
+            self.redList.text.append("\(players) \n")
+            print("list: red: " + players)
         }
     }
     

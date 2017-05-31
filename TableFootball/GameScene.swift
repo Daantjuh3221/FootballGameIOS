@@ -47,9 +47,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var teamBlue:[String] = []
     var teamRed:[String] = []
     
-    
-    
-    
     override func didMove(to view: SKView) {
         print(Constants.TEAMRED)
         print(Constants.TEAMBLUE)
@@ -207,15 +204,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         socket.emit("resetgamedata")
     }
     
-    //var i = 50
+    var i = 50
     override func update(_ currentTime: TimeInterval) {
         //Update all objects
-        
-        //i -= 1
-        //if(i < 0){
-        //    goToHomeScreen()
-        //}
-        
+        i -= 1
+        if(i < 0){
+            goToHomeScreen()
+        }
+        print("IW: \(i)")
         //Start a screenshake
         if(theBall.isScored && theBall.isGoalAllowed()){
             goalShake.StartShake()

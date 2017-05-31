@@ -275,11 +275,13 @@ class Ball: SKSpriteNode {
                     //Blue scored false
                     score.blueFalseScore()
                     redFalseScored = false
+                    socket.emit("falsegoal", "blue")
                     
                 }else{
                     //red score false
                     score.redFalseScore()
                     redFalseScored = true
+                    socket.emit("falsegoal", "red")
                 }
             }
             
