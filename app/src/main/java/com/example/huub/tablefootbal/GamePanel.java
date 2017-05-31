@@ -13,6 +13,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
@@ -74,7 +75,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private float startVelocity;
     private float swipeVelocity;
 
-    private Vibrator buzz;
+    private Vibrator myVib;
+
 
 
     public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
@@ -160,7 +162,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
         // get pointer ID
         int pointerId = event.getPointerId(pointerIndex);
 
-        buzz = (Vibrator)this.getContext().getSystemService(VIBRATOR_SERVICE);
+        myVib = (Vibrator)this.getContext().getSystemService(VIBRATOR_SERVICE);
 
         switch(action) {
             case MotionEvent.ACTION_DOWN:
@@ -202,7 +204,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
                     swipeVelocity = maxXVelocity - startVelocity;
                     System.out.println("Swipe: " + swipeVelocity);
                     mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
-                    buzz.vibrate(50);
+                    myVib.vibrate(Constants.VIBRATIONDEFAULT);
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
@@ -291,12 +293,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     public void draw(Canvas canvas){
         super.draw(canvas);
         if (Constants.TEAMRED.contains(Constants.USERNAME)) {
-            canvas.drawColor(Color.RED);
+            canvas.drawColor(Color.argb(255, 204, 0 , 0));
         } else {
-            canvas.drawColor(Color.BLUE);
+            canvas.drawColor(Color.argb(255, 0, 102, 255));
         }
         player.draw(canvas);
         stick.draw(canvas);
 
     }
+
 }
