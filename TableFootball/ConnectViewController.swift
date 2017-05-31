@@ -123,7 +123,7 @@ class ConnectViewController: UIViewController {
         //Updates both player lists!
         self.blueList.text = "Team Blue: \n"
         self.redList.text = "Team Red: \n"
-        
+        //
         for players in Constants.TEAMBLUELIST{
             self.blueList.text.append("\(players) \n")
             print("list: blue: " + players)
