@@ -14,7 +14,7 @@ class SocketIOManager: NSObject {
     
     // ip Huub  "http://192.168.10.28:3000"
     // ip Daan  "http://192.168.10.49:3000"
-    var socket = SocketIOClient(socketURL: URL(string:"http://192.168.10.28:3000")! as URL)
+    var socket = SocketIOClient(socketURL: URL(string:"http://192.168.10.49:3000")! as URL)
     
     override public init() {
         super.init()
