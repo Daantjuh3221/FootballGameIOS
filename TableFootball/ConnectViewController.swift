@@ -17,6 +17,9 @@ class ConnectViewController: UIViewController {
     @IBOutlet weak var redList: UITextView!
     @IBOutlet weak var blueList: UITextView!
     
+    
+
+    
     var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     var strLabel = UILabel()
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -39,6 +42,8 @@ class ConnectViewController: UIViewController {
         
         activityIndicator("Waiting for players...")
         
+        //self.userSettings.set("elit7u", forKey: "joinCode")
+        
         updatePlayerList()
         
         self.listConnectedPlayers.text = ""
@@ -57,6 +62,7 @@ class ConnectViewController: UIViewController {
         socket.on("getJoinCode") {data, ack in
             let joinCode:String = (data[0] as? String)!
             self.lblJoinCode.text = joinCode
+            //self.lblJoinCode.text?.append(joinCode) //= joinCode
             self.userSettings.set(joinCode, forKey: "joinCode")
         }
         

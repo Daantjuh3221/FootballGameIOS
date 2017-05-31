@@ -134,9 +134,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     self.childNode(withName: "stick0" + String(i + 1))?.alpha = 0
             }
         }
-        
-        
-        
     }// End did move
     
     override func sceneDidLoad() {

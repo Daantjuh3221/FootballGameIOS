@@ -63,7 +63,7 @@ class Ball: SKSpriteNode {
     }
     
     func getSound(){
-        //get the soft bounce
+        //get the soft bounce sound
         for i in 0...9{
             soundSoftBounce.append(SKAction.playSoundFileNamed("bounce0" + String(i + 1) + ".wav", waitForCompletion: false))
         }
@@ -72,9 +72,9 @@ class Ball: SKSpriteNode {
     }
     
     func didScored(){
+        //mothode called when a goal is scored
         isScored = true
         run(cheerSound[0])
-        
     }
     
     func setTouches(currentTouch: String){
@@ -87,14 +87,13 @@ class Ball: SKSpriteNode {
             firstTouches = currentTouch
         }
         
-        print("Touch First: " + firstTouches)
-        print("Touch Second: " + secondTouches)
+        //print("Touch First: " + firstTouches)
+        //print("Touch Second: " + secondTouches)
     }
     
     func isGoalAllowed() -> Bool{
         /*
          Checks if a goal is allowed or not. returns the outcome (True || False)!
-         AKA game rules
          
          - foot1 = red keeper
          - foot2 = red defence
@@ -106,6 +105,11 @@ class Ball: SKSpriteNode {
          - foot8 = red keeper
          
          - wall = wall... duh
+         
+         <--- Rules --->
+         - A player cant score a own goal
+         - You cant score trough the wall
+         - middfielders cant score
  */
         if(firstTouches == "wall"){
             //Cant score with the wall
@@ -117,15 +121,19 @@ class Ball: SKSpriteNode {
             if(position.x > 0){
                 //red scored own goal
                 if(checkPosession() == "red"){
+                    //own goal red
                     return false
                 }else if(checkPosession() == "blue"){
+                    //goal blue
                     return true
                 }
             }else {
                 //invert if blue scored own goal
                 if(checkPosession() == "red"){
+                    //goal red
                     return true
                 }else if(checkPosession() == "blue"){
+                    //own goal blue
                     return false
                 }
             }
