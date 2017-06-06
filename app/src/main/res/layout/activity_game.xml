@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizental"
+    android:orientation="horizontal"
     tools:context="com.example.huub.tablefootbal.GameActivity">
 
     <FrameLayout
