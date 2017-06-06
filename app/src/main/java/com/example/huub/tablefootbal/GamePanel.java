@@ -16,6 +16,7 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -38,9 +39,7 @@ import static com.example.huub.tablefootbal.MainThread.canvas;
 /**
  * Created by Huub on 15-2-2017.
  */
-public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, SensorEventListener {
-    StringBuilder sb = new StringBuilder();
-/*    private static final String SERVER_ADDRESS  = "http://192.168.10.49:3000";*/
+public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     private Socket mSocket;
 
     private MainThread thread;
@@ -48,27 +47,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     private PointF playerPoint;
     private PointF currentPos = new PointF(0,0);
     private PointF previousPos = new PointF(0,0);
-    private int mDeviceWidth;
-    private int mDeviceHeight;
     private float counter = 0;
     private int countLimit = 100;
 
     //Database Var
     public PointF playerData;
-    public int playerID = 12345;
     public int frameID = 0;
-    public String stringFrameID;
 
     private Stick stick;
     private Bitmap[] sticks = new Bitmap[3];
-
-    private SensorManager sensorManager;
-    private Sensor mySensor;
-
-    private float yRotation;
-    private Point screenSize;
-
-    private TableFootbalController tableFootbalController;
 
     private VelocityTracker mVelocityTracker = null;
     private float maxXVelocity;
@@ -81,28 +68,23 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 
     public GamePanel(Context context, SensorManager sensor, int deviceWidth, int deviceHeight, TableFootbalController tableFootbalController){
         super(context);
-        mDeviceHeight = deviceHeight;
-        mDeviceWidth = deviceWidth;
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(),this);
 
-        this.tableFootbalController = tableFootbalController;
 
         SocketConnection app = (SocketConnection) tableFootbalController.getApplication();
         mSocket = app.getSocket(context);
         mSocket.connect();
 
         getSticks();
-
         stick = new Stick(new Rect(200,200,400,400), Color.BLACK, sticks, deviceWidth, deviceHeight);
-        sensorManager = sensor;
-        mySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        sensorManager.registerListener(this, mySensor, sensorManager.SENSOR_DELAY_GAME);
-        setFocusable(true);
 
         //Init player
         player = new Player(new Rect(200,200,400,400), Color.TRANSPARENT, new PointF(800,1600/2));
         playerPoint = new PointF(600,150);
+
+        setFocusable(true);
+
 
 
     }
@@ -114,17 +96,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
     }
 
 
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy){
-
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event){
-        //System.out.println("x: "+event.values[0]*10);
-        yRotation = event.values[0]*10;
-    }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height){
@@ -220,7 +191,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 
     public PointF getPos(){
         PointF d = new PointF(0,0);
-
         playerData = player.getPosition();
         d.x = (float) (((playerData.x - 600) / 3.8) * 2.5);
         d.y = playerData.y - 800;
@@ -281,12 +251,25 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback, Se
 
         System.out.println(getPos());
         System.out.println(inRange());
-        player.update(playerPoint, yRotation);
+        player.update(playerPoint, swipeVelocity);
         stick.update(playerPoint.x - 100, player.getVelocity());
 
         frameID+=1;
         //update table
         //tableFootbalController.InsertData();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (event.getKeyCode()) {
+                case KeyEvent.KEYCODE_BACK:
+                    return true;
+            }
+        }
+
+        return super.dispatchKeyEvent(event);
     }
 
     @Override

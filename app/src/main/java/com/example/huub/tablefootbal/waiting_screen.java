@@ -16,22 +16,26 @@ import android.widget.TextView;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class waiting_screen extends AppCompatActivity {
+public class waiting_screen extends AppCompatActivity implements SocketConnection.onPlayGameEvent, SocketConnection.onSocketGotLoginEvent {
 
     private TextView mUsername;
     private TextView mJoinCode;
     private TextView mJoinStatus;
     private ImageView mRefreshButton;
+    private Socket mSocket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_screen);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        SocketConnection app = (SocketConnection) getApplication();
+        mSocket = app.getSocket(this);
+        mSocket.connect();
 
         mUsername = (TextView)findViewById(R.id.username);
         mJoinCode = (TextView)findViewById(R.id.lblJoinCode);
         mJoinStatus = (TextView)findViewById(R.id.lblServerStatus);
-        mRefreshButton = (ImageView) findViewById(R.id.imgRefreshButton);
+        mRefreshButton = (ImageView) findViewById(R.id.btnRefreshAppleTV);
 
         mUsername.setText(Constants.USERNAME);
         if (Constants.isConnectedServer){
@@ -50,6 +54,8 @@ public class waiting_screen extends AppCompatActivity {
             mJoinCode.setText(Constants.DISCONNECTEDTEXT);
             mJoinCode.setTextColor(Color.RED);
         }
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
     }
 
     public void selectSettings (View v) {
@@ -58,4 +64,52 @@ public class waiting_screen extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void enableStart() {
+
+    }
+
+    @Override
+    public void chooseSide() {
+        Intent i = new Intent(getApplicationContext(), localGameSettings.class);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void startGame() {
+
+    }
+
+    @Override
+    public void isPlayerOne(boolean playerOne) {
+
+    }
+
+    @Override
+    public void onDisconnectAppleTV() {
+        Intent i = new Intent(this, mainMenu.class);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void loginSucceeded(boolean loginSucceeded) {
+
+    }
+
+    @Override
+    public void startLocal() {
+
+    }
+
+    @Override
+    public void usernameExists(boolean usernameExists) {
+
+    }
+
+    @Override
+    public void connectedToAppleTV(boolean connectedToAppleTV, boolean goToChooseSide) {
+
+    }
 }

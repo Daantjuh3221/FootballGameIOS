@@ -12,7 +12,7 @@ import android.widget.Toast;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
-public class codeScreen extends AppCompatActivity {
+public class codeScreen extends AppCompatActivity implements SocketConnection.onSocketGotLoginEvent {
 
     TextView txtCode;
     private Socket mSocket;
@@ -29,70 +29,74 @@ public class codeScreen extends AppCompatActivity {
         SocketConnection app = (SocketConnection) getApplication();
         mSocket = app.getSocket(this);
 
-        mSocket.on("appleTvExists", onAppleTvExists);
-        mSocket.on("isPlayerOne", onIsPlayerOne);
-        mSocket.connect();
-
         sharedPrefs =  getApplicationContext().getSharedPreferences(prefsFile, MODE_PRIVATE);
-
-        if(sharedPrefs.contains("joinCode")){
-            Toast.makeText(codeScreen.this, "There is a join code saved: " + sharedPrefs.getString("joinCode", ""), Toast.LENGTH_SHORT).show();
-            Constants.JOINCODE = sharedPrefs.getString("joinCode", "");
-            mSocket.emit("userJoinAppleTV", Constants.JOINCODE);
-        } else{
-            Toast.makeText(codeScreen.this, "There is no Join code saved", Toast.LENGTH_SHORT).show();
-        }
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         txtCode = (TextView) findViewById(R.id.codeText);
     }
 
-    private Emitter.Listener onIsPlayerOne = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            Constants.isPlayerOne = (boolean)args[0];
-            System.out.println("IS PLAYER ONE: " + Constants.isPlayerOne);
-        }
-    };
 
-    private Emitter.Listener onAppleTvExists = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            mExists = (boolean)args[0];
-            if (!mExists) {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                Constants.isConnectedAppleTV = true;
-                editor.putString("joinCode", Constants.JOINCODE);
-                editor.commit();
-                if (Constants.isPlayerOne){
-                    System.out.println("WEL PLAYER 1");
-                    Intent i = new Intent(getApplicationContext(), mainMenu.class);
-                    startActivity(i);
-                    finish();
-                } else{
-                    System.out.println("NIET PLAYER 1");
-                    Intent i = new Intent(getApplicationContext(), waiting_screen.class);
-                    startActivity(i);
-                    finish();
-                }
 
-            } else{
-                Constants.USERNAME = "";
-                Constants.isConnectedAppleTV = false;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(codeScreen.this, "Cannot find Apple TV!", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-            }
-        }
-    };
     public void submitCode(View v) {
         code = txtCode.getText().toString();
         Constants.JOINCODE = code;
         mSocket.emit("userJoinAppleTV", code);
+    }
+
+    @Override
+    public void isPlayerOne(boolean playerOne) {
+
+    }
+
+    @Override
+    public void onDisconnectAppleTV() {
+
+    }
+
+    @Override
+    public void loginSucceeded(boolean loginSucceeded) {
+
+    }
+
+    @Override
+    public void startLocal() {
+
+    }
+
+    @Override
+    public void usernameExists(boolean usernameExists) {
+
+    }
+
+    @Override
+    public void connectedToAppleTV(boolean connectedToAppleTV, boolean goToChooseSide) {
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(prefsFile, MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPref.edit();
+        System.out.println("connectedToAppleTV?: " + connectedToAppleTV);
+        if (connectedToAppleTV){
+            edit.putString("joinCode", txtCode.getText().toString());
+            edit.commit();
+            if (Constants.isPlayerOne){
+                Intent i = new Intent(this, mainMenu.class);
+                startActivity(i);
+                finish();
+            } else{
+                if (goToChooseSide){
+                    Intent i = new Intent(this, localGameSettings.class);
+                    startActivity(i);
+                    finish();
+                } else{
+                    Intent i = new Intent(this, waiting_screen.class);
+                    startActivity(i);
+                    finish();
+                }
+
+            }
+        } else{
+            Toast.makeText(getApplicationContext(),"Could not find apple tv",Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

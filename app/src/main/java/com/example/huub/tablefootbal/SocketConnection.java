@@ -44,7 +44,10 @@ public class SocketConnection extends Application {
                 mLoginListener = (onSocketGotLoginEvent) mContext;
             }
             if(mContext instanceof onPlayGameEvent) {
+                System.out.println("Has Instance of onplaygameevent");
                 mPlayGameListener = (onPlayGameEvent) mContext;
+            } else{
+                System.out.println("Has not instance of onplaygameevent");
             }
             if(mContext instanceof onErrorSocketEvent) {
                 mErrorListener = (onErrorSocketEvent) mContext;
@@ -60,6 +63,8 @@ public class SocketConnection extends Application {
         mSocket.on("error", onSocketError);
         mSocket.on("startLocal", onStartLocal);
         mSocket.on("allPlayersAreReady", onAllPlayersAreReady);
+        mSocket.on("startGameOnAndroid", onStartGame);
+        mSocket.on("disconnectFromAppleTV", onAppleTVDisconnect);
         mSocket.on(Socket.EVENT_CONNECT, onConnect);
         mSocket.on(Socket.EVENT_RECONNECT_ATTEMPT, onReconnectAttempt);
         mSocket.on(Socket.EVENT_RECONNECT_FAILED, onReconnectFailed);
@@ -140,8 +145,9 @@ public class SocketConnection extends Application {
             @Override
             public void run() {
             if (mErrorListener != null){
+                mSocket.disconnect();
+                mSocket.off();
                 mErrorListener.disconnected();
-                //mSocket.disconnect();
                 System.out.println("DISCONNECTED");
                 Constants.isConnectedAppleTV = false;
                 Constants.isConnectedServer = false;
@@ -163,9 +169,8 @@ public class SocketConnection extends Application {
             public void run() {
                 if (mErrorListener != null){
                     mErrorListener.socketError(args[0].toString());
-                    mErrorListener.disconnected();
-//                    mSocket.disconnect();
-//                    mSocket.off();
+                    mSocket.disconnect();
+                    mSocket.off();
                     System.out.println("SOCKET ERROR");
                 } else{
                     System.out.println("Mlistener is null");
@@ -183,14 +188,53 @@ public class SocketConnection extends Application {
                 public void run() {
                     if (mErrorListener != null){
                         mErrorListener.socketConnectError(args[0].toString());
-//                        mSocket.disconnect();
-//                        mSocket.off();
+                        mSocket.disconnect();
+                        mSocket.off();
                         System.out.println("CONNECT ERROR");
                     } else{
                         System.out.println("Mlistener is null");
                     }
                 }
             });
+        }
+    };
+
+    //////////////////////////
+    //Start Game listeners
+    //////////////////////////
+
+    private Emitter.Listener onStartLocal = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            ((Activity)(mContext)).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mPlayGameListener != null){
+                        System.out.println("START GAME IS ON!!!");
+                        mPlayGameListener.chooseSide();
+                    } else{
+                        System.out.println("mlistener is null");
+                    }
+                }
+            });
+
+        }
+    };
+
+    private Emitter.Listener onStartGame = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            ((Activity)(mContext)).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mPlayGameListener != null){
+                        mPlayGameListener.startGame();
+                    } else{
+                        System.out.println("mlistener is null");
+                    }
+                }
+            });
+
         }
     };
 
@@ -210,22 +254,23 @@ public class SocketConnection extends Application {
         }
     };
 
-    private Emitter.Listener onStartLocal = new Emitter.Listener() {
+    private Emitter.Listener onAppleTVDisconnect = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             ((Activity)(mContext)).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if (mLoginListener != null){
-                        mLoginListener.startLocal();
+                        Constants.isConnectedAppleTV = false;
+                        mLoginListener.onDisconnectAppleTV();
                     } else{
                         System.out.println("mlistener is null");
                     }
                 }
             });
-
         }
     };
+
 
     private Emitter.Listener onAppleTvExists = new Emitter.Listener() {
         @Override
@@ -234,15 +279,17 @@ public class SocketConnection extends Application {
                 @Override
                 public void run() {
                     boolean exists = (boolean)args[0];
+                    boolean chooseTeam = (boolean)args[1];
                     if (mLoginListener != null){
                         System.out.println("value that we get is: " + exists);
                         if (exists) {
                             System.out.println("Apple tv exist value that we get is: " + exists);
                             Constants.isConnectedAppleTV = exists;
-                            mLoginListener.connectedToAppleTV(exists);
+                            System.out.println("CHOOSE TEAM IS: " + chooseTeam);
+                            mLoginListener.connectedToAppleTV(exists, chooseTeam);
                         } else{
                             System.out.println("Apple tv does not exist");
-                            mLoginListener.connectedToAppleTV(exists);
+                            mLoginListener.connectedToAppleTV(exists, chooseTeam);
                         }
                     } else{
                         System.out.println("mlistener is null");
@@ -284,6 +331,8 @@ public class SocketConnection extends Application {
 
     public interface onPlayGameEvent {
         void enableStart();
+        void chooseSide();
+        void startGame();
 
     }
 
@@ -296,9 +345,10 @@ public class SocketConnection extends Application {
 
     public interface onSocketGotLoginEvent {
         void isPlayerOne(boolean playerOne);
+        void onDisconnectAppleTV();
         void loginSucceeded(boolean loginSucceeded);
         void startLocal();
         void usernameExists(boolean usernameExists);
-        void connectedToAppleTV(boolean connectedToAppleTV);
+        void connectedToAppleTV(boolean connectedToAppleTV, boolean goToChooseSide);
     }
 }

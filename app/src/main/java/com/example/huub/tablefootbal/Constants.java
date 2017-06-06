@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Constants {
     public static String USERNAME = "";
+    public static boolean firstTime = false;
     public static boolean isPlayerOne = false;
     public static boolean isLogedin = false;
     public static boolean isConnectedAppleTV = false;

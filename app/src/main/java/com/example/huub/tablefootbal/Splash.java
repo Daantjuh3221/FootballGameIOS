@@ -14,12 +14,13 @@ import io.socket.client.Socket;
  * Created by Lars on 8-3-2017.
  */
 
-public class Splash extends AppCompatActivity implements SocketConnection.onSocketGotLoginEvent, SocketConnection.onErrorSocketEvent {
+public class Splash extends AppCompatActivity implements SocketConnection.onSocketGotLoginEvent, SocketConnection.onErrorSocketEvent, SocketConnection.onPlayGameEvent {
 
     private String prefsFile = Constants.PREFERENCEFILENAME;
     private Socket mSocket;
     private boolean mUsername;
     private boolean mAppleTV;
+    private boolean errorOccured;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,22 +102,38 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
     }
 
     @Override
-    public void connectedToAppleTV(boolean connectedToAppleTV) {
+    public void connectedToAppleTV(boolean connectedToAppleTV, boolean goToChooseTeam) {
         System.out.println("connectedToAppleTV?: " + connectedToAppleTV);
-        if (Constants.isPlayerOne){
+        if (connectedToAppleTV){
+            if (Constants.isPlayerOne){
+                Intent i = new Intent(this, mainMenu.class);
+                startActivity(i);
+                finish();
+            } else{
+                if (goToChooseTeam){
+                    Intent i = new Intent(this, localGameSettings.class);
+                    startActivity(i);
+                    finish();
+                } else{
+                    Intent i = new Intent(this, waiting_screen.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        } else{
             Intent i = new Intent(this, mainMenu.class);
             startActivity(i);
             finish();
-        } else{
-            Intent i = new Intent(this, waiting_screen.class);
-            startActivity(i);
-            finish();
         }
-
     }
 
     @Override
     public void isPlayerOne(boolean isPlayerOne) {
+
+    }
+
+    @Override
+    public void onDisconnectAppleTV() {
 
     }
 
@@ -128,18 +145,30 @@ public class Splash extends AppCompatActivity implements SocketConnection.onSock
     @Override
     public void socketError(String error) {
         Constants.isConnectedServer = false;
-        Toast.makeText(this, "error: "  + error, Toast.LENGTH_LONG).show();
-        Intent i = new Intent(this, joinScreen.class);
+        Intent i = new Intent(this, ErrorScreen.class);
         startActivity(i);
-        finish();
+
     }
 
     @Override
     public void socketConnectError(String error) {
         Constants.isConnectedServer = false;
-        Toast.makeText(this, "Connection error: could not connect to the server!", Toast.LENGTH_LONG).show();
-        Intent i = new Intent(this, joinScreen.class);
+        Intent i = new Intent(this, ErrorScreen.class);
         startActivity(i);
-        finish();
+    }
+
+    @Override
+    public void enableStart() {
+
+    }
+
+    @Override
+    public void chooseSide() {
+
+    }
+
+    @Override
+    public void startGame() {
+
     }
 }

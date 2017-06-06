@@ -71,6 +71,11 @@ public class joinScreen extends AppCompatActivity implements SocketConnection.on
     }
 
     @Override
+    public void onDisconnectAppleTV() {
+
+    }
+
+    @Override
     public void loginSucceeded(boolean loginSucceeded) {
 
     }
@@ -93,14 +98,14 @@ public class joinScreen extends AppCompatActivity implements SocketConnection.on
             ed.putString("username", username);
             ed.commit();
 
-            Intent i = new Intent(this, mainMenu.class);
+            Intent i = new Intent(this, codeScreen.class);
             startActivity(i);
             finish();
         }
     }
 
     @Override
-    public void connectedToAppleTV(boolean connectedToAppleTV) {
+    public void connectedToAppleTV(boolean connectedToAppleTV, boolean goToChooseSide) {
 
     }
 }

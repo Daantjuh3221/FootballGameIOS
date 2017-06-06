@@ -29,11 +29,12 @@ import io.socket.emitter.Emitter;
 import static com.example.huub.tablefootbal.Constants.JOINCODE;
 import static com.example.huub.tablefootbal.Constants.USERNAME;
 
-public class MainMenuSettings extends AppCompatActivity {
+public class MainMenuSettings extends AppCompatActivity implements SocketConnection.onSocketGotLoginEvent {
 
     private Socket mSocket;
     private TextView mUserName;
     private TextView mAppleTV;
+    private String joinCode;
 
     private SharedPreferences sharedPrefs;
 
@@ -144,14 +145,9 @@ public class MainMenuSettings extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                String appleID = etApple.getText().toString();
-                if (!(appleID.isEmpty())) {
-                    Constants.JOINCODE = appleID;
-                    mAppleTV.setText(appleID);
-                    editor.putString("joinCode", appleID);
-                    editor.commit();
-                    Toast.makeText(getBaseContext(), "Apple ID: " + appleID, Toast.LENGTH_SHORT).show();
+                joinCode = etApple.getText().toString();
+                if (!(joinCode.isEmpty())) {
+                    mSocket.emit("userJoinAppleTV", joinCode);
                 } else {
                     Toast.makeText(getBaseContext(), "Apple ID remains " + Constants.JOINCODE, Toast.LENGTH_SHORT).show();
                 }
@@ -163,15 +159,62 @@ public class MainMenuSettings extends AppCompatActivity {
 
 
     public void returnButton(View v) {
-        if (Constants.isPlayerOne){
-            Intent i = new Intent(getApplicationContext(), mainMenu.class);
-            startActivity(i);
-            finish();
+        if (Constants.isConnectedAppleTV){
+            if (Constants.isPlayerOne){
+                Intent i = new Intent(getApplicationContext(), mainMenu.class);
+                startActivity(i);
+                finish();
+            } else{
+                Intent i = new Intent(getApplicationContext(), waiting_screen.class);
+                startActivity(i);
+                finish();
+            }
         } else{
-            Intent i = new Intent(getApplicationContext(), waiting_screen.class);
+            Intent i = new Intent(getApplicationContext(), mainMenu.class);
             startActivity(i);
             finish();
         }
 
+
+    }
+
+    @Override
+    public void isPlayerOne(boolean playerOne) {
+
+    }
+
+    @Override
+    public void onDisconnectAppleTV() {
+
+    }
+
+    @Override
+    public void loginSucceeded(boolean loginSucceeded) {
+
+    }
+
+    @Override
+    public void startLocal() {
+
+    }
+
+    @Override
+    public void usernameExists(boolean usernameExists) {
+
+    }
+
+    @Override
+    public void connectedToAppleTV(boolean connectedToAppleTV, boolean goToChooseSide) {
+        if (connectedToAppleTV){
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString("joinCode", joinCode);
+            editor.commit();
+            Constants.JOINCODE =joinCode;
+            mAppleTV.setText(Constants.JOINCODE);
+            Toast.makeText(getBaseContext(), "You are connected to: " + joinCode, Toast.LENGTH_SHORT).show();
+        } else{
+            mAppleTV.setText(Constants.JOINCODE);
+            Toast.makeText(getBaseContext(), "Could not find apple tv: " + joinCode, Toast.LENGTH_SHORT).show();
+        }
     }
 }

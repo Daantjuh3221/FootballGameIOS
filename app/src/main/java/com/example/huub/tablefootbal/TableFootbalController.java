@@ -30,11 +30,6 @@ public class TableFootbalController extends Activity {
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-
-        //Force portrait
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         //Sensor shit
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -49,7 +44,7 @@ public class TableFootbalController extends Activity {
 
         setContentView(gPanel);
 
-            }
+        }
 
 
 

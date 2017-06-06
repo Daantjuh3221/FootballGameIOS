@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/mainmenu">
 
+    <ImageView
+        android:id="@+id/btnRefreshAppleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lblJoinCode"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/lblJoinCode"
+        app:srcCompat="@drawable/ic_refresh_black_24dp" />
+
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="250dp"
@@ -106,15 +115,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
         android:textColor="@android:color/background_light"
         android:layout_below="@+id/serverstatus"
-        android:layout_alignStart="@+id/serverstatus" />
-
-    <ImageView
-        android:id="@+id/imgRefreshButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_refresh_black_24dp"
-        android:layout_marginTop="2dp"
-        android:layout_below="@+id/lblJoinedStatus"
         android:layout_alignStart="@+id/serverstatus" />
 
 

@@ -77,6 +77,8 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
             mBtnPlay.setText("Ready");
         }
 
+        mBtnMidden.setEnabled(false);
+
 
         updateUI();
 
@@ -258,8 +260,12 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
         } else{
             mBtnPlay.setEnabled(false);
             mListViewMidden.setEnabled(false);
+            mListViewMidden.setClickable(false);
             mListViewBlue.setEnabled(false);
+            mListViewBlue.setClickable(false);
             mListViewRed.setEnabled(false);
+            mListViewRed.setClickable(false);
+
             mBtnPlay.setText("Waiting for player one");
             mSocket.emit("playerReady");
         }
@@ -270,5 +276,20 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
     @Override
     public void enableStart() {
         mBtnPlay.setEnabled(true);
+    }
+
+    @Override
+    public void chooseSide() {
+
+    }
+
+    @Override
+    public void startGame() {
+        Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+        System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
+        Constants.TEAMBLUE = mPlayersBlue;
+        Constants.TEAMRED = mPlayersRed;
+        startActivity(i);
+        finish();
     }
 }
