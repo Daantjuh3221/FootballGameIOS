@@ -19,7 +19,7 @@ import io.socket.emitter.Emitter;
 
 public class localGameSettings extends AppCompatActivity implements SocketConnection.onPlayGameEvent {
 
-    private ListView mListViewBlue;
+    private ListView  mListViewBlue;
     private ListView mListViewRed;
     private ListView mListViewMidden;
 

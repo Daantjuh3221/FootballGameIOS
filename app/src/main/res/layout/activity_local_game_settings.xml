@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainmenu">
+    android:background="@drawable/teamselect">
 
     <Button
         android:id="@+id/playLocalGame"
@@ -35,7 +35,7 @@
         android:shadowDy="5"
         android:shadowRadius="5"
         android:text="Team Blue"
-        android:textColor="#ffffff" />
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/textTeam2"
@@ -53,7 +53,7 @@
         android:shadowDy="5"
         android:shadowRadius="5"
         android:text="Team Red"
-        android:textColor="#ffffff" />
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/joinTeamBlue"
