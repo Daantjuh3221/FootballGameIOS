@@ -157,7 +157,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
             case MotionEvent.ACTION_MOVE:
                 for (int size = event.getPointerCount(), i = 0; i < size; i++) {
                     if(i == 0){
-                        playerPoint.set((int)event.getX(i),(int)event.getY(i));
+                        playerPoint.set((int)event.getX(i)-150,(int)event.getY(i));
                     }
                     if(i == 1){
                         mVelocityTracker.addMovement(event);
