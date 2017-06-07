@@ -41,6 +41,11 @@ struct Constants {
         //Get from server
         case getYPos = "getPositionYforAppleTV"
         case getXPos = "getPositionXforAppleTV"
+        case getPlayerReady = "appletvplayerready"
+        case getTeamRed = "addPlayerToTeamRed"
+        case getTeamBlue = "addPlayerToTeamBlue"
+        case getTeamMidden = "addPlayerToTeamMidden"
+        case getHost = "getHost"
         
         //send to server
         case emitGoalScored = "goalisscored"
@@ -66,7 +71,7 @@ struct Constants {
         
     }
     
-    
+    static var HOST_PLAYER:String = ""
     
     //Uses for the teams
     static var TEAMRED:[String] = []

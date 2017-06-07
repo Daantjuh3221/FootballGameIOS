@@ -117,10 +117,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Init the ball
         //<-----! The Ball acts as the referee !----->
-        if(self.childNode(withName: Constants.BALL_NAME) != nil){
+      //  if(self.childNode(withName: Constants.BALL_NAME) != nil){
             theBall = self.childNode(withName: Constants.BALL_NAME) as! Ball
             theBall.Init(gamescene: self, scoreLimit: scoreLimit)
-        }
+       // }
         
         
         for i in 0...7{
