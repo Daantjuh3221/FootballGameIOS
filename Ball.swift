@@ -123,7 +123,7 @@ class Ball: SKSpriteNode {
         
         if(firstTouches.contains("foot")){
             //Checks if its a own goal
-            if(position.x > 0){
+           /* if(position.x > 0){
                 //red scored own goal
                 if(checkPosession() == "red"){
                     //own goal red
@@ -143,7 +143,7 @@ class Ball: SKSpriteNode {
                     score.foulText(message: "Own Goal Blue")
                     return false
                 }
-            }
+            }*/
             
             //What happens when its a foot
             if(firstTouches.contains("4") || firstTouches.contains("5")){
