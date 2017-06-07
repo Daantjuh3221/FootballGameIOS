@@ -28,10 +28,14 @@ class Stick: SKSpriteNode{
     
     var footName:String = ""
     
-    func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String, userName:String, footName:String){
+    var offset:CGFloat = 0
+    
+    func Init(amountOfFeets: Int, positionX: CGFloat, gameScene: GameScene, sprite: String, userName:String, footName:String, yOffset: CGFloat){
         //Begins in centre of screen,
         position.y = 0
         position.x = positionX
+        
+        self.offset = yOffset
         
         self.userName = userName
         
@@ -47,7 +51,11 @@ class Stick: SKSpriteNode{
             //Get the Y position for the player
             let inputUser = (data[1] as? String)!
             if(inputUser == userName){
-                self.positionY = (data[0] as? CGFloat)!
+                //Checks if the max value had been reached
+                //if(self.canMoveVertical(yValue: (data[0] as? CGFloat)!)){
+                //self.positionY = (data[0] as? CGFloat)!
+                self.positionY = self.canMoveVertical(yValue: (data[0] as? CGFloat)!)
+               // }
             }
         }
         socket.on(Constants.EMIT_VALUES.getXPos.rawValue) {data, ack in
@@ -69,6 +77,23 @@ class Stick: SKSpriteNode{
         //Positive = right
         //negative = left
         //Swipelength bla bla bla
+        
+    }
+    
+    func canMoveVertical(yValue: CGFloat) -> CGFloat{
+      /*  if(yValue > offset){
+            return false
+        }else if(yValue < -offset){
+            return false
+        }else {
+            return true
+        }*/
+        var y = yValue
+        y = y / 290
+        
+        y = y * offset
+        
+        return y
         
     }
     

@@ -101,6 +101,7 @@ struct Constants {
     static let STICK_POSITION:[Int] = [-400, -300, -180, -65, 65, 180, 300, 400]
     static let STICK_COLOR:[String] = [TEAM.red.rawValue, TEAM.red.rawValue, TEAM.blue.rawValue, TEAM.red.rawValue, TEAM.blue.rawValue, TEAM.red.rawValue, TEAM.blue.rawValue, TEAM.blue.rawValue]
     static let STICK_AMOUNT_OF_FEETS:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
+    static let STICK_OFFSET:[CGFloat] = [100, 150,80, 40, 40, 80, 150, 100]
     
     //Player var settings
     static var PLAYER_SENSITIVITY:CGFloat = CGFloat(80)

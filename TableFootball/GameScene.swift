@@ -40,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var stickEnabled:[Bool] = [true, true, true, true, true, true ,true, true]
     var stickPositions:[Int] = Constants.STICK_POSITION
     var stickColor:[String] = Constants.STICK_COLOR
+    var stickOffset:[CGFloat] = Constants.STICK_OFFSET
     var userNames:[String] = ["", "", "", "", "", "", "", ""]
     var amountOfFeets:[Int] = Constants.STICK_AMOUNT_OF_FEETS
 
@@ -129,7 +130,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if(stickEnabled[i]){
                 if(self.childNode(withName: Constants.STICKNAMES.neutral.rawValue + String(i + 1)) != nil){
                     sticks[i] = self.childNode(withName: Constants.STICKNAMES.neutral.rawValue + String(i + 1)) as! Stick
-                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i], footName: Constants.FOOT_NAME + String(i + 1))
+                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i], footName: Constants.FOOT_NAME + String(i + 1), yOffset: stickOffset[i] )
                     }}else{
                     //Makes unused sticks invisible
                     self.childNode(withName: Constants.STICKNAMES.neutral.rawValue + String(i + 1))?.alpha = 0
