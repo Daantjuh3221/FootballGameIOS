@@ -8,16 +8,17 @@
     tools:context="com.example.huub.tablefootbal.GameActivity">
 
     <FrameLayout
+        android:id="@+id/gameFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/stick"
-            android:layout_width="400dp"
-            android:layout_height="100dp"
-            android:rotation="270"
+            android:layout_width="370dp"
+            android:layout_height="355dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/stick03"
+            android:rotation="270"
+            android:src="@drawable/newstick03"
             tools:src="@drawable/newstick01" />
 
     </FrameLayout>
