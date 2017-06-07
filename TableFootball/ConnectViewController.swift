@@ -77,7 +77,7 @@ class ConnectViewController: UIViewController {
             if let index = Constants.TEAMBLUELIST.index(of: (data[0] as? String)!) {
                 Constants.TEAMBLUELIST.remove(at: index)
             }
-            self.checkForHostPlayer()
+            self.updatePlayerList()
         }
         //Blue team list
         socket.on(Constants.EMIT_VALUES.getTeamBlue.rawValue){data, ack in
@@ -90,7 +90,7 @@ class ConnectViewController: UIViewController {
             if let index = Constants.TEAMREDLIST.index(of: (data[0] as? String)!) {
                 Constants.TEAMREDLIST.remove(at: index)
             }
-            self.checkForHostPlayer()
+            self.updatePlayerList()
         }
         //No team list
         socket.on(Constants.EMIT_VALUES.getTeamMidden.rawValue){data, ack in
@@ -105,24 +105,25 @@ class ConnectViewController: UIViewController {
                 Constants.TEAMREDLIST.remove(at: index)
             }
             
-            self.checkForHostPlayer()
+            self.updatePlayerList()
         }
         
         //Ready after name
         socket.on(Constants.EMIT_VALUES.getPlayerReady.rawValue){data, ack in
             
+            if(Constants.TEAMBLUELIST.count > 0){
             for i in 0...Constants.TEAMBLUELIST.count - 1{
                 if(Constants.TEAMBLUELIST[i] == (data[0] as? String)!){
                     Constants.TEAMBLUELIST[i].append(" (Ready)")
                 }
-            }
+                }}
+            if(Constants.TEAMREDLIST.count > 0){
             for i in 0...Constants.TEAMREDLIST.count - 1{
                 if(Constants.TEAMREDLIST[i] == (data[0] as? String)!){
                     Constants.TEAMREDLIST[i].append(" (Ready)")
                 }
-            }
-            //self.updatePlayerList()
-            self.checkForHostPlayer()
+                }}
+            self.updatePlayerList()
         }
         
         //Set the host palyer
@@ -156,7 +157,6 @@ class ConnectViewController: UIViewController {
             }
             }}
         */
-        updatePlayerList()
     }
     
     func updatePlayerList(){
@@ -166,12 +166,22 @@ class ConnectViewController: UIViewController {
         
         
         for players in Constants.TEAMBLUELIST{
+            //Check if player is Host
+            if(players == Constants.HOST_PLAYER){
+                self.blueList.text.append("\(players) (Host) \n")
+            }else{
             self.blueList.text.append("\(players) \n")
             print("list: blue: " + players)
+            }
         }
         for players in Constants.TEAMREDLIST{
+            //Check if player is Host
+            if(players == Constants.HOST_PLAYER){
+                self.redList.text.append("\(players) (Host)\n")
+            }else{
             self.redList.text.append("\(players) \n")
             print("list: red: " + players)
+            }
         }
     }
     

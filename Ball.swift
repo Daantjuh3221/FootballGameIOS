@@ -259,6 +259,10 @@ class Ball: SKSpriteNode {
         }
     }
     
+    func resetBall(){
+        
+    }
+    
     func update(){
         //Checks if is scored, adds score and resets the ball
         if(isScored){
