@@ -147,7 +147,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void checkTeam(){
-        if (true) {//hier moet nog code neergezet worden
+        if (Constants.TEAMRED.contains(Constants.USERNAME)) {//hier moet nog code neergezet worden
             frame.setBackgroundColor(Color.RED);
         } else {
             frame.setBackgroundColor(Color.BLUE);
