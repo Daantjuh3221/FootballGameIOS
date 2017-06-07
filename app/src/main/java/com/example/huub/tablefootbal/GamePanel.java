@@ -143,7 +143,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
                     mVelocityTracker = VelocityTracker.obtain();
 
                     mVelocityTracker.computeCurrentVelocity(1000);
-                    startVelocity = mVelocityTracker.getXVelocity(pointerIndex);
+                    startVelocity = mVelocityTracker.getYVelocity(pointerIndex);
                     System.out.println("StartSnelheid " + startVelocity);
 
                 }

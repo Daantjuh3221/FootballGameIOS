@@ -267,6 +267,10 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
             mListViewRed.setEnabled(false);
             mListViewRed.setClickable(false);
 
+            mBtnMidden.setEnabled(false);
+            mBtnRed.setEnabled(false);
+            mBtnBlue.setEnabled(false);
+
             mBtnPlay.setText("Waiting for player one");
             mSocket.emit("playerReady");
         }
