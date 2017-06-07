@@ -250,7 +250,7 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
             for (String player:mPlayersRed) {
                 mSocket.emit("addPlayer", "teamRed", player);
             };
-            Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+            Intent i = new Intent(getApplicationContext(), GameActivity.class);
             System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
             Constants.TEAMBLUE = mPlayersBlue;
             Constants.TEAMRED = mPlayersRed;
@@ -290,7 +290,7 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
 
     @Override
     public void startGame() {
-        Intent i = new Intent(getApplicationContext(), TableFootbalController.class);
+        Intent i = new Intent(getApplicationContext(), GameActivity.class);
         System.out.println("TEAMS red:" + mPlayersRed + " blue: " + mPlayersBlue);
         Constants.TEAMBLUE = mPlayersBlue;
         Constants.TEAMRED = mPlayersRed;
