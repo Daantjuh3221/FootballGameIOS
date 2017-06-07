@@ -9,6 +9,15 @@
 import Foundation
 import SpriteKit
 
+enum textShow:String{
+    case goal = "GOOOOAAAAAALLL"
+    case noGoal = "No GOAL!"
+    case redFalseScore = "BLUE GETS THE BALL"
+    case blueFalseScore = "RED GETS THE BALL"
+    case redWin = "Red has won"
+    case blueWin = "Blue has won"
+}
+
 class Score:SKSpriteNode{
     
     //Text labels
@@ -18,6 +27,7 @@ class Score:SKSpriteNode{
     var winLabelShadow = SKLabelNode()
     var scoreLBL = SKLabelNode()
     var scoreLBLShadow = SKLabelNode()
+    
     
     //Score
     var scoreRed:Int = 0
@@ -61,7 +71,7 @@ class Score:SKSpriteNode{
         scoreLBL.alpha = 1
         scoreLBLShadow.alpha = 1
         
-        setText(text: "GOOOOAAAAAALLL", textF: winLabel, textS: winLabelShadow)
+        setText(text: textShow.goal.rawValue, textF: winLabel, textS: winLabelShadow)
         winLabel.fontColor = UIColor.red
         winLabelShadow.alpha = 1
         winLabel.alpha = 1
@@ -79,7 +89,7 @@ class Score:SKSpriteNode{
         scoreLBL.alpha = 1
         scoreLBLShadow.alpha = 1
         
-        setText(text: "GOOOOAAAAAALLL", textF: winLabel, textS: winLabelShadow)
+        setText(text: textShow.goal.rawValue, textF: winLabel, textS: winLabelShadow)
         winLabel.fontColor = UIColor.blue
         winLabelShadow.alpha = 1
         winLabel.alpha = 1
@@ -89,7 +99,7 @@ class Score:SKSpriteNode{
     
     func foulText(message: String){
         setText(text: message, textF: scoreLBL, textS: scoreLBLShadow)
-        setText(text: "No GOAL!", textF: winLabel, textS: winLabelShadow)
+        setText(text: textShow.noGoal.rawValue, textF: winLabel, textS: winLabelShadow)
         scoreLBL.alpha = 0.7
         scoreLBLShadow.alpha = 0.7
         winLabel.alpha = 0.7
@@ -98,11 +108,11 @@ class Score:SKSpriteNode{
     
     func redFalseScore(){
         //Set splash screen
-        setText(text: "BLUE GETS THE BALL", textF: scoreLBL, textS: scoreLBLShadow)
+        setText(text: textShow.redFalseScore.rawValue, textF: scoreLBL, textS: scoreLBLShadow)
         scoreLBL.alpha = 1
         scoreLBLShadow.alpha = 1
         
-        setText(text: "No GOAL!", textF: winLabel, textS: winLabelShadow)
+        setText(text: textShow.noGoal.rawValue, textF: winLabel, textS: winLabelShadow)
         winLabel.fontColor = UIColor.red
         winLabelShadow.alpha = 1
         winLabel.alpha = 1
@@ -110,11 +120,11 @@ class Score:SKSpriteNode{
     
     func blueFalseScore(){
         //Set splash screen
-        setText(text: "RED GETS THE BALL", textF: scoreLBL, textS: scoreLBLShadow)
+        setText(text: textShow.blueFalseScore.rawValue, textF: scoreLBL, textS: scoreLBLShadow)
         scoreLBL.alpha = 1
         scoreLBLShadow.alpha = 1
         
-        setText(text: "No GOAL!", textF: winLabel, textS: winLabelShadow)
+        setText(text: textShow.noGoal.rawValue, textF: winLabel, textS: winLabelShadow)
         winLabel.fontColor = UIColor.blue
         winLabelShadow.alpha = 1
         winLabel.alpha = 1
@@ -131,12 +141,12 @@ class Score:SKSpriteNode{
             if(scoreRed > scoreBlue){
                 //Red has won
                 winLabel.fontColor = UIColor.red
-                setText(text: "Red has won", textF: winLabel, textS: winLabelShadow)
+                setText(text: textShow.redWin.rawValue, textF: winLabel, textS: winLabelShadow)
                 winnerRed = true
             }else if(scoreBlue > scoreRed){
                 //Blue has won
                 winLabel.fontColor = UIColor.blue
-                setText(text: "Blue has won!", textF: winLabel, textS: winLabelShadow)
+                setText(text: textShow.blueWin.rawValue, textF: winLabel, textS: winLabelShadow)
                 winnerRed = false
             }
         }

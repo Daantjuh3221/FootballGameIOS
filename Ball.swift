@@ -9,11 +9,15 @@
 import Foundation
 import SpriteKit
 
+
+
 class Ball: SKSpriteNode {
     
     var isScored:Bool = false
     var isShot:Bool = false
     var score:Score = Score()
+    
+    
     
     var ballSpeed:CGFloat = 3
     
@@ -43,8 +47,8 @@ class Ball: SKSpriteNode {
     
     func Init(gamescene:GameScene, scoreLimit: Int){
         //Initialize the ball here
-        let imageTexture = SKTexture(imageNamed: "ballSprite")
-        name = "ball"
+        let imageTexture = SKTexture(imageNamed: Constants.BALL_SPRITE)
+        name = Constants.BALL_NAME
         
         let body:SKPhysicsBody = SKPhysicsBody(circleOfRadius: imageTexture.size().width/2)
         body.isDynamic = true
@@ -57,7 +61,7 @@ class Ball: SKSpriteNode {
         
         getSound()
         
-        position = CGPoint(x:-12000, y:12000)
+        position = Constants.STARTPOINT_OFFSCREEN
         
         score.Init(gamescene: gamescene, _scoreLimit: scoreLimit)
     }
@@ -141,8 +145,6 @@ class Ball: SKSpriteNode {
                 }
             }
             
-            
-            
             //What happens when its a foot
             if(firstTouches.contains("4") || firstTouches.contains("5")){
                 //Midfield cant score
@@ -171,16 +173,16 @@ class Ball: SKSpriteNode {
          7 = b
          8 = b
          */
-        var teamPos:String = ""
+        var teamPos:String
         
-        let teamRed:[String] = ["foot1", "foot2", "foot4", "foot6"]
-        let teamBlue:[String] = ["foot3", "foot5", "foot7", "foot8"]
+        let teamRed:[String] = Constants.FOOT_TEAM_LEFT
+        let teamBlue:[String] = Constants.FOOT_TEAM_RIGHT
         
         
         if(teamRed.contains(firstTouches) && teamRed.contains(secondTouches)){
-                teamPos = "red"
+                teamPos = Constants.TEAM.red.rawValue
         }else if(teamBlue.contains(firstTouches) && teamBlue.contains(secondTouches)){
-            teamPos = "blue"
+            teamPos = Constants.TEAM.red.rawValue
         }else {
             teamPos = ""
         }
@@ -270,14 +272,14 @@ class Ball: SKSpriteNode {
                 score.blueScored()
                 
                 //Emit to socket if scored
-                socket.emit("goalisscored", "blue")
+                socket.emit(Constants.EMIT_VALUES.emitGoalScored.rawValue, Constants.TEAM.blue.rawValue)
             }
             else{
                 //Right Scored (Red)
                 score.redScores()
                 
                 //Emit to socket if scored
-                socket.emit("goalisscored", "red")
+                socket.emit(Constants.EMIT_VALUES.emitGoalScored.rawValue, Constants.TEAM.red.rawValue)
             }
             checkIfWon()
             
@@ -287,13 +289,13 @@ class Ball: SKSpriteNode {
                     //Blue scored false
                     score.blueFalseScore()
                     redFalseScored = false
-                    socket.emit("falsegoal", "blue")
+                    socket.emit(Constants.EMIT_VALUES.emitFalseGoal.rawValue, Constants.TEAM.blue.rawValue)
                     
                 }else{
                     //red score false
                     score.redFalseScore()
                     redFalseScored = true
-                    socket.emit("falsegoal", "red")
+                    socket.emit(Constants.EMIT_VALUES.emitFalseGoal.rawValue, Constants.TEAM.red.rawValue)
                 }
             }
             
@@ -303,6 +305,10 @@ class Ball: SKSpriteNode {
             physicsBody?.velocity.dx = 0
             goalCounter = 80
             isPlaying = false
+        }
+        
+        if(isScored){
+            isScored = false
         }
         
         //Goal counter drain

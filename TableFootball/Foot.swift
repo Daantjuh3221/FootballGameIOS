@@ -64,7 +64,7 @@ class Foot: SKSpriteNode{
         theFoot.alpha = 0.0
         gameScene.addChild(theFoot)
         
-        if(colorSprite == "red"){
+        if(colorSprite == Constants.TEAM.red.rawValue){
             //Get red team
             for i in 0...4{
             playerImages[i] = "PlayerRed" + String(i + 1)
@@ -135,7 +135,7 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.velocity.dx *= CGFloat(0.9)
     }
     
-    //<--- Geen mooide code --->!!!!!!!!!!!!!!!!
+    
     func animatePlayer(relativePosition: CGFloat){
         /*
  

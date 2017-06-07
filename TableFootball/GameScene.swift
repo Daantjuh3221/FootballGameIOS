@@ -9,6 +9,8 @@
 import SpriteKit
 import GameplayKit
 
+
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let socket = SocketIOManager.sharedInstance.getSocket();
@@ -21,14 +23,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var theBall:Ball = Ball()
     
     //GameRules
-    var scoreLimit:Int = 10;
+    var scoreLimit:Int = Constants.SCORELIMIT;
     
     let goalShake:ScreenShake = ScreenShake()
     
     let gameCamera:SKCameraNode = SKCameraNode()
     
-    //Gameover Var
-    var gameOverCounter = 120
+    var gameOverCounter = Constants.GAMEOVER_COUNTER
     
     // we need to make sure to set this when we create our GameScene
     var viewController: GameViewController!
@@ -37,10 +38,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //<---- All value for the sticks, counting left to right, Excluding the first ---->
     var sticks:[Stick] = []
     var stickEnabled:[Bool] = [true, true, true, true, true, true ,true, true]
-    var stickPositions:[Int] = [-400, -300, -180, -65, 65, 180, 300, 400]
-    var stickColor:[String] = ["red", "red", "blue", "red", "blue", "red", "blue", "blue"]
+    var stickPositions:[Int] = Constants.STICK_POSITION
+    var stickColor:[String] = Constants.STICK_COLOR
     var userNames:[String] = ["", "", "", "", "", "", "", ""]
-    var amountOfFeets:[Int] = [1, 2, 3, 5, 5, 3, 2, 1]
+    var amountOfFeets:[Int] = Constants.STICK_AMOUNT_OF_FEETS
 
     
     //Lists of both teams
@@ -48,8 +49,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var teamRed:[String] = []
     
     override func didMove(to view: SKView) {
-        print(Constants.TEAMRED)
-        print(Constants.TEAMBLUE)
+        //print("team:  \(Constants.TEAMRED)")
+        //print("team:  \(Constants.TEAMBLUE)")
         
         addChild(gameCamera)
         camera = gameCamera
@@ -58,7 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //<---Team divide and stick devide! ---->
         for i in 0...7{
-                if(stickColor[i] == "red"){
+                if(stickColor[i] == Constants.TEAM.red.rawValue){
                     //Team red
                     if(Constants.TEAMRED.count > 0 && Constants.TEAMRED.count < 2){
                         //If one player is connected
@@ -115,8 +116,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Init the ball
         //<-----! The Ball acts as the referee !----->
-        if(self.childNode(withName: "ball") != nil){
-            theBall = self.childNode(withName: "ball") as! Ball
+        if(self.childNode(withName: Constants.BALL_NAME) != nil){
+            theBall = self.childNode(withName: Constants.BALL_NAME) as! Ball
             theBall.Init(gamescene: self, scoreLimit: scoreLimit)
         }
         
@@ -126,12 +127,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //Using the arrays made above
                 sticks.append(Stick())
                 if(stickEnabled[i]){
-                if(self.childNode(withName: "stick0" + String(i + 1)) != nil){
-                    sticks[i] = self.childNode(withName: "stick0" + String(i + 1)) as! Stick
-                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i], footName: "foot" + String(i + 1))
+                if(self.childNode(withName: Constants.STICKNAMES.neutral.rawValue + String(i + 1)) != nil){
+                    sticks[i] = self.childNode(withName: Constants.STICKNAMES.neutral.rawValue + String(i + 1)) as! Stick
+                    sticks[i].Init(amountOfFeets: amountOfFeets[i], positionX: CGFloat(stickPositions[i]), gameScene: self, sprite:stickColor[i], userName:userNames[i], footName: Constants.FOOT_NAME + String(i + 1))
                     }}else{
                     //Makes unused sticks invisible
-                    self.childNode(withName: "stick0" + String(i + 1))?.alpha = 0
+                    self.childNode(withName: Constants.STICKNAMES.neutral.rawValue + String(i + 1))?.alpha = 0
             }
         }
     }// End did move
@@ -147,11 +148,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var secondBody: SKPhysicsBody
         
         switch contact.bodyA.node?.name {
-        case "ball"?:
+        case Constants.BALL_NAME?:
             firstBody = contact.bodyA
             secondBody = contact.bodyB
             break;
-        case "cube"?:
+        case Constants.CUBE?:
             firstBody = contact.bodyA
             secondBody = contact.bodyB
             break;
@@ -159,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
             
-            if(secondBody.node?.name == "ball"){
+            if(secondBody.node?.name == Constants.BALL_NAME){
                 secondBody = firstBody
                 firstBody = contact.bodyB
             }
@@ -167,24 +168,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     
         //Apply tthe collision with the walls
-        if(firstBody.node?.name == "ball" && secondBody.node?.name == "wall"){
-            theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x, currentTouch: "wall")
+        if(firstBody.node?.name == Constants.BALL_NAME && secondBody.node?.name == Constants.WALL_NAME){
+            theBall.collidesWithWallVertical(wallPosition: secondBody.node!.position.x, currentTouch: Constants.WALL_NAME)
         } else
-        if(firstBody.node?.name == "ball" && secondBody.node?.name == "walls"){
+        if(firstBody.node?.name == Constants.BALL_NAME && secondBody.node?.name == Constants.WALLS_NAME){
            // print("wallBEFOREBEFORE \(firstBody.node?.physicsBody?.velocity.dy)")
             
-            theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y, currentTouch: "wall")
+            theBall.collidesWithWallHorizintal(wallPosition: secondBody.node!.position.y, currentTouch: Constants.WALL_NAME)
         }
         //Check if there is made a goal
-        if(firstBody.node?.name == "ball" && secondBody.node?.name == "goal"){
+        if(firstBody.node?.name == Constants.BALL_NAME && secondBody.node?.name == Constants.GOAL_NAME){
             theBall.didScored()
         }
         
-        if((firstBody.node?.name?.contains("foot"))! && secondBody.node?.name == "ball"){
+        if((firstBody.node?.name?.contains(Constants.FOOT_NAME))! && secondBody.node?.name == Constants.BALL_NAME){
             //fixes the collision between foot and ball
             theBall.collidesWithFoot(currentTouch: (firstBody.node?.name)!)
             
-        }else if(firstBody.node?.name == "ball" && (secondBody.node?.name?.contains("foot"))!){
+        }else if(firstBody.node?.name == Constants.BALL_NAME && (secondBody.node?.name?.contains(Constants.FOOT_NAME))!){
             //fixes the collision between ball and foot
             theBall.collidesWithFoot(currentTouch: (secondBody.node?.name)!)
         }
@@ -198,7 +199,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //reset game rules
         let socket = SocketIOManager.sharedInstance.getSocket();
-        socket.emit("resetgamedata")
+        socket.emit(Constants.EMIT_VALUES.resetGame.rawValue)
     }
     
 //    var i = 50
