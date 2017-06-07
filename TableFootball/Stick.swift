@@ -52,10 +52,7 @@ class Stick: SKSpriteNode{
             let inputUser = (data[1] as? String)!
             if(inputUser == userName){
                 //Checks if the max value had been reached
-                //if(self.canMoveVertical(yValue: (data[0] as? CGFloat)!)){
-                //self.positionY = (data[0] as? CGFloat)!
                 self.positionY = self.canMoveVertical(yValue: (data[0] as? CGFloat)!)
-               // }
             }
         }
         socket.on(Constants.EMIT_VALUES.getXPos.rawValue) {data, ack in
@@ -81,13 +78,7 @@ class Stick: SKSpriteNode{
     }
     
     func canMoveVertical(yValue: CGFloat) -> CGFloat{
-      /*  if(yValue > offset){
-            return false
-        }else if(yValue < -offset){
-            return false
-        }else {
-            return true
-        }*/
+        //Gives a value of the max offset of the players
         var y = yValue
         y = y / 290
         
