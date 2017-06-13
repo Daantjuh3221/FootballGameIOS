@@ -43,10 +43,6 @@ public class MainMenuSettings extends AppCompatActivity implements SocketConnect
 
     private String prefsFile = Constants.PREFERENCEFILENAME;
 
-    private KeyListener originalKeyListener;
-
-    private final String username = USERNAME;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +58,11 @@ public class MainMenuSettings extends AppCompatActivity implements SocketConnect
 
         sharedPrefs = getApplicationContext().getSharedPreferences(prefsFile, MODE_PRIVATE);
 
-        mUserName.setText(USERNAME);
-        mAppleTV.setText(JOINCODE);
-
         mSocket = app.getSocket(this);
         mSocket.connect();
 
+        mUserName.setText(USERNAME);
+        mAppleTV.setText(JOINCODE);
 
         //Set fullscreen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -79,16 +74,16 @@ public class MainMenuSettings extends AppCompatActivity implements SocketConnect
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.layout_custom_dialog, null);
         // Initiate its EditText
-        final EditText etUsername = (EditText) alertLayout.findViewById(R.id.et_username);
+        final EditText username = (EditText) alertLayout.findViewById(R.id.et_username);
 
 
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         // Set popup title
         alert.setTitle("Change username");
-        // this is set the view from XML inside AlertDialog
+        // Set the view from XML inside AlertDialog
         alert.setView(alertLayout);
-        // disallow cancel of AlertDialog on click of back button and outside touch
+        // disable cancel of popup by clicking outside touch or back button
         alert.setCancelable(false);
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
@@ -104,7 +99,7 @@ public class MainMenuSettings extends AppCompatActivity implements SocketConnect
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences.Editor editor = sharedPrefs.edit();
-                    String user = etUsername.getText().toString();
+                    String user = username.getText().toString();
                 // if the popup textfield is not empty, the input value will override constant USERNAME, else it will remain the previous value
                     if (!(user.isEmpty())) {
                     Constants.USERNAME = user;
@@ -124,14 +119,14 @@ public class MainMenuSettings extends AppCompatActivity implements SocketConnect
     public void changeAppleID(View view) {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.layout_custom_dialog_apple , null);
-        final EditText etApple = (EditText) alertLayout.findViewById(R.id.et_apple);
+        final EditText apple = (EditText) alertLayout.findViewById(R.id.et_apple);
 
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Change Apple ID");
-        // this is set the view from XML inside AlertDialog
+        // Set the view from XML inside AlertDialog
         alert.setView(alertLayout);
-        // disallow cancel of AlertDialog on click of back button and outside touch
+        // disable cancel of popup by clicking outside touch or back button
         alert.setCancelable(false);
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
@@ -145,7 +140,7 @@ public class MainMenuSettings extends AppCompatActivity implements SocketConnect
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                joinCode = etApple.getText().toString();
+                joinCode = apple.getText().toString();
                 if (!(joinCode.isEmpty())) {
                     mSocket.emit("userJoinAppleTV", joinCode);
                 } else {
