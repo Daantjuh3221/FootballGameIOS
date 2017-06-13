@@ -74,6 +74,14 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
         mBtnBlue = (Button) findViewById(R.id.joinTeamBlue);
         mBtnRed = (Button) findViewById(R.id.joinTeamRed);
         mBtnPlay = (Button) findViewById(R.id.playLocalGame);
+
+        mListViewMidden.setEnabled(false);
+        mListViewMidden.setClickable(false);
+        mListViewBlue.setEnabled(false);
+        mListViewBlue.setClickable(false);
+        mListViewRed.setEnabled(false);
+        mListViewRed.setClickable(false);
+
         if (!Constants.isPlayerOne){
             mBtnPlay.setText("Ready");
         }
@@ -260,12 +268,9 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
             finish();
         } else{
             mBtnPlay.setEnabled(false);
-            mListViewMidden.setEnabled(false);
-            mListViewMidden.setClickable(false);
-            mListViewBlue.setEnabled(false);
-            mListViewBlue.setClickable(false);
-            mListViewRed.setEnabled(false);
-            mListViewRed.setClickable(false);
+            mBtnBlue.setEnabled(false);
+            mBtnMidden.setEnabled(false);
+            mBtnRed.setEnabled(false);
 
             mBtnMidden.setEnabled(false);
             mBtnRed.setEnabled(false);
