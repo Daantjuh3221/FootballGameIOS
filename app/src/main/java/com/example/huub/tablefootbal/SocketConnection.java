@@ -27,8 +27,6 @@ public class SocketConnection extends Application {
     private Socket mSocket;
     {
         try {
-            IO.Options opt = new IO.Options();
-            opt.reconnection = true;
             mSocket = IO.socket(Constants.SERVER_URL);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);

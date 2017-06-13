@@ -133,6 +133,7 @@ public class GameActivity extends AppCompatActivity {
                     swipeVelocity = maxXVelocity - startVelocity;
                     System.out.println("Swipe: " + swipeVelocity);
                     System.out.println("Swipe velocity: " + swipeVelocity);
+                    setSwipeVelocity();
                     mSocket.emit("sendPositionXToAppleTV", swipeVelocity);
                     myVib.vibrate(Constants.VIBRATIONDEFAULT);
                 }
@@ -144,6 +145,21 @@ public class GameActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    private void setSwipeVelocity() {
+        if (swipeVelocity <0) {
+            swipeVelocity = swipeVelocity * 2;
+            if (swipeVelocity < -10000)
+            {
+                swipeVelocity = -10000;
+            }
+        } else {
+            if (swipeVelocity < 10000)
+            {
+                swipeVelocity = 10000;
+            }
+        }
     }
 
     private void checkTeam(){

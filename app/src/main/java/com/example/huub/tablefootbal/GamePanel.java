@@ -124,6 +124,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     }
 
 
+    //registration of the touch input from the user
+    //using the VelocityTracker library to track the speed of the user's swipe
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getActionMasked();

@@ -38,6 +38,7 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
     private List<String> mPlayersRed;
     private List<String> mPlayersMidden;
 
+    private boolean everybodyIsReady = false;
     private Socket mSocket;
     private final String username = Constants.USERNAME;
 
@@ -82,6 +83,7 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
         mListViewRed.setEnabled(false);
         mListViewRed.setClickable(false);
 
+        //if the player is not Player 1, the button text is set to "Ready"
         if (!Constants.isPlayerOne){
             mBtnPlay.setText("Ready");
         }
@@ -179,16 +181,19 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
 
 
         if (Constants.isPlayerOne){
-            if (mListViewBlue.getCount() <= 1 && mListViewRed.getCount() <= 1 && mListViewMidden.getCount() != 0){
+            if (everybodyIsReady && mListViewMidden.getCount() == 0 && mListViewBlue.getCount() > 0 && mListViewRed.getCount() > 0){
+                mBtnPlay.setEnabled(true);
+            } else{
                 mBtnPlay.setEnabled(false);
             }
         }
 
     }
 
-    //knop om voor team rood te kiezen
-    //bij het selecteren van de knop vibreert de telefoon even
-    //wanneer er eenmaal op de knop gedrukt is, wordt deze uitgeschakeld en de andere 2 knoppen op het scherm ingeschakeld
+    //button for chosing red side
+    //onclick vibration
+    //button gets disabled after being clicked, other team buttons get enabled
+    //username gets removed from the other views and added to the view on top of this button
     public void joinTeamRed (View v) {
         myVib.vibrate(Constants.VIBRATIONDEFAULT);
         mBtnRed.setEnabled(false);
@@ -208,9 +213,11 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
     }
 
 
-    //knop om voor team blauw te kiezen
-    //bij het selecteren van de knop vibreert de telefoon even
-    //wanneer er eenmaal op de knop gedrukt is, wordt deze uitgeschakeld en de andere 2 knoppen op het scherm ingeschakeld
+
+    //button for chosing blue side
+    //onclick vibration
+    //button gets disabled after being clicked, other team buttons get enabled
+    //username gets removed from the other views and added to the view on top of this button
     public void joinTeamBlue (View v) {
         myVib.vibrate(Constants.VIBRATIONDEFAULT);
         mBtnRed.setEnabled(true);
@@ -230,6 +237,10 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
     }
 
 
+    //button for chosing no team
+    //onclick vibration
+    //button gets disabled after being clicked, other team buttons get enabled
+    //username gets removed from the other views and added to the view on top of this button
     public void joinTeamMidden (View v) {
         myVib.vibrate(Constants.VIBRATIONDEFAULT);
         mBtnRed.setEnabled(true);
@@ -285,7 +296,8 @@ public class localGameSettings extends AppCompatActivity implements SocketConnec
 
     @Override
     public void enableStart() {
-        mBtnPlay.setEnabled(true);
+        everybodyIsReady = true;
+        updateUI();
     }
 
     @Override
