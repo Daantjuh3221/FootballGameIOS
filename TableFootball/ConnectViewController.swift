@@ -25,6 +25,10 @@ class ConnectViewController: UIViewController {
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     var i:Int = 0
     
+    let joinCode:String = "userJoinedAppleTV"
+    let getJoinCode:String = "getJoinCode"
+    let startGame:String = "startGameOnAppleTV"
+    
     @IBOutlet weak var lblJoinCode: UILabel!
     let userSettings = UserDefaults.standard
     
@@ -49,7 +53,7 @@ class ConnectViewController: UIViewController {
         self.listConnectedPlayers.text = ""
         
         let socket = SocketIOManager.sharedInstance.getSocket();
-        socket.on("userJoinedAppleTV") {data, ack in
+        socket.on(joinCode) {data, ack in
             Constants.CONNECTEDPLAYERS.append((data[0] as? String)!)
             
            // self.redList.text.append((data[0] as? String)!)
@@ -59,7 +63,7 @@ class ConnectViewController: UIViewController {
             self.i += 1
             self.strLabel.text = "Waiting for players. \(self.i) joined"
         }
-        socket.on("getJoinCode") {data, ack in
+        socket.on(getJoinCode) {data, ack in
             let joinCode:String = (data[0] as? String)!
             self.lblJoinCode.text = joinCode
             //self.lblJoinCode.text?.append(joinCode) //= joinCode
@@ -69,42 +73,45 @@ class ConnectViewController: UIViewController {
         //Red team list
         socket.on(Constants.EMIT_VALUES.getTeamRed.rawValue){data, ack in
             //Adds player to list if its not allready on the list
-            if(!Constants.TEAMREDLIST.contains((data[0] as? String)!)){
-                Constants.TEAMREDLIST.append((data[0] as? String)!)
+            if let playerName = data[0] as? String{
+            if(!Constants.TEAMREDLIST.contains(playerName)){
+                Constants.TEAMREDLIST.append(playerName)
             }
             
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMBLUELIST.index(of: (data[0] as? String)!) {
+            if let index = Constants.TEAMBLUELIST.index(of: playerName) {
                 Constants.TEAMBLUELIST.remove(at: index)
-            }
+                }}
             self.updatePlayerList()
         }
         //Blue team list
         socket.on(Constants.EMIT_VALUES.getTeamBlue.rawValue){data, ack in
             //Adds player to list if its not allready on the list
-            if(!Constants.TEAMBLUELIST.contains((data[0] as? String)!)){
-                Constants.TEAMBLUELIST.append((data[0] as? String)!)
+            if let playerName = data[0] as? String{
+            if(!Constants.TEAMBLUELIST.contains(playerName)){
+                Constants.TEAMBLUELIST.append(playerName)
             }
             
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMREDLIST.index(of: (data[0] as? String)!) {
+            if let index = Constants.TEAMREDLIST.index(of: playerName) {
                 Constants.TEAMREDLIST.remove(at: index)
-            }
+                }}
             self.updatePlayerList()
         }
         //No team list
         socket.on(Constants.EMIT_VALUES.getTeamMidden.rawValue){data, ack in
             //Removes player from both list
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMBLUELIST.index(of: (data[0] as? String)!) {
+            if let playerName = data[0] as? String{
+            
+            if let index = Constants.TEAMBLUELIST.index(of: playerName) {
                 Constants.TEAMBLUELIST.remove(at: index)
             }
-            
             //Check if other list contains player and delete it
-            if let index = Constants.TEAMREDLIST.index(of: (data[0] as? String)!) {
+            if let index = Constants.TEAMREDLIST.index(of: playerName) {
                 Constants.TEAMREDLIST.remove(at: index)
             }
-            
+            }
             self.updatePlayerList()
         }
         
@@ -113,32 +120,45 @@ class ConnectViewController: UIViewController {
             
             if(Constants.TEAMBLUELIST.count > 0){
             for i in 0...Constants.TEAMBLUELIST.count - 1{
-                if(Constants.TEAMBLUELIST[i] == (data[0] as? String)!){
+                if let playerName = data[0] as? String{
+                    if(Constants.TEAMBLUELIST[i] == playerName){
                     Constants.TEAMBLUELIST[i].append(" (Ready)")
-                }
+                    print("READY \(i)")
+                    }}
                 }}
             if(Constants.TEAMREDLIST.count > 0){
             for i in 0...Constants.TEAMREDLIST.count - 1{
+                //<-------->\\
+                if let playerName = data[0] as? String{
+                    if(Constants.TEAMREDLIST[i] == playerName){
+                        Constants.TEAMREDLIST[i].append(" (Ready)")
+                    }
+                }
+                
                 if(Constants.TEAMREDLIST[i] == (data[0] as? String)!){
-                    Constants.TEAMREDLIST[i].append(" (Ready)")
+                    Constants.TEAMBLUELIST[i].append(" (Ready)")
+                    print("READY \(i)")
                 }
                 }}
+            
             self.updatePlayerList()
         }
         
         //Set the host palyer
         socket.on(Constants.EMIT_VALUES.getHost.rawValue){data, ack in
-            Constants.HOST_PLAYER = (data[0] as? String)!
-            
+            if let playerName = data[0] as? String{
+            Constants.HOST_PLAYER = playerName
+            }
             print("wqw:   \(data[0] as? String)!")
             print("wqw:   \(Constants.HOST_PLAYER)")
         }
         
-        socket.on("startGameOnAppleTV") {data, ack in
+        socket.on(startGame) {data, ack in
             
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "GameViewController") as! UINavigationController
             self.present(vc, animated: true, completion: nil)
+           // self.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
             
         }
     }

@@ -50,7 +50,7 @@ struct Constants {
         //send to server
         case emitGoalScored = "goalisscored"
         case emitFalseGoal = "falsegoal"
-        case resetGame = "resetgamedata"
+        case resetGame = "resetGameData"
     }
     enum FOOT{
         /*
@@ -109,7 +109,7 @@ struct Constants {
     static let STICK_OFFSET:[CGFloat] = [100, 150,80, 40, 40, 80, 150, 100]
     
     //Player var settings
-    static var PLAYER_SENSITIVITY:CGFloat = CGFloat(80)
+    static var PLAYER_SENSITIVITY:CGFloat = CGFloat(250)
     
     //Goal values
     static let GOAL_NAME:String = "goal"
@@ -123,7 +123,7 @@ struct Constants {
     static let CUBE:String = "cube"
     
     //Game rules
-    static var SCORELIMIT = 10 // Needs to be set from controller
+    static var SCORELIMIT = 5 // Needs to be set from controller
     static let GAMEOVER_COUNTER = 120
     
     //Screen text Vlues
@@ -139,4 +139,8 @@ struct Constants {
  besturing (gebruiksvriendelijkheid) moet nog beter!
  
  validator & sanitizer
+ 
+ /////Tweede resit
+ Singleton 
+ Ovalen foots
 */

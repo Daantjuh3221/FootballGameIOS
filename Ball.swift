@@ -17,8 +17,6 @@ class Ball: SKSpriteNode {
     var isShot:Bool = false
     var score:Score = Score()
     
-    
-    
     var ballSpeed:CGFloat = 3
     
     var touchFoot:SKNode = SKNode()
@@ -91,8 +89,8 @@ class Ball: SKSpriteNode {
             firstTouches = currentTouch
         }
         
-        //print("Touch First: " + firstTouches)
-        //print("Touch Second: " + secondTouches)
+        print("Touch First: " + firstTouches)
+        print("Touch Second: " + secondTouches)
     }
     
     func isGoalAllowed() -> Bool{
@@ -369,8 +367,10 @@ class Ball: SKSpriteNode {
             if((physicsBody?.velocity.dx)! > CGFloat(0) || (physicsBody?.velocity.dx)! < CGFloat(0)){
             //rotate sprite
                 rotationSpeed += (physicsBody?.velocity.dx)! - (physicsBody?.velocity.dy)!
-                if(rotationSpeed > 360){
-                    rotationSpeed = -300
+                if(rotationSpeed > 36){
+                    rotationSpeed = -36
+                }else if(rotationSpeed < -36){
+                    rotationSpeed = 36
                 }
                 self.zRotation = rotationSpeed
                 

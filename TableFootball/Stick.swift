@@ -47,16 +47,22 @@ class Stick: SKSpriteNode{
         
         //Get data from socket
         let socket = SocketIOManager.sharedInstance.getSocket();
+        
         socket.on(Constants.EMIT_VALUES.getYPos.rawValue) {data, ack in
             //Get the Y position for the player
+            print("UserName: \(data[1] as? String)")
+            print("givenUserName: \(userName)")
             let inputUser = (data[1] as? String)!
             if(inputUser == userName){
                 //Checks if the max value had been reached
                 self.positionY = self.canMoveVertical(yValue: (data[0] as? CGFloat)!)
+                print("swipees: \(self.positionY)")
             }
         }
         socket.on(Constants.EMIT_VALUES.getXPos.rawValue) {data, ack in
            // print(data)
+            print("UserName: \(data[1] as? String)")
+            print("givenUserName: \(userName)")
             let inputUser = (data[1] as? String)!
             if(inputUser == userName){
             self.swipeLength = (data[0] as? CGFloat)!
@@ -65,6 +71,7 @@ class Stick: SKSpriteNode{
                 //Call methode here
                 for i in self.theFoots{
                     i.addImpulse(length: self.swipeLength)
+                    print("swipee: \(self.swipeLength)")
                 }
             }
         }

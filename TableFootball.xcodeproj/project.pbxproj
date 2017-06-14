@@ -204,7 +204,6 @@
 				D125C4151E81131E00A63590 /* GameScene.swift */,
 				D125C40F1E81131E00A63590 /* GameScene.sks */,
 				D125C4171E81131E00A63590 /* GameViewController.swift */,
-				D125C4191E81131E00A63590 /* Main.storyboard */,
 				D125C41C1E81131E00A63590 /* Assets.xcassets */,
 				D125C41E1E81131E00A63590 /* Info.plist */,
 				D125C4401E81141A00A63590 /* Ball.swift */,
@@ -231,6 +230,7 @@
 		D125C4311E81131F00A63590 /* TableFootballUITests */ = {
 			isa = PBXGroup;
 			children = (
+				D125C4191E81131E00A63590 /* Main.storyboard */,
 				D125C4321E81131F00A63590 /* TableFootballUITests.swift */,
 				D125C4341E81131F00A63590 /* Info.plist */,
 			);
@@ -523,6 +523,7 @@
 				D125C41A1E81131E00A63590 /* Base */,
 			);
 			name = Main.storyboard;
+			path = ../TableFootball;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

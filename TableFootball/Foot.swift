@@ -54,14 +54,17 @@ class Foot: SKSpriteNode{
         theFoot.size = size
         theFoot.position.x = postionX
         theFoot.position.y = positionY
-        theFoot.physicsBody = SKPhysicsBody(rectangleOf: theFoot.frame.size)
+        //theFoot.physicsBody = SKPhysicsBody(rectangleOf: theFoot.frame.size)
+        theFoot.physicsBody = SKPhysicsBody(circleOfRadius: theFoot.frame.size.width)
         theFoot.physicsBody?.allowsRotation = false
+        
+        
         theFoot.physicsBody?.affectedByGravity = false
         theFoot.physicsBody?.mass = Constants.FOOT_MASS
         theFoot.physicsBody?.isDynamic = true
         theFoot.name = footName
         theFoot.zPosition = 0
-        theFoot.alpha = 0.0
+        theFoot.alpha = 0.5
         gameScene.addChild(theFoot)
         
         if(colorSprite == Constants.TEAM.red.rawValue){
@@ -124,7 +127,7 @@ class Foot: SKSpriteNode{
         }
         if(theFoot.position.x < startPos - maxOffsets){
             theFoot.physicsBody?.velocity.dx = 0
-            theFoot.position.x = startPos - maxOffsets - 1
+            theFoot.position.x = startPos - maxOffsets + 1
         }
         //<--- End Clamp ---->
     }
@@ -134,7 +137,6 @@ class Foot: SKSpriteNode{
         theFoot.physicsBody?.velocity.dx += (startPos - theFoot.position.x) * 1
         theFoot.physicsBody?.velocity.dx *= CGFloat(0.9)
     }
-    
     
     func animatePlayer(relativePosition: CGFloat){
         /*
@@ -188,6 +190,7 @@ class Foot: SKSpriteNode{
     func addImpulse(length: CGFloat){
         //Makes the swipe possible, so the player can shoot the ball
         theFoot.physicsBody?.applyForce(CGVector(dx:length * Constants.PLAYER_SENSITIVITY, dy:0 ))
+        print("lengte: \(length)")
         playShotSound()
     }
     
